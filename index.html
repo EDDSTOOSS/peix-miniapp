@@ -2,91 +2,128 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Boutique</title>
+  <title>PeixPeix Boutique</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
       background: #0f0f0f;
       color: #fff;
-      margin: 0;
-      padding: 16px;
     }
 
-    h2 {
-      margin-bottom: 16px;
-    }
-
-    .product {
-      background: #181818;
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 12px;
-    }
-
-    .price {
-      color: #4caf50;
+    header {
+      padding: 14px;
+      background: #151515;
+      font-size: 18px;
       font-weight: bold;
     }
 
-    button {
-      margin-top: 8px;
-      width: 100%;
-      padding: 8px;
+    nav {
+      display: flex;
+      background: #1c1c1c;
+    }
+
+    nav button {
+      flex: 1;
+      padding: 10px;
+      background: none;
       border: none;
-      border-radius: 6px;
-      background: #2ea6ff;
-      color: #000;
+      color: #aaa;
       font-weight: bold;
       cursor: pointer;
+    }
+
+    nav button.active {
+      color: #2ea6ff;
+      border-bottom: 2px solid #2ea6ff;
+    }
+
+    .container {
+      padding: 14px;
+    }
+
+    .filters {
+      margin-bottom: 12px;
+      background: #181818;
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    .filters input {
+      width: 100%;
+      padding: 6px;
+      margin-bottom: 6px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .empty {
+      color: #777;
+      text-align: center;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
 
-<h2>🛒 Produits disponibles</h2>
-<div id="products"></div>
+<header>🛒 Boutique</header>
+
+<nav>
+  <button id="tab-shop" class="active" onclick="showTab('shop')">Boutique</button>
+  <button id="tab-cart" onclick="showTab('cart')">Panier</button>
+  <button id="tab-history" onclick="showTab('history')">Historique</button>
+</nav>
+
+<div class="container">
+
+  <!-- BOUTIQUE -->
+  <div id="shop">
+    <div class="filters">
+      <input type="text" placeholder="Filtrer par code postal">
+      <input type="number" placeholder="Âge minimum">
+    </div>
+
+    <div class="empty">
+      Aucun produit pour le moment (A venir...)
+    </div>
+  </div>
+
+  <!-- PANIER -->
+  <div id="cart" style="display:none;">
+    <div class="empty">
+      Votre panier est vide :/
+    </div>
+  </div>
+
+  <!-- HISTORIQUE -->
+  <div id="history" style="display:none;">
+    <div class="empty">
+      Aucun achat effectué :/
+    </div>
+  </div>
+
+</div>
 
 <script>
   const tg = window.Telegram.WebApp;
   tg.expand();
 
-  // ⚠️ données envoyées par le bot à l’ouverture
-  const data = tg.initDataUnsafe;
+  function showTab(tab) {
+    document.getElementById("shop").style.display = "none";
+    document.getElementById("cart").style.display = "none";
+    document.getElementById("history").style.display = "none";
 
-  const products = data?.products || [];
+    document.getElementById(tab).style.display = "block";
 
-  const container = document.getElementById("products");
+    document.getElementById("tab-shop").classList.remove("active");
+    document.getElementById("tab-cart").classList.remove("active");
+    document.getElementById("tab-history").classList.remove("active");
 
-  if (products.length === 0) {
-    container.innerHTML = "<p>Aucun produit disponible</p>";
-  } else {
-    products.forEach(p => {
-      const div = document.createElement("div");
-      div.className = "product";
-
-      div.innerHTML = `
-        <b>Prénom :</b> ${p.prenom}<br>
-        <b>Âge :</b> ${p.age}<br>
-        <b>Code postal :</b> ${p.code_postal}<br>
-        <b>Code TE :</b> ${p.code_te}<br>
-        <span class="price">${p.price} €</span>
-        <button onclick="buy(${p.id})">Acheter</button>
-      `;
-
-      container.appendChild(div);
-    });
-  }
-
-  function buy(productId) {
-    tg.sendData(JSON.stringify({
-      action: "buy",
-      product_id: productId
-    }));
+    document.getElementById("tab-" + tab).classList.add("active");
   }
 </script>
 
 </body>
 </html>
-
