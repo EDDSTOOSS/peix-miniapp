@@ -4,55 +4,89 @@
   <meta charset="UTF-8">
   <title>Boutique</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
   <style>
-    body { font-family: Arial; background:#111; color:#fff; }
-    .product {
-      border:1px solid #333;
-      padding:10px;
-      margin:10px 0;
-      border-radius:6px;
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      margin: 0;
+      padding: 16px;
     }
-    .price { color:#4caf50; }
+
+    h2 {
+      margin-bottom: 16px;
+    }
+
+    .product {
+      background: #181818;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      color: #4caf50;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 8px;
+      width: 100%;
+      padding: 8px;
+      border: none;
+      border-radius: 6px;
+      background: #2ea6ff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
-<h2>Produits disponibles</h2>
+<h2>🛒 Produits disponibles</h2>
 <div id="products"></div>
 
 <script>
   const tg = window.Telegram.WebApp;
+  tg.expand();
 
-  // demander les produits au bot
-  tg.sendData(JSON.stringify({
-    action: "get_products"
-  }));
+  // ⚠️ données envoyées par le bot à l’ouverture
+  const data = tg.initDataUnsafe;
 
-  // recevoir la réponse du bot
-  tg.onEvent("web_app_data_received", (event) => {
-    const products = JSON.parse(event.data);
-    const container = document.getElementById("products");
-    container.innerHTML = "";
+  const products = data?.products || [];
 
-    if (products.length === 0) {
-      container.innerHTML = "<p>Aucun produit disponible</p>";
-      return;
-    }
+  const container = document.getElementById("products");
 
+  if (products.length === 0) {
+    container.innerHTML = "<p>Aucun produit disponible</p>";
+  } else {
     products.forEach(p => {
       const div = document.createElement("div");
       div.className = "product";
+
       div.innerHTML = `
         <b>Prénom :</b> ${p.prenom}<br>
         <b>Âge :</b> ${p.age}<br>
         <b>Code postal :</b> ${p.code_postal}<br>
         <b>Code TE :</b> ${p.code_te}<br>
-        <span class="price"><b>Prix :</b> ${p.price} €</span>
+        <span class="price">${p.price} €</span>
+        <button onclick="buy(${p.id})">Acheter</button>
       `;
+
       container.appendChild(div);
     });
-  });
+  }
+
+  function buy(productId) {
+    tg.sendData(JSON.stringify({
+      action: "buy",
+      product_id: productId
+    }));
+  }
 </script>
 
 </body>
 </html>
+
