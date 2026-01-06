@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>PeixPeix Boutique</title>
+  <title>PeixCC Shop</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <style>
@@ -13,103 +13,76 @@
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
-      background: #0f0f0f;
+      background: #0b0b0b;
       color: #fff;
-      padding-bottom: 70px;
+      padding-bottom: 75px;
     }
 
-    /* ===== HEADER ===== */
-    header {
-      text-align: center;
-      padding: 14px;
-      background: #151515;
-      font-size: 26px;
-      font-weight: 600;
-      color: #e53935;
+    /* ===== HEADER IMAGE ===== */
+    .header {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     /* ===== FILTRES ===== */
-    .filter-container {
-      position: sticky;
-      top: 0;
-      background: #151515;
-      padding: 10px;
+    .filters-wrapper {
+      padding: 12px;
       border-bottom: 1px solid #222;
-      z-index: 10;
+      background: linear-gradient(to bottom, #121212, #0b0b0b);
     }
 
     .filter-btn {
       width: 100%;
       padding: 10px;
+      border-radius: 8px;
+      border: none;
       background: #1c1c1c;
-      border: none;
       color: #fff;
-      font-weight: bold;
+      font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
-      border-radius: 6px;
-    }
-
-    .filters {
-      margin-top: 10px;
-      background: #181818;
-      padding: 10px;
-      border-radius: 6px;
-    }
-
-    .filters input {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 8px;
-      border-radius: 4px;
-      border: none;
-    }
-
-    .hidden {
-      display: none;
     }
 
     /* ===== CONTENU ===== */
-    .container {
-      padding: 14px;
-    }
-
-    .empty {
-      color: #777;
+    .content {
+      padding: 30px 15px;
       text-align: center;
-      margin-top: 30px;
+      color: #888;
+      font-size: 14px;
     }
 
-    /* ===== NAVIGATION BAS ===== */
-    .bottom-nav {
+    /* ===== NAV BAR BAS ===== */
+    .nav-bottom {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 60px;
-      background: #1c1c1c;
+      height: 65px;
+      background: #111;
+      border-top: 1px solid #222;
       display: flex;
-      border-top: 1px solid #333;
     }
 
-    .bottom-nav button {
+    .nav-bottom button {
       flex: 1;
       background: none;
       border: none;
-      color: #aaa;
-      cursor: pointer;
+      color: #777;
+      font-size: 11px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      cursor: pointer;
     }
 
-    .bottom-nav button .icon {
-      font-size: 20px;
-      line-height: 20px;
+    .nav-bottom button .icon {
+      font-size: 22px;
+      margin-bottom: 2px;
     }
 
-    .bottom-nav button.active {
+    .nav-bottom button.active {
       color: #2ea6ff;
     }
   </style>
@@ -117,82 +90,40 @@
 
 <body>
 
-<header>🛍️ PEIXCC SHOP 🛍️</header>
+<!-- IMAGE HEADER -->
+<img src="header.png" class="header" alt="PeixCC Shop">
 
 <!-- FILTRES -->
-<div class="filter-container">
-  <button class="filter-btn" onclick="toggleFilters()">🔍 Filtres</button>
-
-  <div id="filters" class="filters hidden">
-    <input type="text" placeholder="Filtrer par code postal">
-    <input type="number" placeholder="Âge minimum">
-  </div>
+<div class="filters-wrapper">
+  <button class="filter-btn">🔍 Filtres</button>
 </div>
 
-<div class="container">
-
-  <!-- BOUTIQUE -->
-  <div id="shop">
-    <div class="empty">
-      Aucun produit pour le moment (À venir…)
-    </div>
-  </div>
-
-  <!-- PANIER -->
-  <div id="cart" style="display:none;">
-    <div class="empty">
-      Votre panier est vide 🛒
-    </div>
-  </div>
-
-  <!-- HISTORIQUE -->
-  <div id="history" style="display:none;">
-    <div class="empty">
-      Aucun achat effectué 🧾
-    </div>
-  </div>
-
+<!-- CONTENU -->
+<div class="content">
+  Aucun produit pour le moment (À venir...)
 </div>
 
 <!-- NAVIGATION BAS -->
-<div class="bottom-nav">
-  <button id="tab-shop" class="active" onclick="showTab('shop')">
+<div class="nav-bottom">
+  <button class="active">
     <div class="icon">🏬</div>
-    <div>Boutique</div>
+    Boutique
   </button>
 
-  <button id="tab-cart" onclick="showTab('cart')">
+  <button>
     <div class="icon">🛒</div>
-    <div>Panier</div>
+    Panier
   </button>
 
-  <button id="tab-history" onclick="showTab('history')">
+  <button>
     <div class="icon">🧾</div>
-    <div>Historique</div>
+    Historique
   </button>
 </div>
 
 <script>
   const tg = window.Telegram.WebApp;
   tg.expand();
-
-  function showTab(tab) {
-    document.getElementById("shop").style.display = "none";
-    document.getElementById("cart").style.display = "none";
-    document.getElementById("history").style.display = "none";
-
-    document.getElementById(tab).style.display = "block";
-
-    document.getElementById("tab-shop").classList.remove("active");
-    document.getElementById("tab-cart").classList.remove("active");
-    document.getElementById("tab-history").classList.remove("active");
-
-    document.getElementById("tab-" + tab).classList.add("active");
-  }
-
-  function toggleFilters() {
-    document.getElementById("filters").classList.toggle("hidden");
-  }
 </script>
 
 </body>
