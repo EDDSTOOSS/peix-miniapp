@@ -28,14 +28,9 @@ body {
   content: "";
   position: absolute;
   bottom: 0;
-  height: 80px;
+  height: 60px;
   width: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(14,14,14,0),
-    rgba(14,14,14,0.6),
-    #0e0e0e
-  );
+  background: linear-gradient(to bottom, transparent, #0e0e0e);
 }
 
 /* SOLDE */
@@ -122,6 +117,7 @@ body {
   border: none;
   color: #ffd700;
   opacity: 0.6;
+  cursor: pointer;
 }
 .bottom-nav button.active {
   opacity: 1;
@@ -204,13 +200,31 @@ body {
 </div>
 
 <div class="container">
-  <div class="empty">Aucun produit pour le moment</div>
+
+  <div id="shop">
+    <div class="empty">Aucun produit pour le moment</div>
+  </div>
+
+  <div id="cart" style="display:none;">
+    <div class="empty">Votre panier est vide</div>
+  </div>
+
+  <div id="history" style="display:none;">
+    <div class="empty">Aucun achat effectué</div>
+  </div>
+
 </div>
 
 <div class="bottom-nav">
-  <button class="active"><span>🏪</span>Boutique</button>
-  <button><span>🛒</span>Panier</button>
-  <button><span>🧾</span>Historique</button>
+  <button class="active" onclick="showTab('shop', this)">
+    <span>🏪</span>Boutique
+  </button>
+  <button onclick="showTab('cart', this)">
+    <span>🛒</span>Panier
+  </button>
+  <button onclick="showTab('history', this)">
+    <span>🧾</span>Historique
+  </button>
 </div>
 
 <script>
@@ -219,6 +233,20 @@ Telegram.WebApp.expand();
 function toggleFilters() {
   const f = document.getElementById("filters");
   f.style.display = f.style.display === "block" ? "none" : "block";
+}
+
+function showTab(tab, btn) {
+  document.getElementById("shop").style.display = "none";
+  document.getElementById("cart").style.display = "none";
+  document.getElementById("history").style.display = "none";
+
+  document.getElementById(tab).style.display = "block";
+
+  document.querySelectorAll(".bottom-nav button").forEach(b => {
+    b.classList.remove("active");
+  });
+
+  btn.classList.add("active");
 }
 </script>
 
