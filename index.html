@@ -10,7 +10,7 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #0e0e0e;
-  color: #fff;
+  color: #ffd700;
 }
 
 /* ===== HEADER IMAGE AVEC FONDU ===== */
@@ -27,7 +27,6 @@ body {
   object-fit: cover;
 }
 
-/* Dégradé de fondu */
 .header-wrapper::after {
   content: "";
   position: absolute;
@@ -50,15 +49,15 @@ body {
 }
 
 .balance-title {
-  color: #aaa;
   font-size: 14px;
+  color: #ffd700;
 }
 
 .balance-amount {
   font-size: 20px;
   font-weight: bold;
   font-style: italic;
-  color: #2ea6ff;
+  color: #ffd700;
 }
 
 /* ===== FILTRES ===== */
@@ -69,6 +68,7 @@ body {
   border-radius: 8px;
   text-align: center;
   cursor: pointer;
+  color: #ffd700;
 }
 
 .filters-panel {
@@ -85,6 +85,8 @@ body {
   margin-bottom: 8px;
   border-radius: 6px;
   border: none;
+  background: #101010;
+  color: #ffd700;
 }
 
 /* ===== CONTENU ===== */
@@ -95,7 +97,7 @@ body {
 
 .empty {
   text-align: center;
-  color: #777;
+  color: #ffd700;
   margin-top: 40px;
 }
 
@@ -115,9 +117,10 @@ body {
   flex: 1;
   background: none;
   border: none;
-  color: #888;
+  color: #ffd700;
   font-size: 11px;
   cursor: pointer;
+  opacity: 0.6;
 }
 
 .bottom-nav button span {
@@ -127,7 +130,8 @@ body {
 }
 
 .bottom-nav button.active {
-  color: #2ea6ff;
+  opacity: 1;
+  text-shadow: 0 0 8px rgba(255,215,0,0.6);
 }
 </style>
 </head>
@@ -202,7 +206,7 @@ function toggleFilters() {
   f.style.display = f.style.display === "block" ? "none" : "block";
 }
 
-/* Solde temporaire */
+/* Solde exemple */
 document.getElementById("balance").innerText = "10000€";
 </script>
 
