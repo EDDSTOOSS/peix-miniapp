@@ -6,46 +6,51 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
       background: #0f0f0f;
       color: #fff;
+      padding-bottom: 70px; /* espace pour nav bas */
     }
 
+    /* ===== HEADER ===== */
     header {
+      text-align: center;
       padding: 14px;
       background: #151515;
-      font-size: 18px;
-      font-weight: bold;
+      font-size: 26px;
+      font-weight: 600;
+      color: #e53935; /* rouge */
     }
 
-    nav {
-      display: flex;
-      background: #1c1c1c;
-    }
-
-    nav button {
-      flex: 1;
+    /* ===== FILTRES ===== */
+    .filter-container {
+      position: sticky;
+      top: 0;
+      background: #151515;
       padding: 10px;
-      background: none;
+      border-bottom: 1px solid #222;
+      z-index: 10;
+    }
+
+    .filter-btn {
+      width: 100%;
+      padding: 10px;
+      background: #1c1c1c;
       border: none;
-      color: #aaa;
+      color: #fff;
       font-weight: bold;
       cursor: pointer;
-    }
-
-    nav button.active {
-      color: #2ea6ff;
-      border-bottom: 2px solid #2ea6ff;
-    }
-
-    .container {
-      padding: 14px;
+      border-radius: 6px;
     }
 
     .filters {
-      margin-bottom: 12px;
+      margin-top: 10px;
       background: #181818;
       padding: 10px;
       border-radius: 6px;
@@ -53,10 +58,19 @@
 
     .filters input {
       width: 100%;
-      padding: 6px;
-      margin-bottom: 6px;
+      padding: 8px;
+      margin-bottom: 8px;
       border-radius: 4px;
       border: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* ===== CONTENU ===== */
+    .container {
+      padding: 14px;
     }
 
     .empty {
@@ -64,29 +78,55 @@
       text-align: center;
       margin-top: 30px;
     }
+
+    /* ===== NAVIGATION BAS ===== */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #1c1c1c;
+      display: flex;
+      border-top: 1px solid #333;
+    }
+
+    .bottom-nav button {
+      flex: 1;
+      background: none;
+      border: none;
+      color: #aaa;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .bottom-nav button.active {
+      color: #2ea6ff;
+      border-top: 2px solid #2ea6ff;
+    }
   </style>
 </head>
+
 <body>
 
-<header>🛒 Boutique</header>
+<header>Boutique</header>
 
-<nav>
-  <button id="tab-shop" class="active" onclick="showTab('shop')">Boutique</button>
-  <button id="tab-cart" onclick="showTab('cart')">Panier</button>
-  <button id="tab-history" onclick="showTab('history')">Historique</button>
-</nav>
+<!-- FILTRES -->
+<div class="filter-container">
+  <button class="filter-btn" onclick="toggleFilters()">🔍 Filtres</button>
+
+  <div id="filters" class="filters hidden">
+    <input type="text" placeholder="Filtrer par code postal">
+    <input type="number" placeholder="Âge minimum">
+  </div>
+</div>
 
 <div class="container">
 
   <!-- BOUTIQUE -->
   <div id="shop">
-    <div class="filters">
-      <input type="text" placeholder="Filtrer par code postal">
-      <input type="number" placeholder="Âge minimum">
-    </div>
-
     <div class="empty">
-      Aucun produit pour le moment (A venir...)
+      Aucun produit pour le moment (À venir…)
     </div>
   </div>
 
@@ -106,6 +146,13 @@
 
 </div>
 
+<!-- NAVIGATION BAS -->
+<div class="bottom-nav">
+  <button id="tab-shop" class="active" onclick="showTab('shop')">Boutique</button>
+  <button id="tab-cart" onclick="showTab('cart')">Panier</button>
+  <button id="tab-history" onclick="showTab('history')">Historique</button>
+</div>
+
 <script>
   const tg = window.Telegram.WebApp;
   tg.expand();
@@ -122,6 +169,10 @@
     document.getElementById("tab-history").classList.remove("active");
 
     document.getElementById("tab-" + tab).classList.add("active");
+  }
+
+  function toggleFilters() {
+    document.getElementById("filters").classList.toggle("hidden");
   }
 </script>
 
