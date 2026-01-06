@@ -13,10 +13,10 @@ body {
   color: #ffd700;
 }
 
-/* ===== HEADER AVEC FONDU FLOU ===== */
+/* ===== HEADER PROPRE ===== */
 .header-wrapper {
   position: relative;
-  height: 170px;
+  height: 155px;
   overflow: hidden;
 }
 
@@ -27,35 +27,42 @@ body {
   display: block;
 }
 
-/* Dégradé fondu */
+/* FONDU SUBTIL (PAS DE LIGNE NOIRE) */
 .header-wrapper::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 80px;
+  height: 38px;
   background: linear-gradient(
     to bottom,
     rgba(14,14,14,0) 0%,
-    rgba(14,14,14,0.6) 40%,
-    #0e0e0e 100%
+    rgba(14,14,14,0.35) 50%,
+    rgba(14,14,14,0.85) 100%
   );
-  backdrop-filter: blur(6px);
 }
 
 /* ===== SOLDE ===== */
 .balance-box {
-  margin: 12px;
+  margin: 10px 12px 0 12px;
   padding: 14px;
-  background: #161616;
-  border-radius: 10px;
+  background: #151515;
+  border-radius: 12px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
+
+.balance-box span {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
 .balance-amount {
   font-style: italic;
   font-size: 20px;
+  font-weight: bold;
 }
 
 /* ===== FILTRES ===== */
@@ -63,53 +70,21 @@ body {
   margin: 12px;
   padding: 10px;
   background: #1b1b1b;
-  border-radius: 8px;
+  border-radius: 10px;
   text-align: center;
   cursor: pointer;
 }
 
-.filters-panel {
-  display: none;
-  margin: 12px;
-  padding: 12px;
-  background: #141414;
-  border-radius: 10px;
-}
-
-.filters-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.filters-full {
-  margin-top: 10px;
-}
-
-.filters-panel label {
-  font-size: 12px;
-  margin-bottom: 4px;
-  display: block;
-}
-
-.filters-panel input,
-.filters-panel select {
-  width: 100%;
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
-  background: #0e0e0e;
-  color: #ffd700;
-}
-
 /* ===== CONTENU ===== */
 .container {
-  padding: 12px;
+  padding: 14px;
   padding-bottom: 90px;
 }
+
 .empty {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 35px;
+  opacity: 0.8;
 }
 
 /* ===== NAV BAR ===== */
@@ -122,19 +97,24 @@ body {
   display: flex;
   border-top: 1px solid #222;
 }
+
 .bottom-nav button {
   flex: 1;
   background: none;
   border: none;
   color: #ffd700;
   opacity: 0.6;
+  font-size: 11px;
 }
+
 .bottom-nav button.active {
   opacity: 1;
 }
+
 .bottom-nav span {
   font-size: 20px;
   display: block;
+  margin-bottom: 2px;
 }
 </style>
 </head>
@@ -148,71 +128,19 @@ body {
 
 <!-- SOLDE -->
 <div class="balance-box">
-  <div>Solde</div>
+  <span>Solde</span>
   <div class="balance-amount">10000€</div>
 </div>
 
 <!-- FILTRES -->
-<div class="filters-btn" onclick="toggleFilters()">🔍 Filtres</div>
+<div class="filters-btn">🔍 Filtres</div>
 
-<div class="filters-panel" id="filters">
-
-  <div class="filters-grid">
-    <div>
-      <label>Banque</label>
-      <select>
-        <option>TOUS</option>
-        <option>CREDIT AGRICOLE</option>
-        <option>SA</option>
-        <option>SOCIETE GENERAL</option>
-        <option>LE CREDIT LYONNAIS</option>
-        <option>CREDIT MUTUEL ARKEA</option>
-        <option>BPCE</option>
-        <option>BOURSORAMA BANQUE</option>
-        <option>BANQUE FEDERATIVE DU CREDIT MUTUEL (BFCM)</option>
-        <option>LA BANQUE POSTALE</option>
-        <option>BNP PARIBAS</option>
-        <option>REVOLUT UAB</option>
-        <option>CREDIT AGRICOLE SOCIETE ANONYME</option>
-        <option>CREDIT INDUSTRIEL ET COMMERCIAL</option>
-        <option>NATIXIS</option>
-        <option>MILLEIS BANQUE</option>
-      </select>
-    </div>
-
-    <div>
-      <label>Level</label>
-      <select>
-        <option>TOUS</option>
-        <option>CREDIT</option>
-        <option>DEBIT</option>
-        <option>UNKNOW</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="filters-grid" style="margin-top:10px;">
-    <div>
-      <label>Âge</label>
-      <input type="number">
-    </div>
-    <div>
-      <label>Code postal</label>
-      <input type="text">
-    </div>
-  </div>
-
-  <div class="filters-full">
-    <label>Prix maximum (€)</label>
-    <input type="number">
-  </div>
-
-</div>
-
+<!-- CONTENU -->
 <div class="container">
   <div class="empty">Aucun produit pour le moment</div>
 </div>
 
+<!-- NAVIGATION -->
 <div class="bottom-nav">
   <button class="active"><span>🏪</span>Boutique</button>
   <button><span>🛒</span>Panier</button>
@@ -220,10 +148,6 @@ body {
 </div>
 
 <script>
-function toggleFilters() {
-  const f = document.getElementById("filters");
-  f.style.display = f.style.display === "block" ? "none" : "block";
-}
 Telegram.WebApp.expand();
 </script>
 
