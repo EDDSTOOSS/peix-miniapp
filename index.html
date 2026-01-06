@@ -13,184 +13,30 @@ body {
   color: #fff;
 }
 
-/* ===== HEADER IMAGE ===== */
+/* ===== HEADER IMAGE AVEC FONDU ===== */
 .header-wrapper {
+  position: relative;
   width: 100%;
   height: 160px;
   overflow: hidden;
 }
+
 .header-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* ===== SOLDE ===== */
-.balance-box {
-  margin: 12px;
-  padding: 14px;
-  background: linear-gradient(135deg, #151515, #1f1f1f);
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.balance-title {
-  color: #aaa;
-  font-size: 14px;
-}
-
-.balance-amount {
-  font-size: 20px;
-  font-weight: bold;
-  color: #2ea6ff;
-}
-
-/* ===== FILTRES ===== */
-.filters-btn {
-  margin: 0 12px 12px;
-  padding: 10px;
-  background: #1b1b1b;
-  border-radius: 8px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.filters-panel {
-  display: none;
-  background: #181818;
-  margin: 0 12px 12px;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-.filters-panel input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 8px;
-  border-radius: 6px;
-  border: none;
-}
-
-/* ===== CONTENU ===== */
-.container {
-  padding: 12px;
-  padding-bottom: 90px;
-}
-
-.empty {
-  text-align: center;
-  color: #777;
-  margin-top: 40px;
-}
-
-/* ===== NAV BAR ===== */
-.bottom-nav {
-  position: fixed;
+/* Dégradé de fondu */
+.header-wrapper::after {
+  content: "";
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 70px;
-  background: #141414;
-  display: flex;
-  border-top: 1px solid #222;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(14,14,14,0), #0e0e0e);
 }
 
-.bottom-nav button {
-  flex: 1;
-  background: none;
-  border: none;
-  color: #888;
-  font-size: 11px;
-  cursor: pointer;
-}
+/
 
-.bottom-nav button span {
-  display: block;
-  font-size: 20px;
-  margin-bottom: 2px;
-}
-
-.bottom-nav button.active {
-  color: #2ea6ff;
-}
-</style>
-</head>
-
-<body>
-
-<!-- HEADER -->
-<div class="header-wrapper">
-  <img src="header.png" class="header-img">
-</div>
-
-<!-- SOLDE -->
-<div class="balance-box">
-  <div class="balance-title">Solde</div>
-  <div class="balance-amount" id="balance">0€</div>
-</div>
-
-<!-- FILTRES -->
-<div class="filters-btn" onclick="toggleFilters()">🔍 Filtres</div>
-<div class="filters-panel" id="filters">
-  <input type="text" placeholder="Code postal">
-  <input type="number" placeholder="Âge minimum">
-</div>
-
-<!-- CONTENU -->
-<div class="container">
-
-  <div id="shop">
-    <div class="empty">Aucun produit pour le moment</div>
-  </div>
-
-  <div id="cart" style="display:none;">
-    <div class="empty">Panier vide</div>
-  </div>
-
-  <div id="history" style="display:none;">
-    <div class="empty">Aucun achat</div>
-  </div>
-
-</div>
-
-<!-- NAVIGATION -->
-<div class="bottom-nav">
-  <button id="btn-shop" class="active" onclick="showTab('shop')">
-    <span>🏪</span>Boutique
-  </button>
-  <button id="btn-cart" onclick="showTab('cart')">
-    <span>🛒</span>Panier
-  </button>
-  <button id="btn-history" onclick="showTab('history')">
-    <span>🧾</span>Historique
-  </button>
-</div>
-
-<script>
-const tg = window.Telegram.WebApp;
-tg.expand();
-
-/* Navigation */
-function showTab(tab) {
-  ['shop','cart','history'].forEach(t => {
-    document.getElementById(t).style.display = 'none';
-    document.getElementById('btn-'+t).classList.remove('active');
-  });
-  document.getElementById(tab).style.display = 'block';
-  document.getElementById('btn-'+tab).classList.add('active');
-}
-
-/* Filtres */
-function toggleFilters() {
-  const f = document.getElementById("filters");
-  f.style.display = f.style.display === "block" ? "none" : "block";
-}
-
-/* Solde (temporaire, plus tard envoyé par le bot) */
-document.getElementById("balance").innerText = "10000€";
-</script>
-
-</body>
-</html>
