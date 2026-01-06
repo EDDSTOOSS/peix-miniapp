@@ -13,7 +13,7 @@ body {
   color: #ffd700;
 }
 
-/* ===== HEADER PROPRE ===== */
+/* ===== HEADER ===== */
 .header-wrapper {
   position: relative;
   height: 155px;
@@ -24,39 +24,29 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
-/* FONDU SUBTIL (PAS DE LIGNE NOIRE) */
 .header-wrapper::after {
   content: "";
   position: absolute;
   bottom: 0;
-  left: 0;
   width: 100%;
-  height: 38px;
+  height: 35px;
   background: linear-gradient(
     to bottom,
-    rgba(14,14,14,0) 0%,
-    rgba(14,14,14,0.35) 50%,
-    rgba(14,14,14,0.85) 100%
+    rgba(14,14,14,0),
+    rgba(14,14,14,0.8)
   );
 }
 
 /* ===== SOLDE ===== */
 .balance-box {
-  margin: 10px 12px 0 12px;
+  margin: 10px 12px;
   padding: 14px;
   background: #151515;
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-}
-
-.balance-box span {
-  font-size: 14px;
-  opacity: 0.9;
 }
 
 .balance-amount {
@@ -75,15 +65,41 @@ body {
   cursor: pointer;
 }
 
+.filters-panel {
+  display: none;
+  margin: 0 12px 12px;
+  padding: 12px;
+  background: #141414;
+  border-radius: 10px;
+}
+
+.filters-panel select,
+.filters-panel input {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 6px;
+  background: #1e1e1e;
+  border: none;
+  color: #ffd700;
+}
+
 /* ===== CONTENU ===== */
 .container {
   padding: 14px;
   padding-bottom: 90px;
 }
 
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
 .empty {
   text-align: center;
-  margin-top: 35px;
+  margin-top: 30px;
   opacity: 0.8;
 }
 
@@ -105,6 +121,7 @@ body {
   color: #ffd700;
   opacity: 0.6;
   font-size: 11px;
+  cursor: pointer;
 }
 
 .bottom-nav button.active {
@@ -114,7 +131,6 @@ body {
 .bottom-nav span {
   font-size: 20px;
   display: block;
-  margin-bottom: 2px;
 }
 </style>
 </head>
@@ -133,22 +149,66 @@ body {
 </div>
 
 <!-- FILTRES -->
-<div class="filters-btn">🔍 Filtres</div>
+<div class="filters-btn" onclick="toggleFilters()">🔍 Filtres</div>
+
+<div class="filters-panel" id="filters">
+  <select>
+    <option>Banque (Tous)</option>
+  </select>
+  <select>
+    <option>Level (Tous)</option>
+  </select>
+  <input type="number" placeholder="Âge minimum">
+  <input type="text" placeholder="Code postal">
+</div>
 
 <!-- CONTENU -->
 <div class="container">
-  <div class="empty">Aucun produit pour le moment</div>
+
+  <div id="shop" class="page active">
+    <div class="empty">Aucun produit pour le moment</div>
+  </div>
+
+  <div id="cart" class="page">
+    <div class="empty">Votre panier est vide</div>
+  </div>
+
+  <div id="history" class="page">
+    <div class="empty">Aucun achat effectué</div>
+  </div>
+
 </div>
 
 <!-- NAVIGATION -->
 <div class="bottom-nav">
-  <button class="active"><span>🏪</span>Boutique</button>
-  <button><span>🛒</span>Panier</button>
-  <button><span>🧾</span>Historique</button>
+  <button class="active" onclick="showPage('shop', this)">
+    <span>🏪</span>Boutique
+  </button>
+  <button onclick="showPage('cart', this)">
+    <span>🛒</span>Panier
+  </button>
+  <button onclick="showPage('history', this)">
+    <span>🧾</span>Historique
+  </button>
 </div>
 
 <script>
 Telegram.WebApp.expand();
+
+/* NAVIGATION */
+function showPage(id, btn) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".bottom-nav button").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+/* FILTRES */
+function toggleFilters() {
+  const f = document.getElementById("filters");
+  f.style.display = (f.style.display === "block") ? "none" : "block";
+}
 </script>
 
 </body>
