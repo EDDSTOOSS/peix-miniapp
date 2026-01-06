@@ -13,201 +13,188 @@ body {
   color: #ffd700;
 }
 
-/* ===== HEADER IMAGE AVEC FONDU ===== */
+/* HEADER */
 .header-wrapper {
   position: relative;
-  width: 100%;
   height: 160px;
   overflow: hidden;
 }
-
 .header-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .header-wrapper::after {
   content: "";
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
   height: 60px;
-  background: linear-gradient(to bottom, rgba(14,14,14,0), #0e0e0e);
+  width: 100%;
+  background: linear-gradient(to bottom, transparent, #0e0e0e);
 }
 
-/* ===== SOLDE ===== */
+/* SOLDE */
 .balance-box {
   margin: 12px;
   padding: 14px;
-  background: linear-gradient(135deg, #151515, #1f1f1f);
+  background: #161616;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
-
-.balance-title {
-  font-size: 14px;
-  color: #ffd700;
-}
-
 .balance-amount {
-  font-size: 20px;
-  font-weight: bold;
   font-style: italic;
-  color: #ffd700;
+  font-size: 20px;
 }
 
-/* ===== FILTRES ===== */
+/* FILTRES */
 .filters-btn {
-  margin: 0 12px 12px;
+  margin: 12px;
   padding: 10px;
   background: #1b1b1b;
   border-radius: 8px;
   text-align: center;
   cursor: pointer;
-  color: #ffd700;
 }
 
 .filters-panel {
   display: none;
-  background: #181818;
-  margin: 0 12px 12px;
-  padding: 10px;
-  border-radius: 8px;
+  margin: 12px;
+  padding: 12px;
+  background: #141414;
+  border-radius: 10px;
 }
 
-.filters-panel input {
+.filters-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.filters-full {
+  margin-top: 10px;
+}
+
+.filters-panel label {
+  font-size: 12px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.filters-panel input,
+.filters-panel select {
   width: 100%;
   padding: 8px;
-  margin-bottom: 8px;
   border-radius: 6px;
   border: none;
-  background: #101010;
+  background: #0e0e0e;
   color: #ffd700;
 }
 
-/* ===== CONTENU ===== */
+/* CONTENU */
 .container {
   padding: 12px;
   padding-bottom: 90px;
 }
-
 .empty {
   text-align: center;
-  color: #ffd700;
   margin-top: 40px;
 }
 
-/* ===== NAV BAR ===== */
+/* NAV BAR */
 .bottom-nav {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  width: 100%;
   height: 70px;
   background: #141414;
   display: flex;
   border-top: 1px solid #222;
 }
-
 .bottom-nav button {
   flex: 1;
   background: none;
   border: none;
   color: #ffd700;
-  font-size: 11px;
-  cursor: pointer;
   opacity: 0.6;
 }
-
-.bottom-nav button span {
-  display: block;
-  font-size: 20px;
-  margin-bottom: 2px;
-}
-
 .bottom-nav button.active {
   opacity: 1;
-  text-shadow: 0 0 8px rgba(255,215,0,0.6);
+}
+.bottom-nav span {
+  font-size: 20px;
+  display: block;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <div class="header-wrapper">
   <img src="header.png" class="header-img">
 </div>
 
-<!-- SOLDE -->
 <div class="balance-box">
-  <div class="balance-title">Solde</div>
-  <div class="balance-amount" id="balance">0€</div>
+  <div>Solde</div>
+  <div class="balance-amount">10000€</div>
 </div>
 
-<!-- FILTRES -->
 <div class="filters-btn" onclick="toggleFilters()">🔍 Filtres</div>
+
 <div class="filters-panel" id="filters">
-  <input type="text" placeholder="Code postal">
-  <input type="number" placeholder="Âge minimum">
+
+  <!-- LIGNE 1 -->
+  <div class="filters-grid">
+    <div>
+      <label>Banque</label>
+      <select>
+        <option>Tous</option>
+      </select>
+    </div>
+    <div>
+      <label>Level</label>
+      <select>
+        <option>Tous</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- LIGNE 2 -->
+  <div class="filters-grid" style="margin-top:10px;">
+    <div>
+      <label>Âge</label>
+      <input type="number" placeholder="Ex: 25">
+    </div>
+    <div>
+      <label>Code postal</label>
+      <input type="text" placeholder="Ex: 75000">
+    </div>
+  </div>
+
+  <!-- LIGNE 3 -->
+  <div class="filters-full">
+    <label>Prix maximum (€)</label>
+    <input type="number" placeholder="Ex: 1000">
+  </div>
+
 </div>
 
-<!-- CONTENU -->
 <div class="container">
-
-  <div id="shop">
-    <div class="empty">Aucun produit pour le moment</div>
-  </div>
-
-  <div id="cart" style="display:none;">
-    <div class="empty">Panier vide</div>
-  </div>
-
-  <div id="history" style="display:none;">
-    <div class="empty">Aucun achat</div>
-  </div>
-
+  <div class="empty">Aucun produit pour le moment</div>
 </div>
 
-<!-- NAVIGATION -->
 <div class="bottom-nav">
-  <button id="btn-shop" class="active" onclick="showTab('shop')">
-    <span>🏪</span>Boutique
-  </button>
-  <button id="btn-cart" onclick="showTab('cart')">
-    <span>🛒</span>Panier
-  </button>
-  <button id="btn-history" onclick="showTab('history')">
-    <span>🧾</span>Historique
-  </button>
+  <button class="active"><span>🏪</span>Boutique</button>
+  <button><span>🛒</span>Panier</button>
+  <button><span>🧾</span>Historique</button>
 </div>
 
 <script>
-const tg = window.Telegram.WebApp;
-tg.expand();
-
-/* Navigation */
-function showTab(tab) {
-  ['shop','cart','history'].forEach(t => {
-    document.getElementById(t).style.display = 'none';
-    document.getElementById('btn-'+t).classList.remove('active');
-  });
-  document.getElementById(tab).style.display = 'block';
-  document.getElementById('btn-'+tab).classList.add('active');
-}
-
-/* Filtres */
 function toggleFilters() {
   const f = document.getElementById("filters");
   f.style.display = f.style.display === "block" ? "none" : "block";
 }
-
-/* Solde exemple */
-document.getElementById("balance").innerText = "10000€";
+Telegram.WebApp.expand();
 </script>
 
 </body>
