@@ -13,97 +13,95 @@ body {
   color: #ffd700;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 .header-wrapper {
   position: relative;
-  height: 155px;
+  height: 160px;
   overflow: hidden;
 }
-
 .header-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .header-wrapper::after {
   content: "";
   position: absolute;
   bottom: 0;
+  height: 60px;
   width: 100%;
-  height: 35px;
-  background: linear-gradient(
-    to bottom,
-    rgba(14,14,14,0),
-    rgba(14,14,14,0.8)
-  );
+  background: linear-gradient(to bottom, transparent, #0e0e0e);
 }
 
-/* ===== SOLDE ===== */
+/* SOLDE */
 .balance-box {
-  margin: 10px 12px;
+  margin: 12px;
   padding: 14px;
-  background: #151515;
-  border-radius: 12px;
+  background: #161616;
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
 }
-
 .balance-amount {
   font-style: italic;
   font-size: 20px;
-  font-weight: bold;
 }
 
-/* ===== FILTRES ===== */
+/* FILTRES */
 .filters-btn {
   margin: 12px;
   padding: 10px;
   background: #1b1b1b;
-  border-radius: 10px;
+  border-radius: 8px;
   text-align: center;
   cursor: pointer;
 }
 
 .filters-panel {
   display: none;
-  margin: 0 12px 12px;
+  margin: 12px;
   padding: 12px;
   background: #141414;
   border-radius: 10px;
 }
 
-.filters-panel select,
-.filters-panel input {
-  width: 100%;
-  margin-bottom: 8px;
-  padding: 6px;
-  background: #1e1e1e;
-  border: none;
-  color: #ffd700;
+.filters-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
-/* ===== CONTENU ===== */
-.container {
-  padding: 14px;
-  padding-bottom: 90px;
+.filters-full {
+  margin-top: 10px;
 }
 
-.page {
-  display: none;
-}
-
-.page.active {
+.filters-panel label {
+  font-size: 12px;
+  margin-bottom: 4px;
   display: block;
 }
 
-.empty {
-  text-align: center;
-  margin-top: 30px;
-  opacity: 0.8;
+.filters-panel input,
+.filters-panel select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: #0e0e0e;
+  color: #ffd700;
 }
 
-/* ===== NAV BAR ===== */
+/* CONTENU */
+.container {
+  padding: 12px;
+  padding-bottom: 90px;
+}
+.empty {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* NAV BAR */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -113,21 +111,16 @@ body {
   display: flex;
   border-top: 1px solid #222;
 }
-
 .bottom-nav button {
   flex: 1;
   background: none;
   border: none;
   color: #ffd700;
   opacity: 0.6;
-  font-size: 11px;
-  cursor: pointer;
 }
-
 .bottom-nav button.active {
   opacity: 1;
 }
-
 .bottom-nav span {
   font-size: 20px;
   display: block;
@@ -137,78 +130,90 @@ body {
 
 <body>
 
-<!-- HEADER -->
 <div class="header-wrapper">
   <img src="header.png" class="header-img">
 </div>
 
-<!-- SOLDE -->
 <div class="balance-box">
-  <span>Solde</span>
+  <div>Solde</div>
   <div class="balance-amount">10000€</div>
 </div>
 
-<!-- FILTRES -->
 <div class="filters-btn" onclick="toggleFilters()">🔍 Filtres</div>
 
 <div class="filters-panel" id="filters">
-  <select>
-    <option>Banque (Tous)</option>
-  </select>
-  <select>
-    <option>Level (Tous)</option>
-  </select>
-  <input type="number" placeholder="Âge minimum">
-  <input type="text" placeholder="Code postal">
+
+  <!-- LIGNE 1 -->
+  <div class="filters-grid">
+    <div>
+      <label>Banque</label>
+      <select>
+        <option>TOUS</option>
+        <option>CREDIT AGRICOLE</option>
+        <option>SA</option>
+        <option>SOCIETE GENERAL</option>
+        <option>LE CREDIT LYONNAIS</option>
+        <option>CREDIT MUTUEL ARKEA</option>
+        <option>BPCE</option>
+        <option>BOURSORAMA BANQUE</option>
+        <option>BANQUE FEDERATIVE DU CREDIT MUTUEL (BFCM)</option>
+        <option>LA BANQUE POSTALE</option>
+        <option>BNP PARIBAS</option>
+        <option>REVOLUT UAB</option>
+        <option>CREDIT AGRICOLE SOCIETE ANONYME</option>
+        <option>CREDIT INDUSTRIEL ET COMMERCIAL</option>
+        <option>NATIXIS</option>
+        <option>MILLEIS BANQUE</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Level</label>
+      <select>
+        <option>TOUS</option>
+        <option>CREDIT</option>
+        <option>DEBIT</option>
+        <option>UNKNOW</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- LIGNE 2 -->
+  <div class="filters-grid" style="margin-top:10px;">
+    <div>
+      <label>Âge</label>
+      <input type="number" placeholder="Ex: 25">
+    </div>
+    <div>
+      <label>Code postal</label>
+      <input type="text" placeholder="Ex: 75000">
+    </div>
+  </div>
+
+  <!-- LIGNE 3 -->
+  <div class="filters-full">
+    <label>Prix maximum (€)</label>
+    <input type="number" placeholder="Ex: 1000">
+  </div>
+
 </div>
 
-<!-- CONTENU -->
 <div class="container">
-
-  <div id="shop" class="page active">
-    <div class="empty">Aucun produit pour le moment</div>
-  </div>
-
-  <div id="cart" class="page">
-    <div class="empty">Votre panier est vide</div>
-  </div>
-
-  <div id="history" class="page">
-    <div class="empty">Aucun achat effectué</div>
-  </div>
-
+  <div class="empty">Aucun produit pour le moment</div>
 </div>
 
-<!-- NAVIGATION -->
 <div class="bottom-nav">
-  <button class="active" onclick="showPage('shop', this)">
-    <span>🏪</span>Boutique
-  </button>
-  <button onclick="showPage('cart', this)">
-    <span>🛒</span>Panier
-  </button>
-  <button onclick="showPage('history', this)">
-    <span>🧾</span>Historique
-  </button>
+  <button class="active"><span>🏪</span>Boutique</button>
+  <button><span>🛒</span>Panier</button>
+  <button><span>🧾</span>Historique</button>
 </div>
 
 <script>
-Telegram.WebApp.expand();
-
-/* NAVIGATION */
-function showPage(id, btn) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-
-  document.querySelectorAll(".bottom-nav button").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-}
-
-/* FILTRES */
 function toggleFilters() {
   const f = document.getElementById("filters");
-  f.style.display = (f.style.display === "block") ? "none" : "block";
+  f.style.display = f.style.display === "block" ? "none" : "block";
 }
+Telegram.WebApp.expand();
 </script>
 
 </body>
