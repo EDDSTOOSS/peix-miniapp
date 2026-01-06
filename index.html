@@ -214,55 +214,12 @@ body {
 </div>
 
 <script>
-const tg = Telegram.WebApp;
-tg.expand();
+Telegram.WebApp.expand();
 
-// demander les produits au bot
-tg.sendData(JSON.stringify({
-  action: "get_products"
-}));
-
-// réception des produits
-tg.onEvent("web_app_data_received", (event) => {
-  const products = JSON.parse(event.data);
-
-  const container = document.querySelector(".container");
-  container.innerHTML = "";
-
-  if (products.length === 0) {
-    container.innerHTML = "<div class='empty'>Aucun produit disponible</div>";
-    return;
-  }
-
-  products.forEach(p => {
-    const div = document.createElement("div");
-    div.style.background = "#161616";
-    div.style.borderRadius = "10px";
-    div.style.padding = "12px";
-    div.style.marginBottom = "10px";
-
-    div.innerHTML = `
-      <b>Prénom :</b> ${p.prenom}<br>
-      <b>Âge :</b> ${p.age}<br>
-      <b>BIN :</b> ${p.bin}<br>
-      <b>Code postal :</b> ${p.code_postal}<br>
-      <b>Prix :</b> ${p.price} €
-      <br><br>
-      <button style="
-        width:100%;
-        padding:10px;
-        border:none;
-        border-radius:6px;
-        background:#ffd700;
-        color:#000;
-        font-weight:bold;
-        cursor:pointer;
-      ">Acheter</button>
-    `;
-
-    container.appendChild(div);
-  });
-});
+function toggleFilters() {
+  const f = document.getElementById("filters");
+  f.style.display = f.style.display === "block" ? "none" : "block";
+}
 </script>
 
 </body>
