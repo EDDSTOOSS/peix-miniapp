@@ -15,7 +15,7 @@
       font-family: "Segoe UI", Arial, sans-serif;
       background: #0f0f0f;
       color: #fff;
-      padding-bottom: 70px; /* espace pour nav bas */
+      padding-bottom: 70px;
     }
 
     /* ===== HEADER ===== */
@@ -25,7 +25,7 @@
       background: #151515;
       font-size: 26px;
       font-weight: 600;
-      color: #e53935; /* rouge */
+      color: #e53935;
     }
 
     /* ===== FILTRES ===== */
@@ -96,13 +96,21 @@
       background: none;
       border: none;
       color: #aaa;
-      font-weight: bold;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .bottom-nav button .icon {
+      font-size: 20px;
+      line-height: 20px;
     }
 
     .bottom-nav button.active {
       color: #2ea6ff;
-      border-top: 2px solid #2ea6ff;
     }
   </style>
 </head>
@@ -133,14 +141,14 @@
   <!-- PANIER -->
   <div id="cart" style="display:none;">
     <div class="empty">
-      Votre panier est vide :/
+      Votre panier est vide 🛒
     </div>
   </div>
 
   <!-- HISTORIQUE -->
   <div id="history" style="display:none;">
     <div class="empty">
-      Aucun achat effectué :/
+      Aucun achat effectué 🧾
     </div>
   </div>
 
@@ -148,9 +156,20 @@
 
 <!-- NAVIGATION BAS -->
 <div class="bottom-nav">
-  <button id="tab-shop" class="active" onclick="showTab('shop')">Boutique</button>
-  <button id="tab-cart" onclick="showTab('cart')">Panier</button>
-  <button id="tab-history" onclick="showTab('history')">Historique</button>
+  <button id="tab-shop" class="active" onclick="showTab('shop')">
+    <div class="icon">🏬</div>
+    <div>Shop</div>
+  </button>
+
+  <button id="tab-cart" onclick="showTab('cart')">
+    <div class="icon">🛒</div>
+    <div>Panier</div>
+  </button>
+
+  <button id="tab-history" onclick="showTab('history')">
+    <div class="icon">🧾</div>
+    <div>Historique</div>
+  </button>
 </div>
 
 <script>
@@ -165,16 +184,4 @@
     document.getElementById(tab).style.display = "block";
 
     document.getElementById("tab-shop").classList.remove("active");
-    document.getElementById("tab-cart").classList.remove("active");
-    document.getElementById("tab-history").classList.remove("active");
-
-    document.getElementById("tab-" + tab).classList.add("active");
-  }
-
-  function toggleFilters() {
-    document.getElementById("filters").classList.toggle("hidden");
-  }
-</script>
-
-</body>
-</html>
+    document.getElementById("tab-cart").classList.remove("act
