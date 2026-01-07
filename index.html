@@ -6,7 +6,6 @@
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-<!-- POLICE MISTERBIN (INTER) -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -30,50 +29,54 @@ body {
   background: rgba(0,0,0,0.15);
 }
 
-/* SOLDE */
+/* ========================= */
+/* ===== SOLDE (COMPACT) === */
+/* ========================= */
+
 .balance-box {
-  margin: 16px;
-  padding: 22px;
-  background: rgba(10,10,10,0.85);
+  margin: 14px 16px 10px;
+  padding: 12px 16px;
+  background: rgba(10,10,10,0.88);
   backdrop-filter: blur(14px);
-  border-radius: 18px;
+  border-radius: 14px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 18px;
-  font-weight: 500;
 }
 
 .balance-box div:first-child {
+  font-size: 14px;
   font-weight: 500;
+  opacity: 0.85;
 }
 
 .balance-amount {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 700;
 }
 
 /* FILTRES */
 .filters-btn {
-  margin: 12px 16px 0 16px;
-  padding: 16px;
+  margin: 8px 16px 0;
+  padding: 12px;
   background: rgba(10,10,10,0.85);
   backdrop-filter: blur(14px);
-  border-radius: 16px;
+  border-radius: 14px;
   text-align: center;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
 }
 
 /* PANNEAU FILTRES */
 .filters-panel {
   display: none;
-  margin: 16px;
-  padding: 18px;
+  margin: 12px 16px;
+  padding: 16px;
   background: rgba(10,10,10,0.85);
   backdrop-filter: blur(14px);
-  border-radius: 16px;
+  border-radius: 14px;
 }
 
 .filters-panel label {
@@ -84,25 +87,24 @@ body {
 .filters-panel input,
 .filters-panel select {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   border-radius: 10px;
   border: none;
   background: rgba(0,0,0,0.7);
   color: #ffd700;
   font-family: 'Inter', sans-serif;
-  font-weight: 500;
 }
 
 /* CONTENU */
 .container {
   padding: 16px;
-  padding-bottom: 120px;
+  padding-bottom: 110px;
 }
 
 .empty {
   text-align: center;
-  margin-top: 220px;
-  font-size: 15px;
+  margin-top: 200px;
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -114,7 +116,7 @@ body {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 78px;
+  height: 72px;
   background: rgba(10,10,10,0.95);
   backdrop-filter: blur(18px);
   display: flex;
@@ -127,11 +129,13 @@ body {
   border: none;
   color: #ffd700;
   opacity: 0.6;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4px;
+
   font-family: 'Inter', sans-serif;
   cursor: pointer;
 }
@@ -140,15 +144,12 @@ body {
   opacity: 1;
 }
 
-/* icônes */
 .bottom-nav .icon {
-  font-size: 22px;
-  line-height: 1;
+  font-size: 20px;
 }
 
-/* texte */
 .bottom-nav .label {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
 }
 
@@ -171,32 +172,6 @@ body {
 .desktop .app-overlay {
   width: 360px;
   min-height: 100vh;
-}
-
-.desktop .balance-box {
-  padding: 14px;
-  font-size: 14px;
-}
-
-.desktop .balance-amount {
-  font-size: 20px;
-}
-
-.desktop .filters-btn {
-  padding: 10px;
-  font-size: 14px;
-}
-
-.desktop .bottom-nav {
-  height: 70px;
-}
-
-.desktop .bottom-nav .icon {
-  font-size: 20px;
-}
-
-.desktop .bottom-nav .label {
-  font-size: 10.5px;
 }
 
 /* ========================= */
