@@ -24,10 +24,37 @@ body {
     url("backround.png") center top / cover no-repeat fixed;
 }
 
+/* ===== HEADER FIXE (MISTERBIN STYLE) ===== */
+
+.header-fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 160px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.header-fixed img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-fixed::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.75));
+}
+
 /* OVERLAY */
 .app-overlay {
   min-height: 100vh;
   background: rgba(0,0,0,0.12);
+  padding-top: 160px; /* pousse le contenu sous le header */
 }
 
 /* ===== SOLDE ===== */
@@ -124,33 +151,27 @@ body {
   transition: all 0.25s ease;
 }
 
-/* Hover + actif */
 .bottom-nav button:hover,
 .bottom-nav button.active {
   opacity: 1;
   transform: translateY(-2px);
 }
 
-/* ICONES LUCIDE */
 .bottom-nav .icon {
   width: 22px;
   height: 22px;
   stroke-width: 2.2;
   color: #ffd700;
-  transition: all 0.25s ease;
 }
 
-/* Glow jaune */
 .bottom-nav button:hover .icon,
 .bottom-nav button.active .icon {
   filter: drop-shadow(0 0 6px rgba(255,215,0,0.7));
 }
 
-/* Label */
 .bottom-nav .label {
   font-size: 11px;
   font-weight: 600;
-  transition: all 0.25s ease;
 }
 
 .bottom-nav button:hover .label,
@@ -186,6 +207,10 @@ body {
 </head>
 
 <body>
+
+<div class="header-fixed">
+  <img src="headeroffi.png" alt="PeixPeix Header">
+</div>
 
 <div class="app-wrapper">
   <div class="app-overlay">
