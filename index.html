@@ -113,7 +113,7 @@ body {
 /* CONTENU */
 .container {
   padding: 16px;
-  padding-bottom: 110px;
+  padding-bottom: 125px;
 }
 
 .empty {
@@ -125,28 +125,23 @@ body {
 }
 
 /* ========================= */
-/* ===== NAV BAR (GRIS) === */
+/* === NAV BAR TRANSPARENTE */
 /* ========================= */
 
 .bottom-nav {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 72px;
+  height: 78px; /* 🔥 un poil plus grande */
 
-  background: linear-gradient(
-    180deg,
-    rgba(38,38,38,0.98),
-    rgba(24,24,24,0.98)
-  );
+  background: rgba(20,20,20,0.55); /* 🔥 transparent */
+  backdrop-filter: blur(22px);
 
-  backdrop-filter: blur(18px);
   display: flex;
-
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(255,255,255,0.08);
 
   box-shadow:
-    0 -6px 20px rgba(0,0,0,0.45);
+    0 -4px 18px rgba(0,0,0,0.35);
 }
 
 .bottom-nav button {
@@ -161,7 +156,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 5px;
 
   font-family: 'Inter', sans-serif;
   cursor: pointer;
@@ -172,11 +167,11 @@ body {
 }
 
 .bottom-nav .icon {
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .bottom-nav .label {
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 600;
 }
 
