@@ -14,7 +14,7 @@ body {
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: #ffd700;
-  background: #000; /* 🔥 fond noir uniquement */
+  background: #000;
 }
 
 /* ===== HEADER FIXE (IMAGE COUPÉE) ===== */
@@ -23,7 +23,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 170px; /* hauteur similaire MisterBin */
+  height: 155px; /* 🔧 ajusté comme MisterBin */
   z-index: 1000;
   overflow: hidden;
 }
@@ -32,7 +32,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top; /* 🔥 garde le HAUT de l'image */
+  object-position: center -35px; /* 🔧 image remontée */
 }
 
 /* léger fondu bas */
@@ -48,7 +48,7 @@ body {
 /* OVERLAY */
 .app-overlay {
   min-height: 100vh;
-  padding-top: 170px; /* pousse le contenu sous le header */
+  padding-top: 155px; /* 🔧 synchronisé avec le header */
 }
 
 /* ===== SOLDE ===== */
