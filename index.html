@@ -14,23 +14,16 @@ body {
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: #ffd700;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.04),
-      rgba(0,0,0,0.25),
-      rgba(0,0,0,0.65)
-    ),
-    url("backround.png") center top / cover no-repeat fixed;
+  background: #000; /* 🔥 fond noir uniquement */
 }
 
-/* ===== HEADER FIXE (MISTERBIN STYLE) ===== */
+/* ===== HEADER FIXE (IMAGE COUPÉE) ===== */
 
 .header-fixed {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 160px;
+  height: 170px; /* hauteur similaire MisterBin */
   z-index: 1000;
   overflow: hidden;
 }
@@ -39,22 +32,23 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top; /* 🔥 garde le HAUT de l'image */
 }
 
+/* léger fondu bas */
 .header-fixed::after {
   content: "";
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 50px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.75));
+  height: 55px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0), #000);
 }
 
 /* OVERLAY */
 .app-overlay {
   min-height: 100vh;
-  background: rgba(0,0,0,0.12);
-  padding-top: 160px; /* pousse le contenu sous le header */
+  padding-top: 170px; /* pousse le contenu sous le header */
 }
 
 /* ===== SOLDE ===== */
@@ -95,7 +89,6 @@ body {
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 5px 16px rgba(0,0,0,0.35);
 }
 
 .filters-panel {
@@ -103,7 +96,6 @@ body {
   margin: 12px 16px;
   padding: 16px;
   background: linear-gradient(180deg, rgba(40,40,40,0.95), rgba(26,26,26,0.95));
-  backdrop-filter: blur(14px);
   border-radius: 14px;
 }
 
@@ -133,7 +125,6 @@ body {
   backdrop-filter: blur(22px);
   display: flex;
   border-top: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 -4px 18px rgba(0,0,0,0.35);
 }
 
 .bottom-nav button {
@@ -161,7 +152,6 @@ body {
   width: 22px;
   height: 22px;
   stroke-width: 2.2;
-  color: #ffd700;
 }
 
 .bottom-nav button:hover .icon,
@@ -172,11 +162,6 @@ body {
 .bottom-nav .label {
   font-size: 11px;
   font-weight: 600;
-}
-
-.bottom-nav button:hover .label,
-.bottom-nav button.active .label {
-  text-shadow: 0 0 6px rgba(255,215,0,0.45);
 }
 
 /* WRAPPER */
@@ -209,7 +194,7 @@ body {
 <body>
 
 <div class="header-fixed">
-  <img src="headeroffi.png" alt="PeixPeix Header">
+  <img src="backround.png" alt="Header PeixPeix">
 </div>
 
 <div class="app-wrapper">
@@ -221,7 +206,6 @@ body {
     </div>
 
     <div class="filters-btn" onclick="toggleFilters()">🔍 Filtres</div>
-
     <div class="filters-panel" id="filters"></div>
 
     <div class="container">
