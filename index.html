@@ -153,110 +153,164 @@ body {
     drop-shadow(0 0 8px rgba(255,215,0,0.6))
     drop-shadow(0 0 18px rgba(255,215,0,0.35));
 }
+
+/* ===== WRAPPER ===== */
+.app-wrapper {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ===== DESKTOP MODE ===== */
+.desktop .app-wrapper {
+  display: flex;
+  justify-content: center;
+  background: #000;
+}
+
+.desktop .app-overlay {
+  width: 420px;
+  min-height: 100vh;
+  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+}
+
+.desktop .balance-box {
+  font-size: 16px;
+}
+
+.desktop .balance-amount {
+  font-size: 22px;
+}
+
+.desktop .filters-btn {
+  padding: 12px;
+  font-size: 15px;
+}
+
+.desktop .bottom-nav {
+  height: 90px;
+}
+
+.desktop .nav-icon {
+  width: 48px;
+  height: 48px;
+}
+
+/* ===== MOBILE ===== */
+.mobile .app-overlay {
+  width: 100%;
+}
 </style>
 </head>
 
 <body>
 
-<div class="app-overlay">
+<div class="app-wrapper">
+  <div class="app-overlay">
 
-  <div class="balance-box">
-    <div>Solde</div>
-    <div class="balance-amount">10000€</div>
+    <div class="balance-box">
+      <div>Solde</div>
+      <div class="balance-amount">10000€</div>
+    </div>
+
+    <div class="filters-btn" onclick="toggleFilters()">🔍 Filtres</div>
+
+    <div class="filters-panel" id="filters">
+
+      <div class="filters-grid">
+        <div>
+          <label>Banque</label>
+          <select>
+            <option>TOUS</option>
+            <option>CREDIT AGRICOLE, SA</option>
+            <option>SOCIETE GENERAL, SA</option>
+            <option>LE CREDIT LYONNAIS</option>
+            <option>CREDIT MUTUEL ARKEA</option>
+            <option>BPCE</option>
+            <option>BOURSORAMA BANQUE</option>
+            <option>BANQUE FEDERATIVE DU CREDIT MUTUEL (BFCM)</option>
+            <option>LA BANQUE POSTALE</option>
+            <option>BNP PARIBAS</option>
+            <option>REVOLUT UAB</option>
+            <option>CREDIT AGRICOLE SOCIETE ANONYME</option>
+            <option>CREDIT INDUSTRIEL ET COMMERCIAL</option>
+            <option>NATIXIS</option>
+            <option>MILLEIS BANQUE</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Level</label>
+          <select>
+            <option>TOUS</option>
+            <option>CREDIT</option>
+            <option>DEBIT</option>
+            <option>UNKNOW</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filters-grid" style="margin-top:14px;">
+        <div>
+          <label>Âge</label>
+          <input type="number" placeholder="Ex: 25">
+        </div>
+        <div>
+          <label>Code postal</label>
+          <input type="text" placeholder="Ex: 75000">
+        </div>
+      </div>
+
+      <div class="filters-full">
+        <label>Prix maximum (€)</label>
+        <input type="number" placeholder="Ex: 1000">
+      </div>
+
+    </div>
+
+    <div class="container">
+      <div id="shop">
+        <div class="empty">Aucun produit pour le moment</div>
+      </div>
+
+      <div id="cart" style="display:none;">
+        <div class="empty">Votre panier est vide</div>
+      </div>
+
+      <div id="history" style="display:none;">
+        <div class="empty">Aucun achat effectué</div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <button class="active" onclick="showTab('shop', this)">
+        <span>🏪</span>
+        Boutique
+      </button>
+
+      <button onclick="showTab('cart', this)">
+        <img src="chariot.png" class="nav-icon" alt="Panier">
+        Panier
+      </button>
+
+      <button onclick="showTab('history', this)">
+        <span>🧾</span>
+        Historique
+      </button>
+    </div>
+
   </div>
-
-  <div class="filters-btn" onclick="toggleFilters()">🔍 Filtres</div>
-
-  <div class="filters-panel" id="filters">
-
-    <div class="filters-grid">
-      <div>
-        <label>Banque</label>
-        <select>
-          <option>TOUS</option>
-          <option>CREDIT AGRICOLE, SA</option>
-          <option>SOCIETE GENERAL, SA</option>
-          <option>LE CREDIT LYONNAIS</option>
-          <option>CREDIT MUTUEL ARKEA</option>
-          <option>BPCE</option>
-          <option>BOURSORAMA BANQUE</option>
-          <option>BANQUE FEDERATIVE DU CREDIT MUTUEL (BFCM)</option>
-          <option>LA BANQUE POSTALE</option>
-          <option>BNP PARIBAS</option>
-          <option>REVOLUT UAB</option>
-          <option>CREDIT AGRICOLE SOCIETE ANONYME</option>
-          <option>CREDIT INDUSTRIEL ET COMMERCIAL</option>
-          <option>NATIXIS</option>
-          <option>MILLEIS BANQUE</option>
-        </select>
-      </div>
-
-      <div>
-        <label>Level</label>
-        <select>
-          <option>TOUS</option>
-          <option>CREDIT</option>
-          <option>DEBIT</option>
-          <option>UNKNOW</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="filters-grid" style="margin-top:14px;">
-      <div>
-        <label>Âge</label>
-        <input type="number" placeholder="Ex: 25">
-      </div>
-      <div>
-        <label>Code postal</label>
-        <input type="text" placeholder="Ex: 75000">
-      </div>
-    </div>
-
-    <div class="filters-full">
-      <label>Prix maximum (€)</label>
-      <input type="number" placeholder="Ex: 1000">
-    </div>
-
-  </div>
-
-  <div class="container">
-
-    <div id="shop">
-      <div class="empty">Aucun produit pour le moment</div>
-    </div>
-
-    <div id="cart" style="display:none;">
-      <div class="empty">Votre panier est vide</div>
-    </div>
-
-    <div id="history" style="display:none;">
-      <div class="empty">Aucun achat effectué</div>
-    </div>
-
-  </div>
-
-</div>
-
-<div class="bottom-nav">
-  <button class="active" onclick="showTab('shop', this)">
-    <span>🏪</span>
-    Boutique
-  </button>
-
-  <button onclick="showTab('cart', this)">
-    <img src="chariot.png" class="nav-icon" alt="Panier">
-    Panier
-  </button>
-
-  <button onclick="showTab('history', this)">
-    <span>🧾</span>
-    Historique
-  </button>
 </div>
 
 <script>
 Telegram.WebApp.expand();
+
+const platform = Telegram.WebApp.platform;
+const isMobile =
+  platform === "android" ||
+  platform === "ios" ||
+  window.innerWidth < 768;
+
+document.body.classList.add(isMobile ? "mobile" : "desktop");
 
 function toggleFilters() {
   const f = document.getElementById("filters");
