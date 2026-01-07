@@ -102,15 +102,20 @@ body {
   font-size: 16px;
 }
 
-/* NAV BAR */
+/* ========================= */
+/* ===== NAV BAR (MISTERBIN) */
+/* ========================= */
+
 .bottom-nav {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 110px;
+  height: 78px;
   background: rgba(10,10,10,0.95);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(18px);
   display: flex;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  z-index: 100;
 }
 
 .bottom-nav button {
@@ -119,23 +124,28 @@ body {
   border: none;
   color: #ffd700;
   opacity: 0.6;
-  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 11px;
+  cursor: pointer;
 }
 
 .bottom-nav button.active {
   opacity: 1;
 }
 
-.bottom-nav span {
-  font-size: 32px;
+/* icônes */
+.bottom-nav .icon {
+  font-size: 22px;
+  line-height: 1;
 }
 
-/* ICON PANIER */
-.nav-icon {
-  width: 60px;
-  height: 60px;
-  display: block;
-  margin: 0 auto;
+/* texte */
+.bottom-nav .label {
+  font-size: 11px;
 }
 
 /* WRAPPER */
@@ -155,11 +165,11 @@ body {
 }
 
 .desktop .app-overlay {
-  width: 360px;                 /* 🔥 largeur MisterBin */
+  width: 360px; /* largeur MisterBin */
   min-height: 100vh;
 }
 
-/* SOLDE plus compact */
+/* solde compact */
 .desktop .balance-box {
   padding: 14px;
   font-size: 15px;
@@ -169,24 +179,23 @@ body {
   font-size: 20px;
 }
 
-/* FILTRE plus petit */
+/* filtre compact */
 .desktop .filters-btn {
   padding: 10px;
   font-size: 14px;
 }
 
-/* NAVBAR comme MisterBin */
+/* navbar desktop */
 .desktop .bottom-nav {
-  height: 72px;
+  height: 70px;
 }
 
-.desktop .bottom-nav span {
-  font-size: 22px;
+.desktop .bottom-nav .icon {
+  font-size: 20px;
 }
 
-.desktop .nav-icon {
-  width: 36px;
-  height: 36px;
+.desktop .bottom-nav .label {
+  font-size: 10.5px;
 }
 
 /* ========================= */
@@ -219,10 +228,22 @@ body {
       <div class="empty">Aucun produit pour le moment</div>
     </div>
 
+    <!-- NAV BAR -->
     <div class="bottom-nav">
-      <button class="active"><span>🏪</span>Boutique</button>
-      <button><img src="chariot.png" class="nav-icon">Panier</button>
-      <button><span>🧾</span>Historique</button>
+      <button class="active">
+        <span class="icon">🏪</span>
+        <span class="label">Boutique</span>
+      </button>
+
+      <button>
+        <span class="icon">🛒</span>
+        <span class="label">Panier</span>
+      </button>
+
+      <button>
+        <span class="icon">🧾</span>
+        <span class="label">Historique</span>
+      </button>
     </div>
 
   </div>
