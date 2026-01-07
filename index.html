@@ -5,6 +5,7 @@
 <title>PeixPeix Shop</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -118,45 +119,43 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  font-family: 'Inter', sans-serif;
+  gap: 6px;
   cursor: pointer;
-  transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
+  transition: all 0.25s ease;
 }
 
-/* 🔥 HOVER (PC) */
-.bottom-nav button:hover {
+/* Hover + actif */
+.bottom-nav button:hover,
+.bottom-nav button.active {
   opacity: 1;
   transform: translateY(-2px);
 }
 
-/* 🔥 GLOW JAUNE */
+/* ICONES LUCIDE */
+.bottom-nav .icon {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.2;
+  color: #ffd700;
+  transition: all 0.25s ease;
+}
+
+/* Glow jaune */
 .bottom-nav button:hover .icon,
 .bottom-nav button.active .icon {
-  text-shadow:
-    0 0 6px rgba(255,215,0,0.6),
-    0 0 14px rgba(255,215,0,0.35);
+  filter: drop-shadow(0 0 6px rgba(255,215,0,0.7));
 }
 
-/* 🔥 TEXTE */
-.bottom-nav button:hover .label,
-.bottom-nav button.active .label {
-  color: #ffd700;
-  text-shadow: 0 0 6px rgba(255,215,0,0.45);
-}
-
-/* ACTIF */
-.bottom-nav button.active {
-  opacity: 1;
-}
-
-.bottom-nav .icon {
-  font-size: 22px;
-}
-
+/* Label */
 .bottom-nav .label {
   font-size: 11px;
   font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.bottom-nav button:hover .label,
+.bottom-nav button.active .label {
+  text-shadow: 0 0 6px rgba(255,215,0,0.45);
 }
 
 /* WRAPPER */
@@ -206,17 +205,17 @@ body {
 
     <div class="bottom-nav">
       <button class="active">
-        <span class="icon">🏪</span>
+        <i data-lucide="store" class="icon"></i>
         <span class="label">Boutique</span>
       </button>
 
       <button>
-        <span class="icon">🛒</span>
+        <i data-lucide="shopping-cart" class="icon"></i>
         <span class="label">Panier</span>
       </button>
 
       <button>
-        <span class="icon">🧾</span>
+        <i data-lucide="receipt" class="icon"></i>
         <span class="label">Historique</span>
       </button>
     </div>
@@ -238,6 +237,8 @@ function toggleFilters() {
   const f = document.getElementById("filters");
   f.style.display = f.style.display === "block" ? "none" : "block";
 }
+
+lucide.createIcons();
 </script>
 
 </body>
