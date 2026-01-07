@@ -3,12 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>PeixPeix Shop</title>
+
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<!-- POLICE MISTERBIN (INTER) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: #ffd700;
   background:
     linear-gradient(
@@ -36,16 +40,17 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .balance-box div:first-child {
-  font-size: 18px;
+  font-weight: 500;
 }
 
 .balance-amount {
   font-size: 28px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 /* FILTRES */
@@ -57,7 +62,8 @@ body {
   border-radius: 16px;
   text-align: center;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 /* PANNEAU FILTRES */
@@ -70,14 +76,9 @@ body {
   border-radius: 16px;
 }
 
-.filters-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
 .filters-panel label {
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .filters-panel input,
@@ -88,6 +89,8 @@ body {
   border: none;
   background: rgba(0,0,0,0.7);
   color: #ffd700;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
 }
 
 /* CONTENU */
@@ -99,11 +102,12 @@ body {
 .empty {
   text-align: center;
   margin-top: 220px;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 /* ========================= */
-/* ===== NAV BAR (MISTERBIN) */
+/* ===== NAV BAR ========= */
 /* ========================= */
 
 .bottom-nav {
@@ -115,7 +119,6 @@ body {
   backdrop-filter: blur(18px);
   display: flex;
   border-top: 1px solid rgba(255,255,255,0.06);
-  z-index: 100;
 }
 
 .bottom-nav button {
@@ -129,7 +132,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  font-size: 11px;
+  font-family: 'Inter', sans-serif;
   cursor: pointer;
 }
 
@@ -146,6 +149,7 @@ body {
 /* texte */
 .bottom-nav .label {
   font-size: 11px;
+  font-weight: 600;
 }
 
 /* WRAPPER */
@@ -155,7 +159,7 @@ body {
 }
 
 /* ========================= */
-/* ===== DESKTOP FIX ======= */
+/* ===== DESKTOP ========= */
 /* ========================= */
 
 .desktop .app-wrapper {
@@ -165,27 +169,24 @@ body {
 }
 
 .desktop .app-overlay {
-  width: 360px; /* largeur MisterBin */
+  width: 360px;
   min-height: 100vh;
 }
 
-/* solde compact */
 .desktop .balance-box {
   padding: 14px;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .desktop .balance-amount {
   font-size: 20px;
 }
 
-/* filtre compact */
 .desktop .filters-btn {
   padding: 10px;
   font-size: 14px;
 }
 
-/* navbar desktop */
 .desktop .bottom-nav {
   height: 70px;
 }
@@ -228,7 +229,6 @@ body {
       <div class="empty">Aucun produit pour le moment</div>
     </div>
 
-    <!-- NAV BAR -->
     <div class="bottom-nav">
       <button class="active">
         <span class="icon">🏪</span>
