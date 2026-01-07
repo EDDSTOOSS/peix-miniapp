@@ -16,9 +16,9 @@ body {
   background:
     linear-gradient(
       to bottom,
-      rgba(0,0,0,0.05),
-      rgba(0,0,0,0.35),
-      rgba(0,0,0,0.85)
+      rgba(0,0,0,0.04),
+      rgba(0,0,0,0.25),
+      rgba(0,0,0,0.65)
     ),
     url("backround.png") center top / cover no-repeat fixed;
 }
@@ -26,47 +26,72 @@ body {
 /* OVERLAY */
 .app-overlay {
   min-height: 100vh;
-  background: rgba(0,0,0,0.15);
+  background: rgba(0,0,0,0.12);
 }
 
 /* ========================= */
-/* ===== SOLDE (COMPACT) === */
+/* ===== SOLDE (GRIS) ===== */
 /* ========================= */
 
 .balance-box {
   margin: 14px 16px 10px;
   padding: 12px 16px;
-  background: rgba(10,10,10,0.88);
+
+  background: linear-gradient(
+    180deg,
+    rgba(45,45,45,0.95),
+    rgba(30,30,30,0.95)
+  );
+
   backdrop-filter: blur(14px);
   border-radius: 14px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 6px 18px rgba(0,0,0,0.35);
 }
 
 .balance-box div:first-child {
   font-size: 14px;
   font-weight: 500;
-  opacity: 0.85;
+  color: #e6e6e6;
 }
 
 .balance-amount {
   font-size: 20px;
   font-weight: 700;
+  color: #ffd700;
 }
 
-/* FILTRES */
+/* ========================= */
+/* ===== FILTRES ========= */
+/* ========================= */
+
 .filters-btn {
   margin: 8px 16px 0;
   padding: 12px;
-  background: rgba(10,10,10,0.85);
+
+  background: linear-gradient(
+    180deg,
+    rgba(42,42,42,0.95),
+    rgba(28,28,28,0.95)
+  );
+
   backdrop-filter: blur(14px);
   border-radius: 14px;
   text-align: center;
   cursor: pointer;
+
   font-size: 14px;
   font-weight: 600;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 5px 16px rgba(0,0,0,0.35);
 }
 
 /* PANNEAU FILTRES */
@@ -74,25 +99,15 @@ body {
   display: none;
   margin: 12px 16px;
   padding: 16px;
-  background: rgba(10,10,10,0.85);
+
+  background: linear-gradient(
+    180deg,
+    rgba(40,40,40,0.95),
+    rgba(26,26,26,0.95)
+  );
+
   backdrop-filter: blur(14px);
   border-radius: 14px;
-}
-
-.filters-panel label {
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.filters-panel input,
-.filters-panel select {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  background: rgba(0,0,0,0.7);
-  color: #ffd700;
-  font-family: 'Inter', sans-serif;
 }
 
 /* CONTENU */
@@ -106,10 +121,11 @@ body {
   margin-top: 200px;
   font-size: 14px;
   font-weight: 500;
+  color: #ffd700;
 }
 
 /* ========================= */
-/* ===== NAV BAR ========= */
+/* ===== NAV BAR (GRIS) === */
 /* ========================= */
 
 .bottom-nav {
@@ -117,18 +133,29 @@ body {
   bottom: 0;
   width: 100%;
   height: 72px;
-  background: rgba(10,10,10,0.95);
+
+  background: linear-gradient(
+    180deg,
+    rgba(38,38,38,0.98),
+    rgba(24,24,24,0.98)
+  );
+
   backdrop-filter: blur(18px);
   display: flex;
+
   border-top: 1px solid rgba(255,255,255,0.06);
+
+  box-shadow:
+    0 -6px 20px rgba(0,0,0,0.45);
 }
 
 .bottom-nav button {
   flex: 1;
   background: none;
   border: none;
+
   color: #ffd700;
-  opacity: 0.6;
+  opacity: 0.55;
 
   display: flex;
   flex-direction: column;
