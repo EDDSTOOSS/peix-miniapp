@@ -110,7 +110,7 @@ body {
   opacity: 0.9;
 }
 
-/* NAV BAR — GROSSE COMME L’EXEMPLE */
+/* NAV BAR */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -160,7 +160,7 @@ body {
   min-height: 100vh;
 }
 
-/* ===== DESKTOP MODE ===== */
+/* ===== DESKTOP MODE (PROPORTIONS MISTERBIN) ===== */
 .desktop .app-wrapper {
   display: flex;
   justify-content: center;
@@ -168,12 +168,13 @@ body {
 }
 
 .desktop .app-overlay {
-  width: 420px;
+  width: 390px;
   min-height: 100vh;
   box-shadow: 0 0 40px rgba(0,0,0,0.8);
 }
 
 .desktop .balance-box {
+  padding: 18px;
   font-size: 16px;
 }
 
@@ -186,13 +187,21 @@ body {
   font-size: 15px;
 }
 
+.desktop .container {
+  padding-bottom: 130px;
+}
+
 .desktop .bottom-nav {
-  height: 90px;
+  height: 85px;
+}
+
+.desktop .bottom-nav span {
+  font-size: 26px;
 }
 
 .desktop .nav-icon {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
 }
 
 /* ===== MOBILE ===== */
