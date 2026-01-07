@@ -20,99 +20,106 @@ body {
     url("backround.png") center top / cover no-repeat fixed;
 }
 
-/* OVERLAY GLOBAL */
+/* OVERLAY */
 .app-overlay {
   min-height: 100vh;
   background: rgba(0,0,0,0.15);
 }
 
-/* SOLDE */
+/* SOLDE — GROSSE CARD */
 .balance-box {
-  margin: 12px;
-  padding: 18px;
-  background: rgba(10,10,10,0.78);
-  backdrop-filter: blur(10px);
-  border-radius: 14px;
+  margin: 16px;
+  padding: 22px;
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+}
+
+.balance-box div:first-child {
   font-size: 18px;
 }
 
 .balance-amount {
-  font-style: italic;
-  font-size: 24px;
+  font-size: 28px;
+  font-weight: bold;
 }
 
-/* FILTRES */
+/* FILTRES — SOUS SOLDE */
 .filters-btn {
-  margin: 8px 12px;
-  padding: 10px;
-  background: rgba(10,10,10,0.78);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
+  margin: 12px 16px 0 16px;
+  padding: 16px;
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
   text-align: center;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 /* PANNEAU FILTRES */
 .filters-panel {
   display: none;
-  margin: 12px;
-  padding: 14px;
-  background: rgba(10,10,10,0.78);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
+  margin: 16px;
+  padding: 18px;
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
 }
 
 .filters-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 14px;
 }
 
 .filters-full {
-  margin-top: 10px;
+  margin-top: 14px;
 }
 
 .filters-panel label {
-  font-size: 11px;
-  margin-bottom: 4px;
+  font-size: 13px;
+  margin-bottom: 6px;
   display: block;
 }
 
 .filters-panel input,
 .filters-panel select {
   width: 100%;
-  padding: 9px;
-  border-radius: 6px;
+  padding: 14px;
+  border-radius: 10px;
   border: none;
   background: rgba(0,0,0,0.7);
   color: #ffd700;
+  font-size: 15px;
 }
 
 /* CONTENU */
 .container {
-  padding: 12px;
-  padding-bottom: 120px;
+  padding: 16px;
+  padding-bottom: 160px;
 }
 
 .empty {
   text-align: center;
-  margin-top: 260px;
-  font-size: 16px;
+  margin-top: 280px;
+  font-size: 18px;
+  opacity: 0.9;
 }
 
-/* NAV BAR */
+/* NAV BAR — GROSSE COMME L’EXEMPLE */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 90px;
+  height: 110px;
   background: rgba(10,10,10,0.95);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
   display: flex;
-  border-top: 1px solid rgba(255,215,0,0.15);
+  border-top: 1px solid rgba(255,215,0,0.2);
 }
 
 .bottom-nav button {
@@ -122,28 +129,29 @@ body {
   color: #ffd700;
   opacity: 0.6;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .bottom-nav button.active {
   opacity: 1;
 }
 
-/* ICONES NAV */
+/* ICONES */
 .bottom-nav span {
-  font-size: 26px;
+  font-size: 32px;
   display: block;
+  margin-bottom: 4px;
 }
 
 /* IMAGE PANIER */
 .nav-icon {
-  width: 52px;
-  height: 52px;
+  width: 60px;
+  height: 60px;
   margin: 0 auto 4px auto;
   display: block;
   filter:
-    drop-shadow(0 0 6px rgba(255,215,0,0.6))
-    drop-shadow(0 0 14px rgba(255,215,0,0.35));
+    drop-shadow(0 0 8px rgba(255,215,0,0.6))
+    drop-shadow(0 0 18px rgba(255,215,0,0.35));
 }
 </style>
 </head>
@@ -194,7 +202,7 @@ body {
       </div>
     </div>
 
-    <div class="filters-grid" style="margin-top:10px;">
+    <div class="filters-grid" style="margin-top:14px;">
       <div>
         <label>Âge</label>
         <input type="number" placeholder="Ex: 25">
