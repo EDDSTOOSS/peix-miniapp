@@ -47,27 +47,34 @@ body {
 
 /* ===== BARRE DE DEMARCATION (STYLE MISTERBIN) ===== */
 
+.header-divider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
 .header-divider {
   position: fixed;
   top: 155px;
   width: 100%;
-  height: 14px;
+  height: 10px; /* très fin */
   z-index: 999;
   background: linear-gradient(
     to bottom,
-    rgba(30,30,30,0.95),
-    rgba(15,15,15,0.95)
+    rgba(0,0,0,0.6),
+    rgba(0,0,0,0)
   );
-  backdrop-filter: blur(18px);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.06),
-    0 4px 10px rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
 }
+
 
 /* OVERLAY */
 .app-overlay {
   min-height: 100vh;
-  padding-top: 169px; /* header + divider */
+  padding-top: 165px; /* header + divider */
 }
 
 /* ===== SOLDE ===== */
