@@ -17,7 +17,7 @@ body {
   background: #000;
 }
 
-/* ===== HEADER FIXE (PROPRE, SANS DECALLAGE) ===== */
+/* ===== HEADER FIXE (IMAGE 100% PLEINE) ===== */
 
 .header-fixed {
   position: fixed;
@@ -26,35 +26,34 @@ body {
   height: 155px;
   z-index: 1000;
   overflow: hidden;
+  background: #000;
 }
 
 .header-fixed img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center -35px;
+  object-position: center;
+  display: block;
 }
 
-/* fondu + séparation intégrée (style MisterBin) */
-.header-fixed::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
+/* ===== MICRO BARRE SOUS LE HEADER (COMME NAV BAR) ===== */
+
+.header-separator {
+  position: fixed;
+  top: 155px;
   width: 100%;
-  height: 14px;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0),
-    rgba(0,0,0,0.65)
-  );
-  backdrop-filter: blur(10px);
+  height: 8px;
+  z-index: 999;
+  background: rgba(20,20,20,0.55);
+  backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 /* OVERLAY */
 .app-overlay {
   min-height: 100vh;
-  padding-top: 155px;
+  padding-top: 163px; /* header + separator */
 }
 
 /* ===== SOLDE ===== */
@@ -68,7 +67,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 6px 18px rgba(0,0,0,0.35);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04),
+              0 6px 18px rgba(0,0,0,0.35);
 }
 
 .balance-box div:first-child {
@@ -202,6 +202,8 @@ body {
 <div class="header-fixed">
   <img src="backround.png" alt="Header PeixPeix">
 </div>
+
+<div class="header-separator"></div>
 
 <div class="app-wrapper">
   <div class="app-overlay">
