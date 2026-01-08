@@ -17,13 +17,13 @@ body {
   background: #000;
 }
 
-/* ===== HEADER FIXE (IMAGE COUPÉE) ===== */
+/* ===== HEADER ===== */
 
 .header-fixed {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 155px; /* 🔧 ajusté comme MisterBin */
+  height: 155px;
   z-index: 1000;
   overflow: hidden;
 }
@@ -32,49 +32,46 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center -35px; /* 🔧 image remontée */
-}
-
-/* léger fondu bas */
-.header-fixed::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 55px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0), #000);
+  object-position: center -35px;
 }
 
 /* OVERLAY */
 .app-overlay {
   min-height: 100vh;
-  padding-top: 155px; /* 🔧 synchronisé avec le header */
+  padding-top: 155px;
 }
 
-/* ===== SOLDE ===== */
+/* ===== SOLDE (STYLE MISTERBIN) ===== */
 
 .balance-box {
-  margin: 14px 16px 10px;
-  padding: 12px 16px;
-  background: linear-gradient(180deg, rgba(45,45,45,0.95), rgba(30,30,30,0.95));
-  backdrop-filter: blur(14px);
-  border-radius: 14px;
+  margin: 14px 16px 12px;
+  padding: 14px 18px;
+  background: linear-gradient(
+    90deg,
+    rgba(28,28,28,0.95),
+    rgba(38,38,38,0.95)
+  );
+  border-radius: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 6px 18px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 10px 30px rgba(0,0,0,0.45);
 }
 
 .balance-box div:first-child {
   font-size: 14px;
   font-weight: 500;
-  color: #e6e6e6;
+  color: #cfcfcf;
 }
 
 .balance-amount {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   color: #ffd700;
+  letter-spacing: 0.3px;
 }
 
 /* ===== FILTRES ===== */
