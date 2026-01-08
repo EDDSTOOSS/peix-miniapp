@@ -17,7 +17,7 @@ body {
   background: #000;
 }
 
-/* ===== HEADER FIXE ===== */
+/* ===== HEADER FIXE (PROPRE, SANS DECALLAGE) ===== */
 
 .header-fixed {
   position: fixed;
@@ -35,46 +35,26 @@ body {
   object-position: center -35px;
 }
 
-/* fondu bas */
+/* fondu + séparation intégrée (style MisterBin) */
 .header-fixed::after {
   content: "";
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 55px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0), #000);
-}
-
-/* ===== BARRE DE DEMARCATION (STYLE MISTERBIN) ===== */
-
-.header-divider::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 1px;
-  background: rgba(255,255,255,0.08);
-}
-
-.header-divider {
-  position: fixed;
-  top: 155px;
-  width: 100%;
-  height: 10px; /* très fin */
-  z-index: 999;
+  height: 14px;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,0.6),
-    rgba(0,0,0,0)
+    rgba(0,0,0,0),
+    rgba(0,0,0,0.65)
   );
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-
 
 /* OVERLAY */
 .app-overlay {
   min-height: 100vh;
-  padding-top: 165px; /* header + divider */
+  padding-top: 155px;
 }
 
 /* ===== SOLDE ===== */
@@ -222,8 +202,6 @@ body {
 <div class="header-fixed">
   <img src="backround.png" alt="Header PeixPeix">
 </div>
-
-<div class="header-divider"></div>
 
 <div class="app-wrapper">
   <div class="app-overlay">
