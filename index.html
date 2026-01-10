@@ -326,6 +326,87 @@ body {
   transform: scale(0.98);
 }
 
+.product-card {
+  background: linear-gradient(180deg, #2a2105, #1a1404);
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.25);
+  border: 1px solid rgba(255,215,0,0.35);
+  color: #ffd700;
+  position: relative;
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.discount {
+  background: #ffd700;
+  color: #111;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.last-chance {
+  background: rgba(255, 80, 80, 0.15);
+  color: #ff4d4d;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.product-id {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.product-info {
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.price .old {
+  text-decoration: line-through;
+  opacity: 0.5;
+  margin-right: 6px;
+}
+
+.price .new {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.add-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #000;
+  color: #ffd700;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(255,215,0,0.6);
+}
+
+.add-btn:hover {
+  transform: scale(1.08);
+}
+
 </style>
 </head>
 
@@ -391,6 +472,34 @@ body {
   <button class="apply-filters">Appliquer les filtres</button>
 
 </div>
+
+<div class="product-card">
+  <div class="product-header">
+    <span class="discount">-70%</span>
+    <span class="last-chance">DERNIÈRE CHANCE</span>
+  </div>
+
+  <div class="product-body">
+    <div class="product-id">444111</div>
+
+    <div class="product-info">
+      <div>💳 Type : DEBIT</div>
+      <div>⭐ Level : CLASSIC</div>
+      <div>🏦 Banque : MONOBANK</div>
+      <div>📍 Ville : LIMOGES</div>
+    </div>
+
+    <div class="product-footer">
+      <div class="price">
+        <span class="old">50€</span>
+        <span class="new">15€</span>
+      </div>
+
+      <button class="add-btn">+</button>
+    </div>
+  </div>
+</div>
+
 
     <div class="container">
       <div class="empty">Aucun produit pour le moment</div>
