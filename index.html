@@ -218,6 +218,69 @@ body {
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.55);
 }
 
+/* ===== FILTRES PREMIUM ===== */
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-item.full {
+  grid-column: span 2;
+}
+
+.filter-item label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #cfcfcf;
+  letter-spacing: 0.4px;
+}
+
+.filter-item input {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(15,15,15,0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #ffd700;
+  font-size: 13px;
+  outline: none;
+}
+
+.filter-item input::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+.filter-item input:focus {
+  border-color: rgba(255,215,0,0.6);
+  box-shadow: 0 0 0 1px rgba(255,215,0,0.2);
+}
+
+/* Bouton appliquer */
+.apply-filters {
+  width: 100%;
+  padding: 10px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffeaa0, #d4a700);
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.45);
+}
+
+.apply-filters:active {
+  transform: scale(0.98);
+}
+
 </style>
 </head>
 
@@ -243,7 +306,40 @@ body {
 
 </div>
 
-    <div class="filters-panel" id="filters"></div>
+    <div class="filters-panel" id="filters">
+
+  <div class="filters-grid">
+    <!-- Ligne 1 -->
+    <div class="filter-item">
+      <label>BIN</label>
+      <input type="text" placeholder="Ex: 457173">
+    </div>
+
+    <div class="filter-item">
+      <label>Banque</label>
+      <input type="text" placeholder="Ex: BNP">
+    </div>
+
+    <div class="filter-item">
+      <label>Âge</label>
+      <input type="number" placeholder="Ex: 25">
+    </div>
+
+    <!-- Ligne 2 -->
+    <div class="filter-item">
+      <label>Code postal</label>
+      <input type="text" placeholder="Ex: 75001">
+    </div>
+
+    <div class="filter-item full">
+      <label>Prix maximum (€)</label>
+      <input type="number" placeholder="Ex: 50">
+    </div>
+  </div>
+
+  <button class="apply-filters">Appliquer les filtres</button>
+
+</div>
 
     <div class="container">
       <div class="empty">Aucun produit pour le moment</div>
