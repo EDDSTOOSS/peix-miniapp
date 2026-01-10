@@ -42,67 +42,29 @@ body {
   padding-top: 155px;
 }
 
-/* ===== SOLDE PREMIUM (SANS IMAGE) ===== */
+/* ===== SOLDE ===== */
 
 .balance-box {
-  position: relative;
   margin: 12px 16px 10px;
-  padding: 12px 16px;
-  border-radius: 14px;
+  padding: 10px 14px;
+  background: #000;
+  border-radius: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  background: linear-gradient(
-    180deg,
-    #0b0b0b,
-    #000000
-  );
-
-  border: 1px solid rgba(255,215,0,0.22);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.05),
-    0 8px 24px rgba(0,0,0,0.65);
-}
-
-/* Ligne lumineuse subtile en haut */
-.balance-box::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 12px;
-  right: 12px;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,215,0,0.45),
-    transparent
-  );
-}
-
-/* Lueur douce en bas */
-.balance-box::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 14px;
-  box-shadow: 0 0 18px rgba(255,215,0,0.08);
-  pointer-events: none;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .balance-box div:first-child {
   font-size: 13px;
   font-weight: 500;
-  color: #d8d8d8;
+  color: #e0e0e0;
 }
 
 .balance-amount {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   color: #ffd700;
-  letter-spacing: 0.2px;
-  text-shadow: 0 0 6px rgba(255,215,0,0.35);
 }
 
 /* ===== FILTRES ===== */
@@ -215,6 +177,29 @@ body {
 .mobile .app-overlay {
   width: 100%;
 }
+
+/* TRANSITION PREMIUM ENTRE HEADER ET BACKGROUND */
+.header-fixed::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.45) 60%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  pointer-events: none;
+}
+
+/* Léger glow premium */
+.header-fixed {
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.55);
+}
+
 </style>
 </head>
 
