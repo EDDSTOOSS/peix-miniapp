@@ -218,23 +218,19 @@ body {
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.55);
 }
 
-/* ===== FILTRES PREMIUM ===== */
+/* ===== FILTRES GRID ===== */
 
 .filters-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .filter-item {
   display: flex;
   flex-direction: column;
   gap: 6px;
-}
-
-.filter-item.full {
-  grid-column: span 2;
 }
 
 .filter-item label {
@@ -245,13 +241,12 @@ body {
 }
 
 .filter-item input {
-  padding: 8px 10px;
+  padding: 9px 10px;
   border-radius: 10px;
   background: rgba(15,15,15,0.9);
   border: 1px solid rgba(255,255,255,0.08);
   color: #ffd700;
   font-size: 13px;
-  outline: none;
 }
 
 .filter-item input::placeholder {
@@ -260,8 +255,56 @@ body {
 
 .filter-item input:focus {
   border-color: rgba(255,215,0,0.6);
-  box-shadow: 0 0 0 1px rgba(255,215,0,0.2);
+  outline: none;
 }
+
+/* ===== PRIX SLIDER ===== */
+
+.price-filter {
+  margin-bottom: 16px;
+}
+
+.price-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #e6e6e6;
+}
+
+.price-value {
+  color: #ffd700;
+  font-weight: 700;
+}
+
+.price-filter input[type="range"] {
+  width: 100%;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffeaa0, #d4a700);
+  outline: none;
+}
+
+.price-filter input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #ffd700;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255,215,0,0.8);
+  cursor: pointer;
+}
+
+.price-filter input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #ffd700;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 
 /* Bouton appliquer */
 .apply-filters {
@@ -309,6 +352,7 @@ body {
     <div class="filters-panel" id="filters">
 
   <div class="filters-grid">
+
     <!-- Ligne 1 -->
     <div class="filter-item">
       <label>BIN</label>
@@ -320,21 +364,26 @@ body {
       <input type="text" placeholder="Ex: BNP">
     </div>
 
+    <!-- Ligne 2 -->
     <div class="filter-item">
       <label>Âge</label>
       <input type="number" placeholder="Ex: 25">
     </div>
 
-    <!-- Ligne 2 -->
     <div class="filter-item">
       <label>Code postal</label>
       <input type="text" placeholder="Ex: 75001">
     </div>
 
-    <div class="filter-item full">
-      <label>Prix maximum (€)</label>
-      <input type="number" placeholder="Ex: 50">
+  </div>
+
+  <!-- Ligne 3 : Prix -->
+  <div class="price-filter">
+    <div class="price-header">
+      <span>Prix maximum</span>
+      <span class="price-value"><span id="priceValue">50</span>€</span>
     </div>
+    <input type="range" min="1" max="500" value="50" id="priceRange">
   </div>
 
   <button class="apply-filters">Appliquer les filtres</button>
@@ -381,6 +430,14 @@ function toggleFilters() {
 }
 
 lucide.createIcons();
+
+const priceRange = document.getElementById("priceRange");
+const priceValue = document.getElementById("priceValue");
+
+priceRange.addEventListener("input", () => {
+  priceValue.textContent = priceRange.value;
+});
+
 </script>
 
 </body>
