@@ -112,6 +112,8 @@ body {
 .container {
   padding: 16px;
   padding-bottom: 125px;
+  display: flex;
+  justify-content: center;
 }
 
 .empty {
@@ -327,17 +329,6 @@ body {
 }
 
 .product-card {
-  background: linear-gradient(180deg, #2a2105, #1a1404);
-  border-radius: 16px;
-  padding: 14px;
-  margin-bottom: 14px;
-  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.25);
-  border: 1px solid rgba(255,215,0,0.35);
-  color: #ffd700;
-  position: relative;
-}
-
-.product-card {
   position: relative;
   margin-bottom: 14px;
   padding: 14px;
@@ -347,6 +338,9 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,0.55);
   display: flex;
   gap: 14px;
+  max-width: 340px;   /* 🔑 empêche l’étirement */
+  width: 100%;
+  margin: 0 auto;
 }
 
 .card-image {
