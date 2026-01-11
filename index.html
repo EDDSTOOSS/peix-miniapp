@@ -587,7 +587,7 @@ body {
   </div>
 </div>
 
-<div class="app-overlay">
+<div id="shop-page" class="app-overlay">
 
   <div class="top-actions">
 
@@ -659,9 +659,12 @@ body {
   </button>
 
   <button onclick="openCart()" id="nav-cart">
+  <div class="cart-icon-wrapper">
     <i data-lucide="shopping-cart" class="icon"></i>
-    <span class="label">Panier</span>
-  </button>
+    <div id="cart-badge" class="cart-badge">1</div>
+  </div>
+  <span class="label">Panier</span>
+</button>
 
   <button onclick="openHistory()" id="nav-history">
     <i data-lucide="receipt" class="icon"></i>
@@ -784,44 +787,50 @@ renderPagination();
 </script>
 
 <script>
+/* ===== PANIER GLOBAL ===== */
 let cartCount = 0;
-let cartPrice = 15;
 
+/* ===== AJOUT PANIER ===== */
 function addToCart() {
-  cartCount = 1; // simple : 1 produit
-  document.getElementById("cart-badge").style.display = "flex";
-  document.getElementById("cart-badge").textContent = cartCount;
+  cartCount = 1;
+
+  const badge = document.getElementById("cart-badge");
+  badge.style.display = "flex";
+  badge.textContent = cartCount;
+
+  document.getElementById("cart-content").style.display = "flex";
 }
 
+/* ===== OUVRIR PANIER ===== */
 function openCart() {
-  document.querySelector(".app-overlay").style.display = "none";
+  document.getElementById("shop-page").style.display = "none";
   document.getElementById("cart-page").style.display = "block";
+  setActiveNav("cart");
 }
 
+/* ===== RETOUR SHOP ===== */
 function openShop() {
   document.getElementById("cart-page").style.display = "none";
-  document.querySelector(".app-overlay").style.display = "block";
+  document.getElementById("shop-page").style.display = "block";
+  setActiveNav("shop");
 }
 
+/* ===== SUPPRIMER ARTICLE ===== */
 function removeFromCart() {
   cartCount = 0;
 
   document.getElementById("cart-content").style.display = "none";
   document.getElementById("cart-badge").style.display = "none";
-
-  // Optionnel plus tard :
-  // fetch('/api/cart/remove', { method: 'POST' })
 }
 
-function openShop() {
-  document.getElementById("shop-page").style.display = "block";
-  document.getElementById("cart-page").style.display = "none";
+/* ===== NAV ACTIVE ===== */
+function setActiveNav(active) {
+  document.querySelectorAll(".bottom-nav button")
+    .forEach(b => b.classList.remove("active"));
 
-  setActiveNav("shop");
+  document.getElementById("nav-" + active).classList.add("active");
 }
-
 </script>
-
 
 </body>
 </html>
