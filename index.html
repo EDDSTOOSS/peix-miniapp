@@ -124,9 +124,9 @@ body {
 
 #products {
   width: 100%;
-  max-width: 320px;     /* 🔥 CLÉ : largeur MisterBin */
-  margin: 0 auto;
-  padding: 0 10px;      /* marges fines */
+  max-width: 360px;     /* largeur Telegram réaliste */
+  margin: 0 auto;      /* ✅ CENTRÉ */
+  padding: 0 12px;     /* marge gauche/droite clean */
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -209,17 +209,18 @@ body {
 
 body {
   margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #ffd700;
   background: url("Derriere.png") no-repeat center center fixed;
   background-size: cover;
-  display: flex;
-  justify-content: flex-start; /* 🔥 IMPORTANT */
 }
 
+
 /* WRAPPER PRINCIPAL */
-.app-wrapper {
+..app-wrapper {
   width: 100%;
   display: flex;
-  justify-content: center; /* centre DANS la WebApp */
+  justify-content: center; /* ✅ centre toute la mini-app */
 }
 
 /* CONTENU */
