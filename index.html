@@ -155,6 +155,19 @@ body {
   color: #ffd700;
 }
 
+.products-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.products-inner {
+  width: 100%;
+  max-width: 300px;        /* ⬅️ CLÉ DU RENDU */
+  padding: 0 10px;         /* ⬅️ espace gauche/droite */
+  box-sizing: border-box;
+}
+
 /* ===== NAV BAR ===== */
 
 .bottom-nav {
@@ -376,6 +389,7 @@ body {
   background: linear-gradient(180deg, rgba(30,25,10,0.95), rgba(15,12,5,0.95));
   border: 1px solid rgba(255,215,0,0.25);
   box-shadow: 0 6px 14px rgba(0,0,0,0.45);
+  margin-bottom: 10px;
 }
 
 .card-image {
@@ -463,7 +477,11 @@ body {
   <img src="backround.png" alt="Header PeixPeix">
 </div>
 
-<div class="app-wrapper">
+<div class="products-wrapper">
+  <div class="products-inner">
+    <!-- TES product-card ici -->
+  </div>
+</div>
   <div class="app-overlay">
 
     <div class="top-actions">
