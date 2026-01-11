@@ -480,6 +480,76 @@ body {
   color: #111;
 }
 
+/* ===== PANIER ===== */
+
+#cart-page {
+  padding: 16px;
+}
+
+.cart-header {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.cart-item {
+  background: linear-gradient(180deg, rgba(30,25,10,0.95), rgba(15,12,5,0.95));
+  border: 1px solid rgba(255,215,0,0.25);
+  border-radius: 14px;
+  padding: 10px;
+  margin-bottom: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-item-info {
+  font-size: 13px;
+}
+
+.cart-item-price {
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.cart-remove {
+  background: none;
+  border: none;
+  color: #ff5c5c;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* RÉCAP */
+
+.cart-summary {
+  position: sticky;
+  bottom: 90px;
+  background: rgba(20,20,20,0.9);
+  border-radius: 14px;
+  padding: 12px;
+  margin-top: 16px;
+}
+
+.cart-total {
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.cart-validate {
+  width: 100%;
+  padding: 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffeaa0, #d4a700);
+  border: none;
+  font-size: 15px;
+  font-weight: 800;
+  color: #111;
+  cursor: pointer;
+}
+
 </style>
 </head>
 
@@ -558,9 +628,12 @@ body {
 
 </div> <!-- 🔴 FIN app-overlay -->
 
+<div id="cart-page" style="display:none"></div>
+
 <!-- ✅ NAV BAR SORTIE DE app-overlay -->
 <div class="bottom-nav">
-  <button class="active">
+  <button class="active" onclick="showShop()">
+    <button onclick="showCart()">
     <i data-lucide="store" class="icon"></i>
     <span class="label">Boutique</span>
   </button>
@@ -574,6 +647,26 @@ body {
     <i data-lucide="receipt" class="icon"></i>
     <span class="label">Historique</span>
   </button>
+</div>
+
+<!-- ===== PAGE PANIER ===== -->
+
+  <div class="cart-header">
+    🛒 Mon panier
+  </div>
+
+  <div id="cart-items"></div>
+
+  <div class="cart-summary">
+    <div class="cart-total">
+      Total : <span id="cart-total">0€</span>
+    </div>
+
+    <button class="cart-validate">
+      Valider l’achat
+    </button>
+  </div>
+
 </div>
 
 <script>
@@ -636,7 +729,13 @@ function renderProducts() {
           <div class="card-line">📍 Ville : ${p.city}</div>
           <div class="card-price"><span class="price">${p.price}</span></div>
         </div>
-        <button class="add-btn">+</button>
+        <button class="add-btn"
+onclick='addToCart({
+  bin: "${p.bin}",
+  bank: "${p.bank}",
+  city: "${p.city}",
+  price: "${p.price.replace("€","")}"
+})'>+</button>
       </div>
     `;
   });
@@ -685,6 +784,65 @@ renderProducts();
 renderPagination();
 </script>
 
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+/* AJOUT AU PANIER */
+function addToCart(product) {
+  cart.push(product);
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+/* AFFICHAGE PANIER */
+function renderCart() {
+  const container = document.getElementById("cart-items");
+  const totalEl = document.getElementById("cart-total");
+
+  container.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += parseInt(item.price);
+
+    container.innerHTML += `
+      <div class="cart-item">
+        <div class="cart-item-info">
+          <div><strong>${item.bin}</strong></div>
+          <div>${item.bank} • ${item.city}</div>
+        </div>
+        <div>
+          <div class="cart-item-price">${item.price}€</div>
+          <button class="cart-remove" onclick="removeFromCart(${index})">✕</button>
+        </div>
+      </div>
+    `;
+  });
+
+  totalEl.textContent = total + "€";
+}
+
+/* SUPPRESSION */
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+}
+</script>
+
+<script>
+function showCart() {
+  document.getElementById("products").style.display = "none";
+  document.getElementById("pagination").style.display = "none";
+  document.getElementById("cart-page").style.display = "block";
+  renderCart();
+}
+
+function showShop() {
+  document.getElementById("products").style.display = "flex";
+  document.getElementById("pagination").style.display = "flex";
+  document.getElementById("cart-page").style.display = "none";
+}
+</script>
 
 </body>
 </html>
