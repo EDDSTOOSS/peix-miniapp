@@ -117,10 +117,27 @@ body {
   gap: 14px;
 }
 
-#products {
+#pagination {
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  padding: 0 8px;
+}
+
+.page-nav-btn {
+  background: none;
+  border: none;
+  color: #ffd700;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.page-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
 }
 
 .empty {
@@ -585,22 +602,41 @@ function renderProducts() {
 }
 
 function renderPagination() {
-  const pages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+  const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
   const pagination = document.getElementById("pagination");
-  pagination.innerHTML = "";
 
-  for (let i = 1; i <= pages; i++) {
-    pagination.innerHTML += `
-      <button class="page-btn ${i === currentPage ? "active" : ""}"
-        onclick="goToPage(${i})">${i}</button>
-    `;
+  pagination.innerHTML = `
+    <button class="page-nav-btn"
+      onclick="prevPage()"
+      ${currentPage === 1 ? "disabled" : ""}>
+      ← Précédent
+    </button>
+
+    <button class="page-nav-btn"
+      onclick="nextPage()"
+      ${currentPage === totalPages ? "disabled" : ""}>
+      Suivant →
+    </button>
+  `;
+}
+
+function nextPage() {
+  const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+  if (currentPage < totalPages) {
+    currentPage++;
+    renderProducts();
+    renderPagination();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
 
-function goToPage(page) {
-  currentPage = page;
-  renderProducts();
-  renderPagination();
+function prevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    renderProducts();
+    renderPagination();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 }
 
 // INIT
