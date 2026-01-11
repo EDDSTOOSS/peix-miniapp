@@ -180,6 +180,8 @@ body {
   backdrop-filter: blur(22px);
   display: flex;
   border-top: 1px solid rgba(255,255,255,0.08);
+  left: 0;
+  right: 0;
 }
 
 .bottom-nav button {
@@ -492,86 +494,86 @@ body {
     <!-- TES product-card ici -->
   </div>
 </div>
-  <div class="app-overlay">
 
-    <div class="top-actions">
+<div class="app-overlay">
 
-  <div class="balance-box compact">
-    <div>Solde</div>
-    <div class="balance-amount">10000€</div>
-  </div>
+  <div class="top-actions">
 
-  <div class="filters-box" onclick="toggleFilters()">
-    🔍 Filtres
-  </div>
-
-</div>
-
-    <div class="filters-panel" id="filters">
-
-  <div class="filters-grid">
-
-    <!-- Ligne 1 -->
-    <div class="filter-item">
-      <label>BIN</label>
-      <input type="text" placeholder="Ex: 457173">
+    <div class="balance-box compact">
+      <div>Solde</div>
+      <div class="balance-amount">10000€</div>
     </div>
 
-    <div class="filter-item">
-      <label>Banque</label>
-      <input type="text" placeholder="Ex: BNP">
-    </div>
-
-    <!-- Ligne 2 -->
-    <div class="filter-item">
-      <label>Âge</label>
-      <input type="number" placeholder="Ex: 25">
-    </div>
-
-    <div class="filter-item">
-      <label>Code postal</label>
-      <input type="text" placeholder="Ex: 75001">
+    <div class="filters-box" onclick="toggleFilters()">
+      🔍 Filtres
     </div>
 
   </div>
 
-  <!-- Ligne 3 : Prix -->
-  <div class="price-filter">
-    <div class="price-header">
-      <span>Prix maximum</span>
-      <span class="price-value"><span id="priceValue">50</span>€</span>
-    </div>
-    <input type="range" min="1" max="500" value="50" id="priceRange">
-  </div>
+  <div class="filters-panel" id="filters">
 
-  <button class="apply-filters">Appliquer les filtres</button>
+    <div class="filters-grid">
 
-</div>
+      <!-- Ligne 1 -->
+      <div class="filter-item">
+        <label>BIN</label>
+        <input type="text" placeholder="Ex: 457173">
+      </div>
 
-<div class="container">
-  <div id="products"></div>
-  <div id="pagination"></div>
-</div>
+      <div class="filter-item">
+        <label>Banque</label>
+        <input type="text" placeholder="Ex: BNP">
+      </div>
 
+      <!-- Ligne 2 -->
+      <div class="filter-item">
+        <label>Âge</label>
+        <input type="number" placeholder="Ex: 25">
+      </div>
 
-    <div class="bottom-nav">
-      <button class="active">
-        <i data-lucide="store" class="icon"></i>
-        <span class="label">Boutique</span>
-      </button>
+      <div class="filter-item">
+        <label>Code postal</label>
+        <input type="text" placeholder="Ex: 75001">
+      </div>
 
-      <button>
-        <i data-lucide="shopping-cart" class="icon"></i>
-        <span class="label">Panier</span>
-      </button>
-
-      <button>
-        <i data-lucide="receipt" class="icon"></i>
-        <span class="label">Historique</span>
-      </button>
     </div>
 
+    <!-- Ligne 3 : Prix -->
+    <div class="price-filter">
+      <div class="price-header">
+        <span>Prix maximum</span>
+        <span class="price-value"><span id="priceValue">50</span>€</span>
+      </div>
+      <input type="range" min="1" max="500" value="50" id="priceRange">
+    </div>
+
+    <button class="apply-filters">Appliquer les filtres</button>
+
   </div>
+
+  <div class="container">
+    <div id="products"></div>
+    <div id="pagination"></div>
+  </div>
+
+</div> <!-- 🔴 FIN app-overlay -->
+
+<!-- ✅ NAV BAR SORTIE DE app-overlay -->
+<div class="bottom-nav">
+  <button class="active">
+    <i data-lucide="store" class="icon"></i>
+    <span class="label">Boutique</span>
+  </button>
+
+  <button>
+    <i data-lucide="shopping-cart" class="icon"></i>
+    <span class="label">Panier</span>
+  </button>
+
+  <button>
+    <i data-lucide="receipt" class="icon"></i>
+    <span class="label">Historique</span>
+  </button>
 </div>
 
 <script>
