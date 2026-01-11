@@ -513,6 +513,25 @@ body {
   cursor: pointer;
 }
 
+.cart-item {
+  position: relative;
+}
+
+.remove-item {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #ff4d4d;
+  font-size: 14px;
+  font-weight: 800;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 </style>
 </head>
 
@@ -526,15 +545,19 @@ body {
       🛒 Panier
     </div>
 
-    <div id="cart-content" class="product-card">
-      <div class="card-content">
-        <div class="card-bin">1× Classic</div>
-        <div class="card-line">Produit sélectionné</div>
-        <div class="card-price">
-          <span class="price" id="cart-price">15€</span>
-        </div>
-      </div>
+    <div id="cart-content" class="product-card cart-item">
+
+  <button class="remove-item" onclick="removeFromCart()">✕</button>
+
+  <div class="card-content">
+    <div class="card-bin">1× Classic</div>
+    <div class="card-line">Produit sélectionné</div>
+    <div class="card-price">
+      <span class="price" id="cart-price">15€</span>
     </div>
+  </div>
+
+</div>
 
     <div style="margin-top:20px">
       <button class="cart-pay-btn">Payer</button>
@@ -766,6 +789,17 @@ function openShop() {
   document.getElementById("cart-page").style.display = "none";
   document.querySelector(".app-overlay").style.display = "block";
 }
+
+function removeFromCart() {
+  cartCount = 0;
+
+  document.getElementById("cart-content").style.display = "none";
+  document.getElementById("cart-badge").style.display = "none";
+
+  // Optionnel plus tard :
+  // fetch('/api/cart/remove', { method: 'POST' })
+}
+
 </script>
 
 
