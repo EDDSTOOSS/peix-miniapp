@@ -113,7 +113,14 @@ body {
   padding: 16px;
   padding-bottom: 125px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;   /* 🔑 cartes de haut en bas */
+  gap: 14px;
+}
+
+#products {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .empty {
@@ -490,8 +497,6 @@ body {
   <div id="pagination"></div>
 </div>
 
-    <div class="container">
-    </div>
 
     <div class="bottom-nav">
       <button class="active">
