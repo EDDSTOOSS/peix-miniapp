@@ -532,6 +532,16 @@ body {
   cursor: pointer;
 }
 
+.back-btn {
+  background: none;
+  border: none;
+  color: #ffd700;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 12px 0;
+  cursor: pointer;
+}
+
 </style>
 </head>
 
@@ -642,24 +652,27 @@ body {
 
 <!-- ✅ NAV BAR SORTIE DE app-overlay -->
 <div class="bottom-nav">
-  <button class="active">
+
+  <button onclick="openShop()" id="nav-shop" class="active">
     <i data-lucide="store" class="icon"></i>
     <span class="label">Boutique</span>
   </button>
 
-  <button id="cart-btn" onclick="openCart()">
-  <div class="cart-icon-wrapper">
+  <button onclick="openCart()" id="nav-cart">
     <i data-lucide="shopping-cart" class="icon"></i>
-    <span id="cart-badge" class="cart-badge">0</span>
-  </div>
-  <span class="label">Panier</span>
-</button>
+    <span class="label">Panier</span>
+  </button>
 
-  <button>
+  <button onclick="openHistory()" id="nav-history">
     <i data-lucide="receipt" class="icon"></i>
     <span class="label">Historique</span>
   </button>
+
 </div>
+
+<button class="back-btn" onclick="openShop()">
+  ← Retour à la boutique
+</button>
 
 <script>
 Telegram.WebApp.expand();
@@ -798,6 +811,13 @@ function removeFromCart() {
 
   // Optionnel plus tard :
   // fetch('/api/cart/remove', { method: 'POST' })
+}
+
+function openShop() {
+  document.getElementById("shop-page").style.display = "block";
+  document.getElementById("cart-page").style.display = "none";
+
+  setActiveNav("shop");
 }
 
 </script>
