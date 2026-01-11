@@ -397,6 +397,28 @@ body {
   transform: scale(1.08);
 }
 
+#pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.page-btn {
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: rgba(20,20,20,0.9);
+  border: 1px solid rgba(255,215,0,0.25);
+  color: #ffd700;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.page-btn.active {
+  background: linear-gradient(180deg, #ffeaa0, #d4a700);
+  color: #111;
+}
+
 </style>
 </head>
 
@@ -463,32 +485,12 @@ body {
 
 </div>
 
-<div class="product-card">
-
-  <div class="card-image">
-    <!-- future image carte -->
-  </div>
-
-  <div class="card-content">
-    <div class="card-bin">444111</div>
-
-    <div class="card-line">⭐ Level : <span>CLASSIC</span></div>
-    <div class="card-line">🏦 Banque : <span>MONOBANK</span></div>
-    <div class="card-line">📍 Ville : <span>LIMOGES</span></div>
-    <div class="card-line">🎂 Âge : <span>72</span></div>
-
-    <div class="card-price">
-      <span class="price">15€</span>
-    </div>
-  </div>
-
-  <button class="add-btn">+</button>
-
+<div class="container">
+  <div id="products"></div>
+  <div id="pagination"></div>
 </div>
 
-
     <div class="container">
-      <div class="empty">Aucun produit pour le moment</div>
     </div>
 
     <div class="bottom-nav">
@@ -536,6 +538,71 @@ priceRange.addEventListener("input", () => {
 });
 
 </script>
+
+<script>
+const PRODUCTS_PER_PAGE = 6;
+let currentPage = 1;
+
+// FAKE DATA (remplacé plus tard par le bot)
+const products = Array.from({ length: 50 }, (_, i) => ({
+  bin: "444111",
+  type: "DEBIT",
+  level: "CLASSIC",
+  bank: "MONOBANK",
+  city: "LIMOGES",
+  price: "15€"
+}));
+
+function renderProducts() {
+  const start = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const end = start + PRODUCTS_PER_PAGE;
+  const pageProducts = products.slice(start, end);
+
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+
+  pageProducts.forEach(p => {
+    container.innerHTML += `
+      <div class="product-card">
+        <div class="card-image"></div>
+        <div class="card-content">
+          <div class="card-bin">${p.bin}</div>
+          <div class="card-line">💳 Type : ${p.type}</div>
+          <div class="card-line">⭐ Level : ${p.level}</div>
+          <div class="card-line">🏦 Banque : ${p.bank}</div>
+          <div class="card-line">📍 Ville : ${p.city}</div>
+          <div class="card-price">${p.price}</div>
+        </div>
+        <button class="add-btn">+</button>
+      </div>
+    `;
+  });
+}
+
+function renderPagination() {
+  const pages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+  const pagination = document.getElementById("pagination");
+  pagination.innerHTML = "";
+
+  for (let i = 1; i <= pages; i++) {
+    pagination.innerHTML += `
+      <button class="page-btn ${i === currentPage ? "active" : ""}"
+        onclick="goToPage(${i})">${i}</button>
+    `;
+  }
+}
+
+function goToPage(page) {
+  currentPage = page;
+  renderProducts();
+  renderPagination();
+}
+
+// INIT
+renderProducts();
+renderPagination();
+</script>
+
 
 </body>
 </html>
