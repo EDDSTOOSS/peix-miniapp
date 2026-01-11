@@ -219,13 +219,15 @@ body {
 .app-wrapper {
   width: 100%;
   display: flex;
-  justify-content: center; /* ✅ centre toute la mini-app */
+  justify-content: center;
 }
 
 /* CONTENU */
+/* CONTENEUR PRINCIPAL MINI-APP */
 .app-overlay {
   width: 100%;
-  max-width: 360px;  /* largeur Telegram réaliste */
+  max-width: 320px;     /* 🔥 EXACT MisterBin */
+  margin: 0 auto;
 }
 
 /* MOBILE */
@@ -366,13 +368,10 @@ body {
 
 .product-card {
   width: 100%;
-  padding: 13px;
-  background: linear-gradient(180deg, rgba(30,25,10,0.95), rgba(15,12,5,0.95));
-  border-radius: 14px;
-  border: 1px solid rgba(255,215,0,0.25);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.55);
+  padding: 9px 10px;
+  border-radius: 12px;
   display: flex;
-  gap: 14px;
+  gap: 10px;
 }
 
 .card-image {
