@@ -480,10 +480,69 @@ body {
   color: #111;
 }
 
+.cart-icon-wrapper {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #ff2d2d;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-pay-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffeaa0, #d4a700);
+  border: none;
+  font-size: 16px;
+  font-weight: 800;
+  color: #111;
+  cursor: pointer;
+}
+
 </style>
 </head>
 
 <body>
+
+<div id="cart-page" style="display:none" class="app-overlay">
+
+  <div style="padding:16px">
+
+    <div style="font-size:18px;font-weight:800;margin-bottom:12px">
+      🛒 Panier
+    </div>
+
+    <div id="cart-content" class="product-card">
+      <div class="card-content">
+        <div class="card-bin">1× Classic</div>
+        <div class="card-line">Produit sélectionné</div>
+        <div class="card-price">
+          <span class="price" id="cart-price">15€</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px">
+      <button class="cart-pay-btn">Payer</button>
+    </div>
+
+  </div>
+
+</div>
 
 <div class="header-fixed">
   <img src="backround.png" alt="Header PeixPeix">
@@ -565,10 +624,13 @@ body {
     <span class="label">Boutique</span>
   </button>
 
-  <button>
+  <button id="cart-btn" onclick="openCart()">
+  <div class="cart-icon-wrapper">
     <i data-lucide="shopping-cart" class="icon"></i>
-    <span class="label">Panier</span>
-  </button>
+    <span id="cart-badge" class="cart-badge">0</span>
+  </div>
+  <span class="label">Panier</span>
+</button>
 
   <button>
     <i data-lucide="receipt" class="icon"></i>
@@ -636,7 +698,7 @@ function renderProducts() {
           <div class="card-line">📍 Ville : ${p.city}</div>
           <div class="card-price"><span class="price">${p.price}</span></div>
         </div>
-        <button class="add-btn">+</button>
+        <button class="add-btn" onclick="addToCart()">+</button>
       </div>
     `;
   });
@@ -683,6 +745,27 @@ function prevPage() {
 // INIT
 renderProducts();
 renderPagination();
+</script>
+
+<script>
+let cartCount = 0;
+let cartPrice = 15;
+
+function addToCart() {
+  cartCount = 1; // simple : 1 produit
+  document.getElementById("cart-badge").style.display = "flex";
+  document.getElementById("cart-badge").textContent = cartCount;
+}
+
+function openCart() {
+  document.querySelector(".app-overlay").style.display = "none";
+  document.getElementById("cart-page").style.display = "block";
+}
+
+function openShop() {
+  document.getElementById("cart-page").style.display = "none";
+  document.querySelector(".app-overlay").style.display = "block";
+}
 </script>
 
 
