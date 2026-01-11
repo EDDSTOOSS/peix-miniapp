@@ -478,67 +478,6 @@ body {
   color: #111;
 }
 
-/* ===== PANIER ===== */
-
-.cart-title {
-  font-size: 18px;
-  font-weight: 800;
-  margin: 16px 0 12px;
-  text-align: center;
-}
-
-.cart-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, rgba(30,25,10,0.95), rgba(15,12,5,0.95));
-  border: 1px solid rgba(255,215,0,0.25);
-}
-
-.cart-item-content {
-  flex: 1;
-  font-size: 12px;
-}
-
-.cart-item-price {
-  font-weight: 800;
-  font-size: 15px;
-}
-
-.remove-btn {
-  background: none;
-  border: none;
-  color: #ffd700;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.cart-footer {
-  margin-top: 16px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255,255,255,0.15);
-}
-
-.cart-total {
-  font-size: 16px;
-  font-weight: 800;
-  margin-bottom: 12px;
-}
-
-.checkout-btn {
-  width: 100%;
-  padding: 12px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #ffeaa0, #d4a700);
-  border: none;
-  font-weight: 800;
-  font-size: 15px;
-  cursor: pointer;
-}
-
 </style>
 </head>
 
@@ -611,40 +550,26 @@ body {
 
 <div class="container">
   <div id="products"></div>
-  <div id="cart-page" style="display:none;">
-  <div class="cart-title">🛒 Mon panier</div>
-
-  <div id="cart-items"></div>
-
-  <div class="cart-footer">
-    <div class="cart-total">
-      Total : <span id="cart-total">0€</span>
-    </div>
-
-    <button class="checkout-btn">Valider</button>
-  </div>
-</div>
-
   <div id="pagination"></div>
 </div>
 
 
     <div class="bottom-nav">
-  <button class="active" onclick="showShop()">
-    <i data-lucide="store" class="icon"></i>
-    <span class="label">Boutique</span>
-  </button>
+      <button class="active">
+        <i data-lucide="store" class="icon"></i>
+        <span class="label">Boutique</span>
+      </button>
 
-  <button onclick="showCart()">
-    <i data-lucide="shopping-cart" class="icon"></i>
-    <span class="label">Panier</span>
-  </button>
+      <button>
+        <i data-lucide="shopping-cart" class="icon"></i>
+        <span class="label">Panier</span>
+      </button>
 
-  <button>
-    <i data-lucide="receipt" class="icon"></i>
-    <span class="label">Historique</span>
-  </button>
-</div>
+      <button>
+        <i data-lucide="receipt" class="icon"></i>
+        <span class="label">Historique</span>
+      </button>
+    </div>
 
   </div>
 </div>
@@ -709,7 +634,7 @@ function renderProducts() {
           <div class="card-line">📍 Ville : ${p.city}</div>
           <div class="card-price"><span class="price">${p.price}</span></div>
         </div>
-        <button class="add-btn" onclick='addToCart(${JSON.stringify(p)})'>+</button>
+        <button class="add-btn">+</button>
       </div>
     `;
   });
@@ -758,60 +683,6 @@ renderProducts();
 renderPagination();
 </script>
 
-<script>
-let cart = [];
-
-function addToCart(product) {
-  cart.push(product);
-  Telegram.WebApp.HapticFeedback.impactOccurred("light");
-}
-
-function renderCart() {
-  const cartItems = document.getElementById("cart-items");
-  const totalEl = document.getElementById("cart-total");
-
-  cartItems.innerHTML = "";
-  let total = 0;
-
-  cart.forEach((item, index) => {
-    const price = parseFloat(item.price.replace("€", ""));
-    total += price;
-
-    cartItems.innerHTML += `
-      <div class="cart-item">
-        <div class="cart-item-content">
-          <div><strong>${item.bin}</strong> - ${item.bank}</div>
-          <div>${item.type} • ${item.level} • ${item.city}</div>
-        </div>
-        <div class="cart-item-price">${item.price}</div>
-        <button class="remove-btn" onclick="removeFromCart(${index})">✕</button>
-      </div>
-    `;
-  });
-
-  totalEl.textContent = total + "€";
-}
-
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  renderCart();
-}
-</script>
-
-<script>
-function showShop() {
-  document.getElementById("products").style.display = "block";
-  document.getElementById("pagination").style.display = "flex";
-  document.getElementById("cart-page").style.display = "none";
-}
-
-function showCart() {
-  document.getElementById("products").style.display = "none";
-  document.getElementById("pagination").style.display = "none";
-  document.getElementById("cart-page").style.display = "block";
-  renderCart();
-}
-</script>
 
 </body>
 </html>
