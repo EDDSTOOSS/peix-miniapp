@@ -123,13 +123,14 @@ body {
 }
 
 #products {
-  width: 100%;
-  max-width: 360px;     /* largeur Telegram réaliste */
-  margin: 0 auto;      /* ✅ CENTRÉ */
-  padding: 0 12px;     /* marge gauche/droite clean */
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  align-items: center;      /* 🔑 CENTRAGE COMME CCdiscount */
+  gap: 12px;
+
+  width: 100%;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 
 .page-nav-btn {
@@ -380,9 +381,10 @@ body {
 }
 
 .product-card {
-  width: 100%;
+  width: 280;
   padding: 8px 10px;
-  border-radius: 12px;
+  max-width: 280px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   gap: 10px;
