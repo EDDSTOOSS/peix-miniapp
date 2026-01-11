@@ -337,58 +337,54 @@ body {
   position: relative;
 }
 
-.product-header {
+.product-card {
+  position: relative;
+  margin-bottom: 14px;
+  padding: 14px;
+  background: linear-gradient(180deg, rgba(30,25,10,0.95), rgba(15,12,5,0.95));
+  border-radius: 16px;
+  border: 1px solid rgba(255,215,0,0.25);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.55);
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
+  gap: 14px;
 }
 
-.discount {
-  background: #ffd700;
-  color: #111;
-  font-weight: 800;
-  padding: 4px 8px;
+.card-image {
+  width: 64px;
+  height: 42px;
   border-radius: 8px;
-  font-size: 12px;
+  background: rgba(255,255,255,0.05);
+  flex-shrink: 0;
 }
 
-.last-chance {
-  background: rgba(255, 80, 80, 0.15);
-  color: #ff4d4d;
-  padding: 4px 8px;
-  border-radius: 8px;
-  font-size: 11px;
-  font-weight: 700;
+.card-content {
+  flex: 1;
+  font-size: 13px;
+  color: #ffd700;
 }
 
-.product-id {
+.card-bin {
   font-size: 18px;
   font-weight: 800;
   margin-bottom: 6px;
 }
 
-.product-info {
-  font-size: 13px;
-  line-height: 1.5;
-  opacity: 0.95;
+.card-line {
+  font-size: 12px;
+  opacity: 0.9;
 }
 
-.product-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
+.card-line span {
+  font-weight: 600;
 }
 
-.price .old {
-  text-decoration: line-through;
-  opacity: 0.5;
-  margin-right: 6px;
+.card-price {
+  margin-top: 8px;
 }
 
-.price .new {
-  font-size: 20px;
-  font-weight: 900;
+.card-price .price {
+  font-size: 18px;
+  font-weight: 800;
 }
 
 .add-btn {
@@ -474,30 +470,26 @@ body {
 </div>
 
 <div class="product-card">
-  <div class="product-header">
-    <span class="discount">-70%</span>
-    <span class="last-chance">DERNIÈRE CHANCE</span>
+
+  <div class="card-image">
+    <!-- future image carte -->
   </div>
 
-  <div class="product-body">
-    <div class="product-id">444111</div>
+  <div class="card-content">
+    <div class="card-bin">444111</div>
 
-    <div class="product-info">
-      <div>💳 Type : DEBIT</div>
-      <div>⭐ Level : CLASSIC</div>
-      <div>🏦 Banque : MONOBANK</div>
-      <div>📍 Ville : LIMOGES</div>
-    </div>
+    <div class="card-line">💳 Type : <span>DEBIT</span></div>
+    <div class="card-line">⭐ Level : <span>CLASSIC</span></div>
+    <div class="card-line">🏦 Banque : <span>MONOBANK</span></div>
+    <div class="card-line">📍 Ville : <span>LIMOGES</span></div>
 
-    <div class="product-footer">
-      <div class="price">
-        <span class="old">50€</span>
-        <span class="new">15€</span>
-      </div>
-
-      <button class="add-btn">+</button>
+    <div class="card-price">
+      <span class="price">15€</span>
     </div>
   </div>
+
+  <button class="add-btn">+</button>
+
 </div>
 
 
