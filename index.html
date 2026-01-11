@@ -110,11 +110,8 @@ body {
 /* CONTENU */
 
 .container {
-  padding: 16px;
+  padding: 16px 0;      /* plus de padding horizontal */
   padding-bottom: 125px;
-  display: flex;
-  flex-direction: column;   /* 🔑 cartes de haut en bas */
-  gap: 14px;
 }
 
 #pagination {
@@ -126,13 +123,13 @@ body {
 }
 
 #products {
+  width: 100%;
+  max-width: 360px;   /* largeur app mobile parfaite */
+  margin: 0 auto;     /* 🔑 CENTRAGE TOTAL */
   display: flex;
   flex-direction: column;
-  align-items: center; /* 👈 centre horizontalement */
   gap: 16px;
-  padding: 0 12px; /* petit padding mobile propre */
-  max-width: 380px;
-  margin: 0 auto;
+   padding: 0 12px;
 }
 
 .page-nav-btn {
@@ -363,8 +360,7 @@ body {
 }
 
 .product-card {
-  position: relative;
-  margin-bottom: 14px;
+  width: 100%;          /* prend toute la largeur du conteneur */
   padding: 14px;
   background: linear-gradient(180deg, rgba(30,25,10,0.95), rgba(15,12,5,0.95));
   border-radius: 16px;
@@ -372,9 +368,6 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,0.55);
   display: flex;
   gap: 14px;
-  max-width: 340px;   /* 🔑 empêche l’étirement */
-  width: 100%;
-  margin: 0 auto 16px auto; /* 👈 ESPACE ENTRE LES CARTES */
 }
 
 .card-image {
