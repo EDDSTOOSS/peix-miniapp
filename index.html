@@ -207,20 +207,25 @@ body {
 
 /* WRAPPER */
 
+body {
+  margin: 0;
+  background: url("Derriere.png") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: flex-start; /* 🔥 IMPORTANT */
+}
+
+/* WRAPPER PRINCIPAL */
 .app-wrapper {
   width: 100%;
-  min-height: 100vh;
-}
-
-/* DESKTOP */
-
-.desktop .app-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: center; /* centre DANS la WebApp */
 }
 
-.desktop .app-overlay {
-  width: 360px;
+/* CONTENU */
+.app-overlay {
+  width: 100%;
+  max-width: 360px;  /* largeur Telegram réaliste */
 }
 
 /* MOBILE */
