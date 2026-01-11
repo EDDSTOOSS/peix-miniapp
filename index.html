@@ -526,10 +526,7 @@ body {
 .cart-summary {
   position: sticky;
   bottom: 90px;
-  background: rgba(20,20,20,0.9);
-  border-radius: 14px;
-  padding: 12px;
-  margin-top: 16px;
+  z-index: 10;
 }
 
 .cart-total {
@@ -548,6 +545,10 @@ body {
   font-weight: 800;
   color: #111;
   cursor: pointer;
+}
+
+#cart-page {
+  display: none;
 }
 
 </style>
@@ -621,10 +622,12 @@ body {
 
   </div>
 
+  <div id="shop-page">
   <div class="container">
     <div id="products"></div>
     <div id="pagination"></div>
   </div>
+</div>
 
 </div> <!-- 🔴 FIN app-overlay -->
 
@@ -831,16 +834,14 @@ function removeFromCart(index) {
 
 <script>
 function showCart() {
-  document.getElementById("products").style.display = "none";
-  document.getElementById("pagination").style.display = "none";
+  document.getElementById("shop-page").style.display = "none";
   document.getElementById("cart-page").style.display = "block";
   renderCart();
 }
 
 function showShop() {
-  document.getElementById("products").style.display = "flex";
-  document.getElementById("pagination").style.display = "flex";
   document.getElementById("cart-page").style.display = "none";
+  document.getElementById("shop-page").style.display = "block";
 }
 </script>
 
