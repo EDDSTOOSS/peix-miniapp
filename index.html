@@ -290,7 +290,7 @@ body {
 }
 
 .product-card {
-  width: 280;
+  width: 100%;
   padding: 8px 10px;
   max-width: 280px;
   border-radius: 16px;
@@ -301,6 +301,14 @@ body {
   border: 1px solid rgba(255,215,0,0.25);
   box-shadow: 0 6px 14px rgba(0,0,0,0.45);
   margin-bottom: 10px;
+  min-height: 120px;
+  transition: all 0.3s ease;
+}
+
+.product-card.in-cart {
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 20px rgba(255,215,0,0.6), 0 6px 14px rgba(0,0,0,0.45);
+  background: linear-gradient(180deg, rgba(40,35,15,0.95), rgba(25,20,8,0.95));
 }
 
 .card-image {
@@ -351,10 +359,18 @@ body {
   border: none;
   cursor: pointer;
   box-shadow: 0 0 12px rgba(255,215,0,0.6);
+  transition: all 0.3s ease;
 }
 
 .add-btn:hover {
   transform: scale(1.08);
+}
+
+.add-btn.in-cart-btn {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #000;
+  box-shadow: 0 0 16px rgba(255,215,0,0.8);
+  font-size: 28px;
 }
 
 /* ========== PAGINATION CRONOS STYLE ========== */
@@ -498,17 +514,18 @@ body {
   position: absolute;
   top: -6px;
   right: -10px;
-  min-width: 18px;
-  height: 18px;
+  min-width: 20px;
+  height: 20px;
   padding: 0 5px;
-  border-radius: 999px;
-  background: #ff2d2d;
+  border-radius: 50%;
+  background: #ff0000;
   color: #fff;
   font-size: 11px;
   font-weight: 800;
   display: none;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 12px rgba(255,0,0,0.8), 0 2px 6px rgba(0,0,0,0.4);
 }
 
 .cart-pay-btn {
@@ -713,7 +730,7 @@ body {
 </div>
 
 <div id="cart-page" style="display:none" class="app-overlay">
-  <div style="padding:16px; max-width: 400px; margin: 0 auto;">
+  <div style="padding:16px 16px 100px 16px; max-width: 400px; margin: 0 auto;">
     <div class="cart-container">
       <div class="cart-header">
         <div class="cart-title">
@@ -723,29 +740,13 @@ body {
       </div>
       
       <div id="cart-content" style="display:none">
-        <div class="cart-product-item">
-          <button class="remove-item-cart" onclick="removeFromCart(1)">✕</button>
-          <div class="cart-product-info">
-            <div class="cart-product-name">1× Classic</div>
-            <div class="cart-product-desc">Produit sélectionné</div>
-          </div>
-          <div class="cart-product-price">15€</div>
-        </div>
-        
-        <div class="cart-product-item">
-          <button class="remove-item-cart" onclick="removeFromCart(2)">✕</button>
-          <div class="cart-product-info">
-            <div class="cart-product-name">1× Gold</div>
-            <div class="cart-product-desc">Produit premium</div>
-          </div>
-          <div class="cart-product-price">25€</div>
-        </div>
+        <div id="cart-items-container"></div>
         
         <div class="cart-divider"></div>
         
         <div class="cart-total">
           <div class="cart-total-label">Total</div>
-          <div class="cart-total-amount" id="cart-total">40€</div>
+          <div class="cart-total-amount" id="cart-total">0€</div>
         </div>
       </div>
       
@@ -864,9 +865,13 @@ body {
 <button class="back-btn" onclick="openShop()">← Retour à la boutique</button>
 
 <script>
-Telegram.WebApp.expand();
+try {
+  Telegram.WebApp.expand();
+} catch(e) {
+  console.log("Telegram WebApp non disponible");
+}
 
-const isMobile = Telegram.WebApp.platform === "android" || Telegram.WebApp.platform === "ios" || window.innerWidth < 768;
+const isMobile = window.innerWidth < 768;
 document.body.classList.add(isMobile ? "mobile" : "desktop");
 
 function toggleFilters() {
@@ -880,15 +885,29 @@ lucide.createIcons();
 <script>
 const PRODUCTS_PER_PAGE = 6;
 let currentPage = 1;
+let cartCount = 0;
+let cartItems = [];
 
-const products = Array.from({ length: 50 }, (_, i) => ({
-  bin: "444111",
-  type: "DEBIT",
-  level: "CLASSIC",
-  bank: "MONOBANK",
-  city: "LIMOGES",
-  price: "15€"
-}));
+const products = [
+  { id: 1, bin: "444111", type: "DEBIT", level: "CLASSIC", bank: "MONOBANK", city: "LIMOGES", price: 30 },
+  { id: 2, bin: "457173", type: "CREDIT", level: "GOLD", bank: "BNP PARIBAS", city: "PARIS", price: 45 },
+  { id: 3, bin: "523456", type: "DEBIT", level: "INFINITE", bank: "CREDIT AGRICOLE", city: "LYON", price: 100 },
+  { id: 4, bin: "489321", type: "DEBIT", level: "CLASSIC", bank: "BOURSORAMA", city: "MARSEILLE", price: 30 },
+  { id: 5, bin: "512789", type: "CREDIT", level: "GOLD", bank: "REVOLUT", city: "TOULOUSE", price: 45 },
+  { id: 6, bin: "478965", type: "DEBIT", level: "CLASSIC", bank: "SOCIETE GENERALE", city: "NICE", price: 30 },
+  { id: 7, bin: "534821", type: "CREDIT", level: "INFINITE", bank: "BPCE", city: "BORDEAUX", price: 100 },
+  { id: 8, bin: "456123", type: "DEBIT", level: "GOLD", bank: "CREDIT LYONNAIS", city: "NANTES", price: 45 },
+  { id: 9, bin: "498732", type: "CREDIT", level: "CLASSIC", bank: "MONOBANK", city: "STRASBOURG", price: 30 },
+  { id: 10, bin: "523987", type: "DEBIT", level: "INFINITE", bank: "BNP PARIBAS", city: "LILLE", price: 100 },
+  { id: 11, bin: "445678", type: "CREDIT", level: "GOLD", bank: "BOURSORAMA", city: "RENNES", price: 45 },
+  { id: 12, bin: "512456", type: "DEBIT", level: "CLASSIC", bank: "REVOLUT", city: "REIMS", price: 30 },
+  { id: 13, bin: "478123", type: "CREDIT", level: "INFINITE", bank: "CREDIT AGRICOLE", city: "PARIS", price: 100 },
+  { id: 14, bin: "534987", type: "DEBIT", level: "GOLD", bank: "SOCIETE GENERALE", city: "LYON", price: 45 },
+  { id: 15, bin: "456789", type: "CREDIT", level: "CLASSIC", bank: "BPCE", city: "MARSEILLE", price: 30 },
+  { id: 16, bin: "498456", type: "DEBIT", level: "INFINITE", bank: "MONOBANK", city: "TOULOUSE", price: 100 },
+  { id: 17, bin: "523654", type: "CREDIT", level: "GOLD", bank: "BNP PARIBAS", city: "NICE", price: 45 },
+  { id: 18, bin: "445321", type: "DEBIT", level: "CLASSIC", bank: "BOURSORAMA", city: "BORDEAUX", price: 30 }
+];
 
 function renderProducts() {
   const start = (currentPage - 1) * PRODUCTS_PER_PAGE;
@@ -899,8 +918,11 @@ function renderProducts() {
   container.innerHTML = "";
 
   pageProducts.forEach(p => {
+    const isInCart = cartItems.find(item => item.id === p.id);
+    const inCartClass = isInCart ? 'in-cart' : '';
+    
     container.innerHTML += `
-      <div class="product-card">
+      <div class="product-card ${inCartClass}" data-product-id="${p.id}">
         <div class="card-image"></div>
         <div class="card-content">
           <div class="card-bin">${p.bin}</div>
@@ -908,9 +930,9 @@ function renderProducts() {
           <div class="card-line">⭐ Level : ${p.level}</div>
           <div class="card-line">🏦 Banque : ${p.bank}</div>
           <div class="card-line">📍 Ville : ${p.city}</div>
-          <div class="card-price"><span class="price">${p.price}</span></div>
+          <div class="card-price"><span class="price">${p.price}€</span></div>
         </div>
-        <button class="add-btn" onclick="addToCart()">+</button>
+        <button class="add-btn ${isInCart ? 'in-cart-btn' : ''}" onclick="toggleCart(${p.id}, '${p.level}', ${p.price})">${isInCart ? '−' : '+'}</button>
       </div>
     `;
   });
@@ -985,16 +1007,118 @@ renderPageInfo();
 </script>
 
 <script>
-let cartCount = 0;
-
-function addToCart() {
-  cartCount = 1;
+function addToCart(productId, productName, productPrice) {
+  // Vérifier si le produit est déjà dans le panier
+  const alreadyInCart = cartItems.find(item => item.id === productId);
+  
+  if (alreadyInCart) {
+    return;
+  }
+  
+  // Récupérer les infos complètes du produit
+  const product = products.find(p => p.id === productId);
+  
+  cartItems.push({ 
+    id: productId, 
+    name: productName, 
+    price: productPrice,
+    bin: product.bin,
+    bank: product.bank
+  });
+  cartCount++;
+  
   const badge = document.getElementById("cart-badge");
   badge.style.display = "flex";
   badge.textContent = cartCount;
-  document.getElementById("cart-content").style.display = "block";
-  document.getElementById("empty-cart-msg").style.display = "none";
-  document.getElementById("pay-btn").style.display = "block";
+  
+  updateCartDisplay();
+}
+
+function toggleCart(productId, productName, productPrice) {
+  const alreadyInCart = cartItems.find(item => item.id === productId);
+  
+  if (alreadyInCart) {
+    // Retirer du panier
+    cartItems = cartItems.filter(item => item.id !== productId);
+    cartCount--;
+  } else {
+    // Ajouter au panier
+    const product = products.find(p => p.id === productId);
+    cartItems.push({ 
+      id: productId, 
+      name: productName, 
+      price: productPrice,
+      bin: product.bin,
+      bank: product.bank
+    });
+    cartCount++;
+  }
+  
+  const badge = document.getElementById("cart-badge");
+  if (cartCount === 0) {
+    badge.style.display = "none";
+  } else {
+    badge.style.display = "flex";
+    badge.textContent = cartCount;
+  }
+  
+  updateCartDisplay();
+}
+
+function updateCartDisplay() {
+  const cartContent = document.getElementById("cart-content");
+  const emptyMsg = document.getElementById("empty-cart-msg");
+  const payBtn = document.getElementById("pay-btn");
+  const cartItemsContainer = document.getElementById("cart-items-container");
+  
+  if (cartItems.length === 0) {
+    cartContent.style.display = "none";
+    emptyMsg.style.display = "block";
+    payBtn.style.display = "none";
+  } else {
+    cartContent.style.display = "block";
+    emptyMsg.style.display = "none";
+    payBtn.style.display = "flex";
+    
+    // Grouper les produits par niveau (CLASSIC, GOLD, INFINITE)
+    const grouped = {};
+    cartItems.forEach(item => {
+      if (!grouped[item.name]) {
+        grouped[item.name] = [];
+      }
+      grouped[item.name].push(item);
+    });
+    
+    // Générer le HTML pour chaque groupe
+    cartItemsContainer.innerHTML = "";
+    Object.keys(grouped).forEach(level => {
+      const items = grouped[level];
+      const totalPrice = items.reduce((sum, item) => sum + item.price, 0);
+      
+      // Créer la liste des BIN/Banque
+      const binList = items.map(item => `BIN: ${item.bin} - ${item.bank}`).join('<br>');
+      
+      cartItemsContainer.innerHTML += `
+        <div class="cart-product-item">
+          <button class="remove-item-cart" onclick="removeGroup('${level}')">✕</button>
+          <div class="cart-product-info">
+            <div class="cart-product-name">${items.length}× ${level}</div>
+            <div class="cart-product-desc">${binList}</div>
+          </div>
+          <div class="cart-product-price">${totalPrice}€</div>
+        </div>
+      `;
+    });
+    
+    // Calculer le total
+    let total = cartItems.reduce((sum, item) => sum + item.price, 0);
+    
+    // Afficher le total
+    document.getElementById("cart-total").textContent = total + "€";
+  }
+  
+  // Mettre à jour les cartes produits sélectionnées
+  updateProductCards();
 }
 
 function openCart() {
@@ -1009,12 +1133,47 @@ function openShop() {
   setActiveNav("shop");
 }
 
-function removeFromCart() {
-  cartCount = 0;
-  document.getElementById("cart-content").style.display = "none";
-  document.getElementById("empty-cart-msg").style.display = "block";
-  document.getElementById("pay-btn").style.display = "none";
-  document.getElementById("cart-badge").style.display = "none";
+function removeFromCart(itemIndex) {
+  cartItems.splice(itemIndex, 1);
+  cartCount = cartItems.length;
+  
+  const badge = document.getElementById("cart-badge");
+  if (cartCount === 0) {
+    badge.style.display = "none";
+  } else {
+    badge.textContent = cartCount;
+  }
+  
+  updateCartDisplay();
+}
+
+function removeGroup(level) {
+  cartItems = cartItems.filter(item => item.name !== level);
+  cartCount = cartItems.length;
+  
+  const badge = document.getElementById("cart-badge");
+  if (cartCount === 0) {
+    badge.style.display = "none";
+  } else {
+    badge.textContent = cartCount;
+  }
+  
+  updateCartDisplay();
+}
+
+function updateProductCards() {
+  const productCards = document.querySelectorAll('.product-card');
+  productCards.forEach(card => {
+    card.classList.remove('in-cart');
+  });
+  
+  // Marquer les produits dans le panier
+  cartItems.forEach(item => {
+    const productCard = document.querySelector(`.product-card[data-product-id="${item.id}"]`);
+    if (productCard) {
+      productCard.classList.add('in-cart');
+    }
+  });
 }
 
 function setActiveNav(active) {
