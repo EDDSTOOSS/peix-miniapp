@@ -939,17 +939,25 @@ body {
 
 <div id="shop-page" class="app-overlay">
 
-  <div class="top-actions" style="display:flex; gap:10px;">
-  <!-- Bouton Filtres existant -->
+  <div class="top-actions">
   <div class="filters-box" onclick="toggleFilters()">
     <i data-lucide="sliders-horizontal" class="filter-icon"></i>
     <span>Filtres</span>
   </div>
 
-  <!-- Nouveau bouton Stock -->
-  <div class="filters-box" onclick="toggleStock()">
-    <i data-lucide="package" class="filter-icon"></i>
+  <div class="filters-box" onclick="toggleStock()" style="margin-left:8px;">
+    <i data-lucide="archive" class="filter-icon"></i>
     <span>Stock</span>
+  </div>
+</div>
+
+<!-- STOCK PANEL -->
+<div class="filters-panel" id="stock-panel" style="display:none;">
+  <div style="display:flex; flex-direction:column; gap:6px; font-size:13px; color:#ffd700; line-height:1.4;">
+    <span id="stock-classic">CLASSIC : 23</span>
+    <span id="stock-gold">GOLD : 20</span>
+    <span id="stock-infinite">INFINITE : 6</span>
+    <span id="stock-unknown">UNKNOWN : 8</span>
   </div>
 </div>
 
