@@ -789,6 +789,7 @@ body {
   <div class="container">
     <div id="products"></div>
     <div id="pagination"></div>
+    <div id="page-info" class="page-info"></div>
   </div>
 
 </div>
@@ -888,11 +889,11 @@ function renderPagination() {
       <i data-lucide="chevron-left" class="nav-icon"></i>
     </button>
 
-    <div class="page-numbers">
-      <div class="page-box ${currentPage === 1 ? 'active' : ''}" onclick="goToPage(1)">1</div>
-      ${currentPage > 2 && currentPage < totalPages ? `<div class="page-box active">${currentPage}</div>` : ''}
-      ${totalPages > 1 ? `<div class="page-box ${currentPage === totalPages ? 'active' : ''}" onclick="goToPage(${totalPages})">${totalPages}</div>` : ''}
-    </div>
+    <div class="page-box ${currentPage === 1 ? 'active' : ''}" onclick="goToPage(1)">1</div>
+    <div class="page-box ${currentPage === 2 ? 'active' : ''}" onclick="goToPage(2)">2</div>
+    <div class="page-box ${currentPage === 3 ? 'active' : ''}" onclick="goToPage(3)">3</div>
+    <div class="page-dots">...</div>
+    <div class="page-box ${currentPage === totalPages ? 'active' : ''}" onclick="goToPage(${totalPages})">${totalPages}</div>
 
     <button class="page-nav-btn" onclick="nextPage()" ${currentPage === totalPages ? "disabled" : ""}>
       <i data-lucide="chevron-right" class="nav-icon"></i>
@@ -902,12 +903,21 @@ function renderPagination() {
   lucide.createIcons();
 }
 
+function renderPageInfo() {
+  const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+  const pageInfo = document.getElementById("page-info");
+  if (pageInfo) {
+    pageInfo.textContent = `Page ${currentPage} sur ${totalPages}`;
+  }
+}
+
 function nextPage() {
   const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
   if (currentPage < totalPages) {
     currentPage++;
     renderProducts();
     renderPagination();
+    renderPageInfo();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
@@ -917,6 +927,7 @@ function prevPage() {
     currentPage--;
     renderProducts();
     renderPagination();
+    renderPageInfo();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
@@ -926,6 +937,7 @@ function goToPage(page) {
     currentPage = page;
     renderProducts();
     renderPagination();
+    renderPageInfo();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
@@ -933,6 +945,7 @@ function goToPage(page) {
 // INIT
 renderProducts();
 renderPagination();
+renderPageInfo();
 </script>
 
 <script>
