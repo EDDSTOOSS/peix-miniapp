@@ -68,21 +68,47 @@ body {
   margin: 0 auto;
 }
 
-.user-header {
-  position: fixed;
-  top: 120px;
-  left: 0;
-  right: 0;
-  z-index: 999;
+.user-header-in-header {
+  position: absolute;
+  bottom: -50px; /* descend un peu sous le header pour donner un effet flottant */
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 400px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 12px 16px;
-  background: linear-gradient(180deg, rgba(20,20,20,0.95), rgba(10,10,10,0.95));
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  width: 100%;
-  box-sizing: border-box;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05));
+  border: 1px solid rgba(255,215,0,0.35);
+  box-shadow: 0 8px 18px rgba(255,215,0,0.3), 0 4px 12px rgba(0,0,0,0.3);
   backdrop-filter: blur(12px);
+  z-index: 1001;
+}
+
+.user-header-in-header .user-avatar {
+  width: 48px;
+  height: 48px;
+  font-size: 22px;
+}
+
+.user-header-in-header .user-name {
+  font-size: 16px;
+}
+
+.user-header-in-header .user-id {
+  font-size: 12px;
+}
+
+.user-header-in-header .user-balance {
+  padding: 8px 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #111;
+  box-shadow: 0 4px 12px rgba(255,215,0,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
 .user-info {
@@ -904,20 +930,22 @@ body {
 <body>
 
   <!-- HEADER FIXED PREMIUM -->
+<!-- HEADER FIXED PREMIUM + USER INFO -->
 <div class="header-fixed">
   <div class="header-text">BIENVENUE CHEZ EXEMPLESHOP</div>
-</div>
-
-<div class="user-header">
-  <div class="user-info">
-    <div class="user-avatar">P</div>
-    <div class="user-details">
-      <div class="user-name">PeixUser</div>
-      <div class="user-id">ID: 1234567890</div>
+  
+  <!-- CADRE UTILISATEUR INTEGRÉ -->
+  <div class="user-header-in-header">
+    <div class="user-info">
+      <div class="user-avatar">P</div>
+      <div class="user-details">
+        <div class="user-name">PeixUser</div>
+        <div class="user-id">ID: 1234567890</div>
+      </div>
     </div>
-  </div>
-  <div class="user-balance">
-    <div class="user-balance-amount">10000€</div>
+    <div class="user-balance">
+      <div class="user-balance-amount">10000€</div>
+    </div>
   </div>
 </div>
 
