@@ -236,12 +236,13 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
 }
 
 .range-inputs input {
   flex: 1;
   padding: 9px 10px;
-  border-radius: 10px;
+  border-radius: border-box;
   background: rgba(15,15,15,0.9);
   border: 1px solid rgba(255,255,255,0.08);
   color: #ffd700;
@@ -999,15 +1000,15 @@ body {
         <label>Base</label>
         <select class="filter-select">
           <option value="">Toutes</option>
-          <option value="mondial">Mondial R</option>
-          <option value="ame">Ame</option>
+          <option value="mondial">Mondial Relay</option>
+          <option value="ame">Amelie</option>
           <option value="ulys">Ulys</option>
           <option value="sncf">SNCF</option>
         </select>
       </div>
       <div class="filter-item">
         <label>Code postal</label>
-        <input type="text" placeholder="Ex: 75001">
+        <input type="text" placeholder="Ex: 75">
       </div>
     </div>
 
