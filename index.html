@@ -884,18 +884,22 @@ function renderPagination() {
   const pagination = document.getElementById("pagination");
 
   pagination.innerHTML = `
-    <button class="page-nav-btn"
-      onclick="prevPage()"
-      ${currentPage === 1 ? "disabled" : ""}>
-      ← Précédent
+    <button class="page-nav-btn" onclick="prevPage()" ${currentPage === 1 ? "disabled" : ""}>
+      <i data-lucide="chevron-left" class="nav-icon"></i>
     </button>
 
-    <button class="page-nav-btn"
-      onclick="nextPage()"
-      ${currentPage === totalPages ? "disabled" : ""}>
-      Suivant →
+    <div class="page-numbers">
+      <div class="page-box ${currentPage === 1 ? 'active' : ''}" onclick="goToPage(1)">1</div>
+      ${currentPage > 2 && currentPage < totalPages ? `<div class="page-box active">${currentPage}</div>` : ''}
+      ${totalPages > 1 ? `<div class="page-box ${currentPage === totalPages ? 'active' : ''}" onclick="goToPage(${totalPages})">${totalPages}</div>` : ''}
+    </div>
+
+    <button class="page-nav-btn" onclick="nextPage()" ${currentPage === totalPages ? "disabled" : ""}>
+      <i data-lucide="chevron-right" class="nav-icon"></i>
     </button>
   `;
+  
+  lucide.createIcons();
 }
 
 function nextPage() {
@@ -911,6 +915,15 @@ function nextPage() {
 function prevPage() {
   if (currentPage > 1) {
     currentPage--;
+    renderProducts();
+    renderPagination();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+function goToPage(page) {
+  if (page !== currentPage) {
+    currentPage = page;
     renderProducts();
     renderPagination();
     window.scrollTo({ top: 0, behavior: "smooth" });
