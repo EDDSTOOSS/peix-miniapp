@@ -1213,12 +1213,6 @@ body {
 
   </div>
 </div>
-    
-    <div id="empty-history" style="display:none; text-align:center; padding:40px 20px; color:rgba(255,255,255,0.4); font-size:14px;">
-      Aucune commande pour le moment
-    </div>
-  </div>
-</div>
 
 <div class="bottom-nav">
   <button onclick="openShop()" id="nav-shop" class="active">
@@ -1647,11 +1641,13 @@ function showOrderDetails(orderId) {
       <div style="font-size:12px; color:rgba(255,255,255,0.7);">Ville: LIMOGES</div>
     </div>
     <button class="download-btn" onclick="downloadProduct()">
-      📥 Télécharger
+      <i data-lucide="download" style="width:18px;height:18px;stroke-width:2.5;vertical-align:middle;margin-right:6px;"></i>
+      <span>Télécharger</span>
     </button>
   `;
   
   modal.style.display = 'flex';
+  lucide.createIcons();
 }
 
 function closeOrderDetails() {
