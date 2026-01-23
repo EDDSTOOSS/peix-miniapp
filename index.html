@@ -939,12 +939,19 @@ body {
 
 <div id="shop-page" class="app-overlay">
 
-  <div class="top-actions">
-    <div class="filters-box" onclick="toggleFilters()">
-      <i data-lucide="sliders-horizontal" class="filter-icon"></i>
-      <span>Filtres</span>
-    </div>
+  <div class="top-actions" style="display:flex; gap:10px;">
+  <!-- Bouton Filtres existant -->
+  <div class="filters-box" onclick="toggleFilters()">
+    <i data-lucide="sliders-horizontal" class="filter-icon"></i>
+    <span>Filtres</span>
   </div>
+
+  <!-- Nouveau bouton Stock -->
+  <div class="filters-box" onclick="toggleStock()">
+    <i data-lucide="package" class="filter-icon"></i>
+    <span>Stock</span>
+  </div>
+</div>
 
   <div class="filters-panel" id="filters">
     <div class="filters-grid">
