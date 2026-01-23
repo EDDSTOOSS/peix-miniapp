@@ -1135,9 +1135,6 @@ body {
       <div id="history-content">
         <!-- Commande 1 -->
         <div class="order-card">
-          <button class="order-details-btn" onclick="showOrderDetails(1234)">
-  Détails de la commande
-</button>
           <div class="order-header">
             <div class="order-info">
               <div class="order-id">Commande #1234</div>
@@ -1170,11 +1167,12 @@ body {
           </div>
         </div>
 
-        <!-- Commande 2 -->
-        <div class="order-card">
-          <button class="order-details-btn" onclick="showOrderDetails(1234)">
+        <button class="order-details-btn" onclick="showOrderDetails(1234)">
   Détails de la commande
 </button>
+
+        <!-- Commande 2 -->
+        <div class="order-card">
           <div class="order-header">
             <div class="order-info">
               <div class="order-id">Commande #1233</div>
@@ -1203,6 +1201,10 @@ body {
           </div>
         </div>
       </div>
+
+      <button class="order-details-btn" onclick="showOrderDetails(1234)">
+  Détails de la commande
+</button>
 
       <div id="empty-history" style="display:none; text-align:center; padding:40px 20px; color:rgba(255,255,255,0.4); font-size:14px;">
         Aucune commande pour le moment
