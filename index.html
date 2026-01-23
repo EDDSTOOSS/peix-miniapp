@@ -744,6 +744,100 @@ body {
   transform: scale(0.98);
 }
 
+.history-header {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffd700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+}
+
+.order-card {
+  background: linear-gradient(180deg, rgba(30,30,30,0.95), rgba(20,20,20,0.95));
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  margin-bottom: 16px;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.order-info {
+  flex: 1;
+}
+
+.order-id {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffd700;
+  margin-bottom: 4px;
+}
+
+.order-date {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+.order-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.order-status.valid {
+  background: rgba(0,255,157,0.15);
+  color: #00ff9d;
+  border: 1px solid rgba(0,255,157,0.3);
+}
+
+.order-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  margin: 12px 0;
+}
+
+.order-items {
+  margin: 12px 0;
+}
+
+.order-item-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffd700;
+  padding-top: 4px;
+}
+
+.order-total-price {
+  font-size: 18px;
+  color: #00ff9d;
+  font-weight: 800;
+}
+
 .cart-item {
   position: relative;
 }
@@ -917,6 +1011,85 @@ body {
     <div id="page-info" class="page-info"></div>
   </div>
 
+</div>
+
+<div id="history-page" style="display:none" class="app-overlay">
+  <div style="padding:16px 16px 100px 16px; max-width: 400px; margin: 0 auto;">
+    <div class="history-header">
+      <i data-lucide="receipt" style="width:22px;height:22px;stroke-width:2.5;vertical-align:middle;margin-right:8px;"></i>
+      <span>Historique des commandes</span>
+    </div>
+    
+    <div id="history-content">
+      <!-- Commande 1 -->
+      <div class="order-card">
+        <div class="order-header">
+          <div class="order-info">
+            <div class="order-id">Commande #1234</div>
+            <div class="order-date">23 janvier 2026 - 14:30</div>
+          </div>
+          <div class="order-status valid">
+            <i data-lucide="check-circle" style="width:20px;height:20px;stroke-width:2.5;"></i>
+            <span>Validée</span>
+          </div>
+        </div>
+        
+        <div class="order-divider"></div>
+        
+        <div class="order-items">
+          <div class="order-item-line">
+            <span>2× CLASSIC</span>
+            <span>60€</span>
+          </div>
+          <div class="order-item-line">
+            <span>1× GOLD</span>
+            <span>45€</span>
+          </div>
+        </div>
+        
+        <div class="order-divider"></div>
+        
+        <div class="order-total">
+          <span>Total</span>
+          <span class="order-total-price">105€</span>
+        </div>
+      </div>
+      
+      <!-- Commande 2 -->
+      <div class="order-card">
+        <div class="order-header">
+          <div class="order-info">
+            <div class="order-id">Commande #1233</div>
+            <div class="order-date">22 janvier 2026 - 10:15</div>
+          </div>
+          <div class="order-status valid">
+            <i data-lucide="check-circle" style="width:20px;height:20px;stroke-width:2.5;"></i>
+            <span>Validée</span>
+          </div>
+        </div>
+        
+        <div class="order-divider"></div>
+        
+        <div class="order-items">
+          <div class="order-item-line">
+            <span>1× INFINITE</span>
+            <span>100€</span>
+          </div>
+        </div>
+        
+        <div class="order-divider"></div>
+        
+        <div class="order-total">
+          <span>Total</span>
+          <span class="order-total-price">100€</span>
+        </div>
+      </div>
+    </div>
+    
+    <div id="empty-history" style="display:none; text-align:center; padding:40px 20px; color:rgba(255,255,255,0.4); font-size:14px;">
+      Aucune commande pour le moment
+    </div>
+  </div>
 </div>
 
 <div class="bottom-nav">
@@ -1196,14 +1369,48 @@ function updateCartDisplay() {
   updateProductCards();
 }
 
+function goToHistory() {
+  // Vider le panier
+  cartItems = [];
+  cartCount = 0;
+  document.getElementById("cart-badge").style.display = "none";
+  
+  // Masquer le message de succès
+  document.getElementById("success-message").style.display = "none";
+  document.getElementById("empty-cart-msg").style.display = "block";
+  
+  // Aller sur la page historique
+  openHistory();
+  updateCartDisplay();
+}
+
+function processPayment() {
+  // Cacher le contenu du panier et afficher le message de succès
+  const cartContainer = document.querySelector(".cart-container");
+  const successMsg = document.getElementById("success-message");
+  
+  if (cartContainer) cartContainer.style.display = "none";
+  if (successMsg) {
+    successMsg.style.display = "block";
+    // Réinitialiser les icônes après l'affichage
+    setTimeout(() => {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    }, 50);
+  }
+}
+
 function openCart() {
   document.getElementById("shop-page").style.display = "none";
+  document.getElementById("history-page").style.display = "none";
   document.getElementById("cart-page").style.display = "block";
   setActiveNav("cart");
 }
 
 function openShop() {
   document.getElementById("cart-page").style.display = "none";
+  document.getElementById("history-page").style.display = "none";
   document.getElementById("shop-page").style.display = "block";
   setActiveNav("shop");
 }
