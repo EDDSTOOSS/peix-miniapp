@@ -1462,6 +1462,30 @@ function setActiveNav(active) {
   document.querySelectorAll(".bottom-nav button").forEach(b => b.classList.remove("active"));
   document.getElementById("nav-" + active).classList.add("active");
 }
+
+function openHistory() {
+  // cacher toutes les pages
+  document.querySelectorAll('.app-overlay').forEach(el => {
+    el.style.display = 'none';
+  });
+
+  // afficher l’historique
+  const historyPage = document.getElementById('history-page');
+  if (historyPage) {
+    historyPage.style.display = 'block';
+  }
+
+  // optionnel : activer le bouton nav
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  const navHistory = document.getElementById('nav-history');
+  if (navHistory) {
+    navHistory.classList.add('active');
+  }
+}
+
 </script>
 
 </body>
