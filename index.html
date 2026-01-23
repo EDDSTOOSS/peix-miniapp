@@ -856,6 +856,79 @@ body {
   font-weight: 800;
 }
 
+.order-details-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.08));
+  border: 1px solid rgba(255,215,0,0.3);
+  color: #ffd700;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.order-details-btn:hover {
+  background: linear-gradient(135deg, rgba(255,215,0,0.25), rgba(255,215,0,0.15));
+  transform: translateY(-2px);
+}
+
+.order-details-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-content {
+  background: linear-gradient(180deg, rgba(30,30,30,0.98), rgba(20,20,20,0.98));
+  border-radius: 18px;
+  padding: 24px;
+  border: 2px solid #ffd700;
+  max-width: 400px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.download-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #00ff9d, #00e68a);
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+  cursor: pointer;
+}
+
 .cart-item {
   position: relative;
 }
@@ -1062,6 +1135,9 @@ body {
       <div id="history-content">
         <!-- Commande 1 -->
         <div class="order-card">
+          <button class="order-details-btn" onclick="showOrderDetails(1234)">
+  Détails de la commande
+</button>
           <div class="order-header">
             <div class="order-info">
               <div class="order-id">Commande #1234</div>
@@ -1096,6 +1172,9 @@ body {
 
         <!-- Commande 2 -->
         <div class="order-card">
+          <button class="order-details-btn" onclick="showOrderDetails(1234)">
+  Détails de la commande
+</button>
           <div class="order-header">
             <div class="order-info">
               <div class="order-id">Commande #1233</div>
@@ -1160,6 +1239,13 @@ body {
 </div>
 
 <button class="back-btn" onclick="openShop()">← Retour à la boutique</button>
+
+<div id="order-modal" class="order-details-modal" onclick="if(event.target===this) closeOrderDetails()">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeOrderDetails()">✕</button>
+    <div id="modal-content-inner"></div>
+  </div>
+</div>
 
 <script>
 try {
@@ -1543,6 +1629,35 @@ function openHistory() {
 function toggleStock() {
   const panel = document.getElementById("stock-panel");
   panel.style.display = panel.style.display === "block" ? "none" : "block";
+}
+
+function showOrderDetails(orderId) {
+  const modal = document.getElementById('order-modal');
+  const content = document.getElementById('modal-content-inner');
+  
+  content.innerHTML = `
+    <h3 style="color:#ffd700; margin-bottom:16px;">Commande #${orderId}</h3>
+    <div style="background:rgba(40,35,20,0.9); padding:16px; border-radius:12px; margin-bottom:12px;">
+      <div style="font-size:14px; color:#ffd700; margin-bottom:8px; font-weight:700;">Produit CLASSIC</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.7); margin-bottom:4px;">BIN: 444111</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.7); margin-bottom:4px;">Banque: MONOBANK</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.7); margin-bottom:4px;">Type: DEBIT</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.7);">Ville: LIMOGES</div>
+    </div>
+    <button class="download-btn" onclick="downloadProduct()">
+      📥 Télécharger
+    </button>
+  `;
+  
+  modal.style.display = 'flex';
+}
+
+function closeOrderDetails() {
+  document.getElementById('order-modal').style.display = 'none';
+}
+
+function downloadProduct() {
+  alert('Téléchargement du produit...');
 }
 
 </script>
