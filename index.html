@@ -1269,22 +1269,41 @@ let currentUserBalance = 0;
 
 // Fonction pour charger les données utilisateur
 function loadUserData() {
+  console.log("🔍 Chargement des données utilisateur...");
+  console.log("📍 URL complète:", window.location.href);
+  
   // Méthode 1 : Récupérer depuis l'URL (prioritaire)
   const urlParams = new URLSearchParams(window.location.search);
   const urlUserId = urlParams.get('user_id');
   const urlBalance = urlParams.get('balance');
   
+  console.log("📦 Paramètres URL:", {
+    user_id: urlUserId,
+    balance: urlBalance
+  });
+  
   if (urlUserId && urlBalance) {
     // Données depuis l'URL
     currentUserId = parseInt(urlUserId);
     currentUserBalance = parseInt(urlBalance);
+    console.log("✅ Données chargées depuis l'URL");
+  } else {
+    console.log("⚠️ Aucune donnée dans l'URL");
   }
   
   // Méthode 2 : Récupérer depuis Telegram WebApp
   if (telegramUser) {
     currentUserId = telegramUser.id || currentUserId;
     currentUserName = telegramUser.username || telegramUser.first_name || "PeixUser";
+    console.log("✅ Données Telegram récupérées:", {
+      id: currentUserId,
+      name: currentUserName
+    });
+  } else {
+    console.log("⚠️ Pas de données Telegram disponibles");
   }
+  
+  console.log("💰 Solde final:", currentUserBalance);
   
   // Afficher les données dans l'interface
   updateUserInterface();
@@ -1314,6 +1333,7 @@ function updateUserInterface() {
   const balanceElement = document.querySelector('.user-balance-amount');
   if (balanceElement) {
     balanceElement.textContent = currentUserBalance + '€';
+    console.log("✅ Solde affiché:", currentUserBalance + '€');
   }
 }
 
