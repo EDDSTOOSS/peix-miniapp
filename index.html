@@ -39,12 +39,17 @@ body {
 /* OVERLAY */
 .app-overlay {
   min-height: 100vh;
-  padding-top: 100px;
+  padding-top: 160px;
 }
 
 /* ===== NOUVEAU HEADER UTILISATEUR (style Loki) ===== */
 
 .user-header {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -53,6 +58,7 @@ body {
   border-bottom: 1px solid rgba(255,255,255,0.08);
   width: 100%;
   box-sizing: border-box;
+  backdrop-filter: blur(12px);
 }
 
 .user-info {
@@ -395,9 +401,76 @@ body {
   cursor: pointer;
 }
 
+/* ===== FILTRES SELECT ===== */
+
+.filter-select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 10px;
+  border-radius: 10px;
+  background: rgba(15,15,15,0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #ffd700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  border-color: rgba(255,215,0,0.6);
+  outline: none;
+}
+
+/* ===== FILTRES RANGE (AGE / PRIX) ===== */
+
+.range-filter {
+  margin-bottom: 16px;
+}
+
+.range-filter label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #cfcfcf;
+  letter-spacing: 0.4px;
+  margin-bottom: 8px;
+}
+
+.range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.range-inputs input {
+  flex: 1;
+  padding: 9px 10px;
+  border-radius: 10px;
+  background: rgba(15,15,15,0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #ffd700;
+  font-size: 13px;
+  text-align: center;
+}
+
+.range-inputs input::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+.range-inputs input:focus {
+  border-color: rgba(255,215,0,0.6);
+  outline: none;
+}
+
+.range-separator {
+  color: rgba(255,255,255,0.5);
+  font-weight: 600;
+}
+
 .price {
   font-weight: 700;
 }
+
+/* Bouton appliquer */
 
 .apply-filters {
   width: 100%;
@@ -637,7 +710,8 @@ body {
   <div class="top-actions">
 
     <div class="filters-box" onclick="toggleFilters()">
-      🔍 Filtres
+      <i data-lucide="sliders-horizontal" class="filter-icon"></i>
+      <span>Filtres</span>
     </div>
 
   </div>
@@ -654,13 +728,31 @@ body {
 
       <div class="filter-item">
         <label>Banque</label>
-        <input type="text" placeholder="Ex: BNP">
+        <select class="filter-select">
+          <option value="">Toutes</option>
+          <option value="banque_federative">BANQUE FEDERATIVE DU CREDIT MUTUEL (BFCM)</option>
+          <option value="bnp">BNP PARIBAS</option>
+          <option value="boursorama">BOURSORAMA BANQUE</option>
+          <option value="bpce">BPCE</option>
+          <option value="credit_agricole">CREDIT AGRICOLE S.A.</option>
+          <option value="credit_agricole_sa">CREDIT AGRICOLE SOCIETE ANONYME</option>
+          <option value="credit_lyonnais">LE CREDIT LYONNAIS</option>
+          <option value="lyonnaise">LYONNAISE DE BANQUE</option>
+          <option value="revolut">REVOLUT LTD</option>
+          <option value="societe_generale">SOCIETE GENERAL, S.A.</option>
+        </select>
       </div>
 
       <!-- Ligne 2 -->
       <div class="filter-item">
-        <label>Âge</label>
-        <input type="number" placeholder="Ex: 25">
+        <label>Base</label>
+        <select class="filter-select">
+          <option value="">Toutes</option>
+          <option value="mondial">Mondial R</option>
+          <option value="ame">Ame</option>
+          <option value="ulys">Ulys</option>
+          <option value="sncf">SNCF</option>
+        </select>
       </div>
 
       <div class="filter-item">
@@ -670,13 +762,24 @@ body {
 
     </div>
 
-    <!-- Ligne 3 : Prix -->
-    <div class="price-filter">
-      <div class="price-header">
-        <span>Prix maximum</span>
-        <span class="price-value"><span id="priceValue">50</span>€</span>
+    <!-- Ligne 3 : Age (Min/Max) -->
+    <div class="range-filter">
+      <label>Âge</label>
+      <div class="range-inputs">
+        <input type="number" placeholder="Min" min="18" max="99">
+        <span class="range-separator">-</span>
+        <input type="number" placeholder="Max" min="18" max="99">
       </div>
-      <input type="range" min="1" max="500" value="50" id="priceRange">
+    </div>
+
+    <!-- Ligne 4 : Prix (Min/Max) -->
+    <div class="range-filter">
+      <label>Prix</label>
+      <div class="range-inputs">
+        <input type="number" placeholder="Min" min="0">
+        <span class="range-separator">-</span>
+        <input type="number" placeholder="Max" min="0">
+      </div>
     </div>
 
     <button class="apply-filters">Appliquer les filtres</button>
@@ -733,13 +836,6 @@ function toggleFilters() {
 }
 
 lucide.createIcons();
-
-const priceRange = document.getElementById("priceRange");
-const priceValue = document.getElementById("priceValue");
-
-priceRange.addEventListener("input", () => {
-  priceValue.textContent = priceRange.value;
-});
 
 </script>
 
