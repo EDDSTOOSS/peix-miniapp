@@ -69,46 +69,44 @@ body {
 }
 
 .user-header-in-header {
-  position: absolute;
-  bottom: -50px; /* descend un peu sous le header pour donner un effet flottant */
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 40px);
-  max-width: 400px;
+  position: relative; /* plutôt que absolute, pour rester dans le flux */
+  margin: 16px auto 24px auto; /* espace au-dessus et dessous */
+  width: 90%;
+  max-width: 360px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
-  border-radius: 16px;
+  padding: 8px 12px;
+  border-radius: 12px;
   background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05));
-  border: 1px solid rgba(255,215,0,0.35);
-  box-shadow: 0 8px 18px rgba(255,215,0,0.3), 0 4px 12px rgba(0,0,0,0.3);
-  backdrop-filter: blur(12px);
-  z-index: 1001;
+  border: 1px solid rgba(255,215,0,0.25);
+  box-shadow: 0 4px 10px rgba(255,215,0,0.2);
+  backdrop-filter: blur(6px); /* moins flou */
+  z-index: 100;
 }
 
 .user-header-in-header .user-avatar {
-  width: 48px;
-  height: 48px;
-  font-size: 22px;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
 }
 
-.user-header-in-header .user-name {
-  font-size: 16px;
+.user-header-in-header .user-details .user-name {
+  font-size: 14px;
 }
 
-.user-header-in-header .user-id {
-  font-size: 12px;
+.user-header-in-header .user-details .user-id {
+  font-size: 10px;
 }
 
 .user-header-in-header .user-balance {
-  padding: 8px 16px;
-  border-radius: 14px;
+  padding: 6px 12px;
+  border-radius: 10px;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   background: linear-gradient(135deg, #ffd700, #ffed4e);
   color: #111;
-  box-shadow: 0 4px 12px rgba(255,215,0,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+  box-shadow: 0 2px 8px rgba(255,215,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
 .user-info {
