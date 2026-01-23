@@ -1405,6 +1405,11 @@ function openCart() {
   document.getElementById("shop-page").style.display = "none";
   document.getElementById("history-page").style.display = "none";
   document.getElementById("cart-page").style.display = "block";
+
+  // ✅ CORRECTION : réafficher le panier après un paiement
+  const cartContainer = document.querySelector(".cart-container");
+  if (cartContainer) cartContainer.style.display = "block";
+
   setActiveNav("cart");
 }
 
