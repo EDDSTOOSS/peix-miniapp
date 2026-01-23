@@ -221,7 +221,8 @@ body {
 
 .range-filter {
   margin-bottom: 16px;
-  width: 100%;
+  width: 100%; /* prend toute la largeur du panel */
+  box-sizing: border-box;
 }
 
 .range-filter label {
@@ -237,19 +238,21 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 100%;
+  width: 100%;      /* important */
+  box-sizing: border-box;
 }
 
 .range-inputs input {
-  flex: 1;
+  flex: 1;                  /* prend la moitié de l'espace disponible */
   padding: 9px 10px;
-  border-radius: 10px;          /* arrondi cohérent avec les autres inputs */
+  border-radius: 10px;
   background: rgba(15,15,15,0.9);
   border: 1px solid rgba(255,255,255,0.08);
   color: #ffd700;
   font-size: 13px;
   text-align: center;
-  box-sizing: border-box;       /* important pour que la largeur ne déborde pas */
+  box-sizing: border-box;   /* inclus padding et border dans la largeur */
+  min-width: 0;             /* important pour empêcher le dépassement */
 }
 
 .range-inputs input::placeholder {
