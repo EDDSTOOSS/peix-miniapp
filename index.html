@@ -1257,6 +1257,68 @@ function toggleFilters() {
 }
 
 lucide.createIcons();
+
+// ========== RÉCUPÉRATION DES DONNÉES TELEGRAM ==========
+let tg = window.Telegram.WebApp;
+let telegramUser = tg.initDataUnsafe?.user;
+
+// Variables globales pour les données utilisateur
+let currentUserId = 0;
+let currentUserName = "PeixUser";
+let currentUserBalance = 0;
+
+// Fonction pour charger les données utilisateur
+function loadUserData() {
+  // Méthode 1 : Récupérer depuis l'URL (prioritaire)
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlUserId = urlParams.get('user_id');
+  const urlBalance = urlParams.get('balance');
+  
+  if (urlUserId && urlBalance) {
+    // Données depuis l'URL
+    currentUserId = parseInt(urlUserId);
+    currentUserBalance = parseInt(urlBalance);
+  }
+  
+  // Méthode 2 : Récupérer depuis Telegram WebApp
+  if (telegramUser) {
+    currentUserId = telegramUser.id || currentUserId;
+    currentUserName = telegramUser.username || telegramUser.first_name || "PeixUser";
+  }
+  
+  // Afficher les données dans l'interface
+  updateUserInterface();
+}
+
+// Fonction pour mettre à jour l'interface
+function updateUserInterface() {
+  // Nom d'utilisateur
+  const userNameElement = document.querySelector('.user-name');
+  if (userNameElement) {
+    userNameElement.textContent = currentUserName;
+  }
+  
+  // ID utilisateur
+  const userIdElement = document.querySelector('.user-id');
+  if (userIdElement) {
+    userIdElement.textContent = `ID: ${currentUserId}`;
+  }
+  
+  // Avatar (première lettre du nom)
+  const avatarElement = document.querySelector('.user-avatar');
+  if (avatarElement) {
+    avatarElement.textContent = currentUserName.charAt(0).toUpperCase();
+  }
+  
+  // Solde
+  const balanceElement = document.querySelector('.user-balance-amount');
+  if (balanceElement) {
+    balanceElement.textContent = currentUserBalance + '€';
+  }
+}
+
+// Charger les données au démarrage
+loadUserData();
 </script>
 
 <script>
@@ -1516,6 +1578,28 @@ function goToHistory() {
 }
 
 function processPayment() {
+  // Préparer les données de la commande
+  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+  
+  // Vérifier si le solde est suffisant
+  if (currentUserBalance < total) {
+    alert('❌ Solde insuffisant !');
+    return;
+  }
+  
+  // Envoyer au bot Telegram
+  if (window.Telegram && window.Telegram.WebApp) {
+    window.Telegram.WebApp.sendData(JSON.stringify({
+      action: "checkout",
+      cart_items: cartItems,
+      total_price: total
+    }));
+    
+    // Mettre à jour le solde localement
+    currentUserBalance -= total;
+    updateUserInterface();
+  }
+  
   // Cacher le contenu du panier et afficher le message de succès
   const cartContainer = document.querySelector(".cart-container");
   const successMsg = document.getElementById("success-message");
@@ -1523,7 +1607,6 @@ function processPayment() {
   if (cartContainer) cartContainer.style.display = "none";
   if (successMsg) {
     successMsg.style.display = "block";
-    // Réinitialiser les icônes après l'affichage
     setTimeout(() => {
       if (typeof lucide !== 'undefined') {
         lucide.createIcons();
