@@ -1347,26 +1347,65 @@ let currentPage = 1;
 let cartCount = 0;
 let cartItems = [];
 
-const products = [
-  { id: 1, bin: "444111", type: "DEBIT", level: "CLASSIC", bank: "MONOBANK", city: "LIMOGES", price: 30 },
-  { id: 2, bin: "457173", type: "CREDIT", level: "GOLD", bank: "BNP PARIBAS", city: "PARIS", price: 45 },
-  { id: 3, bin: "523456", type: "DEBIT", level: "INFINITE", bank: "CREDIT AGRICOLE", city: "LYON", price: 100 },
-  { id: 4, bin: "489321", type: "DEBIT", level: "CLASSIC", bank: "BOURSORAMA", city: "MARSEILLE", price: 30 },
-  { id: 5, bin: "512789", type: "CREDIT", level: "GOLD", bank: "REVOLUT", city: "TOULOUSE", price: 45 },
-  { id: 6, bin: "478965", type: "DEBIT", level: "CLASSIC", bank: "SOCIETE GENERALE", city: "NICE", price: 30 },
-  { id: 7, bin: "534821", type: "CREDIT", level: "INFINITE", bank: "BPCE", city: "BORDEAUX", price: 100 },
-  { id: 8, bin: "456123", type: "DEBIT", level: "GOLD", bank: "CREDIT LYONNAIS", city: "NANTES", price: 45 },
-  { id: 9, bin: "498732", type: "CREDIT", level: "CLASSIC", bank: "MONOBANK", city: "STRASBOURG", price: 30 },
-  { id: 10, bin: "523987", type: "DEBIT", level: "INFINITE", bank: "BNP PARIBAS", city: "LILLE", price: 100 },
-  { id: 11, bin: "445678", type: "CREDIT", level: "GOLD", bank: "BOURSORAMA", city: "RENNES", price: 45 },
-  { id: 12, bin: "512456", type: "DEBIT", level: "CLASSIC", bank: "REVOLUT", city: "REIMS", price: 30 },
-  { id: 13, bin: "478123", type: "CREDIT", level: "INFINITE", bank: "CREDIT AGRICOLE", city: "PARIS", price: 100 },
-  { id: 14, bin: "534987", type: "DEBIT", level: "GOLD", bank: "SOCIETE GENERALE", city: "LYON", price: 45 },
-  { id: 15, bin: "456789", type: "CREDIT", level: "CLASSIC", bank: "BPCE", city: "MARSEILLE", price: 30 },
-  { id: 16, bin: "498456", type: "DEBIT", level: "INFINITE", bank: "MONOBANK", city: "TOULOUSE", price: 100 },
-  { id: 17, bin: "523654", type: "CREDIT", level: "GOLD", bank: "BNP PARIBAS", city: "NICE", price: 45 },
-  { id: 18, bin: "445321", type: "DEBIT", level: "CLASSIC", bank: "BOURSORAMA", city: "BORDEAUX", price: 30 }
-];
+// ========== CHARGEMENT DES PRODUITS DEPUIS L'URL ==========
+let products = [];
+
+function loadProductsFromURL() {
+  console.log("📦 Chargement des produits depuis l'URL...");
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  const productsData = urlParams.get('data');
+  
+  if (productsData) {
+    try {
+      // Décoder le base64
+      const decoded = atob(productsData);
+      const productsArray = JSON.parse(decoded);
+      
+      products = productsArray;
+      console.log(`✅ ${products.length} produits chargés`);
+      
+    } catch (error) {
+      console.error("❌ Erreur de décodage:", error);
+      // Produits de fallback vides
+      products = [];
+    }
+  } else {
+    console.log("⚠️ Aucune donnée produit dans l'URL");
+    products = [];
+  }
+  
+  // Afficher les produits
+  updateStockDisplay();
+}
+
+// Fonction pour mettre à jour l'affichage du stock
+function updateStockDisplay() {
+  // Compter les produits par level
+  const stockCount = {
+    CLASSIC: 0,
+    GOLD: 0,
+    INFINITE: 0,
+    UNKNOWN: 0
+  };
+  
+  products.forEach(p => {
+    if (stockCount.hasOwnProperty(p.level)) {
+      stockCount[p.level]++;
+    } else {
+      stockCount.UNKNOWN++;
+    }
+  });
+  
+  // Mettre à jour l'affichage
+  document.getElementById('stock-classic').textContent = `CLASSIC : ${stockCount.CLASSIC}`;
+  document.getElementById('stock-gold').textContent = `GOLD : ${stockCount.GOLD}`;
+  document.getElementById('stock-infinite').textContent = `INFINITE : ${stockCount.INFINITE}`;
+  
+  if (stockCount.UNKNOWN > 0) {
+    document.getElementById('stock-unknown').textContent = `UNKNOWN : ${stockCount.UNKNOWN}`;
+  }
+}
 
 function renderProducts() {
   const start = (currentPage - 1) * PRODUCTS_PER_PAGE;
@@ -1460,6 +1499,8 @@ function goToPage(page) {
   }
 }
 
+// Charger d'abord les produits, puis afficher
+loadProductsFromURL();
 renderProducts();
 renderPagination();
 renderPageInfo();
