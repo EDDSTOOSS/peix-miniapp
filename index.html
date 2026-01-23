@@ -1655,7 +1655,24 @@ function closeOrderDetails() {
 }
 
 function downloadProduct() {
-  alert('Téléchargement du produit...');
+  // L'ID de la commande à télécharger (à adapter selon ton système)
+  const orderId = 1234; // ← Change ce numéro selon la vraie commande
+  
+  // Envoyer la requête au bot Telegram
+  if (window.Telegram && window.Telegram.WebApp) {
+    window.Telegram.WebApp.sendData(JSON.stringify({
+      action: "download_order",
+      order_id: orderId
+    }));
+    
+    // Message de confirmation
+    alert('Votre commande va arriver par message Telegram !');
+    
+    // Fermer la mini-app (optionnel)
+    // window.Telegram.WebApp.close();
+  } else {
+    alert("Cette fonctionnalité nécessite Telegram");
+  }
 }
 
 </script>
