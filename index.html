@@ -18,35 +18,45 @@ body {
   background-size: cover;
 }
 
-/* ===== HEADER ===== */
-
 .header-fixed {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 100px;
+  height: 155px;
   z-index: 1000;
   overflow: hidden;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.55);
 }
 
 .header-fixed img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center -55px;
 }
 
-/* OVERLAY */
+.header-fixed::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 60%, rgba(0, 0, 0, 0.75) 100%);
+  pointer-events: none;
+}
+
 .app-overlay {
   min-height: 100vh;
-  padding-top: 160px;
+  padding-top: 215px;
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
 }
-
-/* ===== NOUVEAU HEADER UTILISATEUR (style Loki) ===== */
 
 .user-header {
   position: fixed;
-  top: 100px;
+  top: 155px;
   left: 0;
   right: 0;
   z-index: 999;
@@ -106,9 +116,7 @@ body {
   padding: 8px 14px;
   background: linear-gradient(135deg, #00ff9d, #00e68a);
   border-radius: 999px;
-  box-shadow: 0 0 24px rgba(0,255,157,0.65),
-              0 4px 12px rgba(0,230,138,0.4),
-              inset 0 1px 0 rgba(255,255,255,0.3);
+  box-shadow: 0 0 24px rgba(0,255,157,0.65), 0 4px 12px rgba(0,230,138,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
 .user-balance-amount {
@@ -118,15 +126,12 @@ body {
   letter-spacing: 0.3px;
 }
 
-/* ===== FILTRES ===== */
-
 .top-actions {
   display: flex;
   gap: 10px;
   margin: 12px 16px 10px;
 }
 
-/* Bouton filtres */
 .filters-box {
   flex: 1;
   padding: 10px 16px;
@@ -142,6 +147,18 @@ body {
   gap: 8px;
   border: 1px solid rgba(255,255,255,0.08);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  transition: all 0.25s ease;
+}
+
+.filters-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(255,215,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.filter-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.5;
 }
 
 .filters-panel {
@@ -151,168 +168,6 @@ body {
   background: linear-gradient(180deg, rgba(40,40,40,0.95), rgba(26,26,26,0.95));
   border-radius: 14px;
 }
-
-/* CONTENU */
-
-.container {
-  padding-top: 16px;
-  padding-bottom: 125px;
-}
-
-#pagination {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 18px;
-  padding: 0 8px;
-}
-
-#products {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  padding: 0 12px;
-  box-sizing: border-box;
-}
-
-.page-nav-btn {
-  background: none;
-  border: none;
-  color: #ffd700;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  opacity: 0.85;
-}
-
-.page-nav-btn:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
-.empty {
-  text-align: center;
-  margin-top: 200px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #ffd700;
-}
-
-.products-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.products-inner {
-  width: 100%;
-  max-width: 300px;
-  padding: 0 10px;
-  box-sizing: border-box;
-}
-
-/* ===== NAV BAR ===== */
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 78px;
-  background: rgba(20,20,20,0.55);
-  backdrop-filter: blur(22px);
-  display: flex;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  left: 0;
-  right: 0;
-}
-
-.bottom-nav button {
-  flex: 1;
-  background: none;
-  border: none;
-  color: #ffd700;
-  opacity: 0.55;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.bottom-nav button:hover,
-.bottom-nav button.active {
-  opacity: 1;
-  transform: translateY(-2px);
-}
-
-.bottom-nav .icon {
-  width: 22px;
-  height: 22px;
-  stroke-width: 2.2;
-}
-
-.bottom-nav button:hover .icon,
-.bottom-nav button.active .icon {
-  filter: drop-shadow(0 0 6px rgba(255,215,0,0.7));
-}
-
-.bottom-nav .label {
-  font-size: 11px;
-  font-weight: 600;
-}
-
-/* WRAPPER */
-
-body {
-  margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: #ffd700;
-  background: url("Derriere.png") no-repeat center center fixed;
-  background-size: cover;
-}
-
-.app-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.app-overlay {
-  width: 100%;
-  max-width: none;
-  margin: 0 auto;
-}
-
-.mobile .app-overlay {
-  width: 100%;
-}
-
-/* TRANSITION PREMIUM ENTRE HEADER ET BACKGROUND */
-.header-fixed::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.45) 60%,
-    rgba(0, 0, 0, 0.75) 100%
-  );
-  pointer-events: none;
-}
-
-.header-fixed {
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.55);
-}
-
-/* ===== FILTRES GRID ===== */
 
 .filters-grid {
   display: grid;
@@ -334,7 +189,7 @@ body {
   letter-spacing: 0.4px;
 }
 
-.filter-item input {
+.filter-item input, .filter-select {
   width: 100%;
   box-sizing: border-box;
   padding: 9px 10px;
@@ -343,84 +198,20 @@ body {
   border: 1px solid rgba(255,255,255,0.08);
   color: #ffd700;
   font-size: 13px;
+}
+
+.filter-select {
+  cursor: pointer;
 }
 
 .filter-item input::placeholder {
   color: rgba(255,255,255,0.35);
 }
 
-.filter-item input:focus {
+.filter-item input:focus, .filter-select:focus {
   border-color: rgba(255,215,0,0.6);
   outline: none;
 }
-
-/* ===== PRIX SLIDER ===== */
-
-.price-filter {
-  margin-bottom: 16px;
-}
-
-.price-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #e6e6e6;
-}
-
-.price-value {
-  color: #ffd700;
-  font-weight: 700;
-}
-
-.price-filter input[type="range"] {
-  width: 100%;
-  appearance: none;
-  height: 6px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #ffeaa0, #d4a700);
-  outline: none;
-}
-
-.price-filter input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  background: #ffd700;
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(255,215,0,0.8);
-  cursor: pointer;
-}
-
-.price-filter input[type="range"]::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  background: #ffd700;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-/* ===== FILTRES SELECT ===== */
-
-.filter-select {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 9px 10px;
-  border-radius: 10px;
-  background: rgba(15,15,15,0.9);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: #ffd700;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.filter-select:focus {
-  border-color: rgba(255,215,0,0.6);
-  outline: none;
-}
-
-/* ===== FILTRES RANGE (AGE / PRIX) ===== */
 
 .range-filter {
   margin-bottom: 16px;
@@ -466,12 +257,6 @@ body {
   font-weight: 600;
 }
 
-.price {
-  font-weight: 700;
-}
-
-/* Bouton appliquer */
-
 .apply-filters {
   width: 100%;
   padding: 10px;
@@ -489,6 +274,21 @@ body {
   transform: scale(0.98);
 }
 
+.container {
+  padding-top: 16px;
+  padding-bottom: 125px;
+}
+
+#products {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
 .product-card {
   width: 280;
   padding: 8px 10px;
@@ -501,11 +301,6 @@ body {
   border: 1px solid rgba(255,215,0,0.25);
   box-shadow: 0 6px 14px rgba(0,0,0,0.45);
   margin-bottom: 10px;
-}
-
-.product-card .price {
-  font-weight: 700;
-  font-size: 16px;
 }
 
 .card-image {
@@ -562,26 +357,136 @@ body {
   transform: scale(1.08);
 }
 
+/* ========== PAGINATION CRONOS STYLE ========== */
 #pagination {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin-top: 20px;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+  padding: 0 16px;
 }
 
-.page-btn {
-  padding: 6px 12px;
+.page-nav-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2e2e3a;
+  border: none;
   border-radius: 10px;
-  background: rgba(20,20,20,0.9);
-  border: 1px solid rgba(255,215,0,0.25);
-  color: #ffd700;
-  font-weight: 600;
+  color: #fff;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
-.page-btn.active {
-  background: linear-gradient(180deg, #ffeaa0, #d4a700);
+.page-nav-btn:hover:not(:disabled) {
+  background: #3a3a4a;
+}
+
+.page-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.nav-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.5;
+}
+
+.page-box {
+  min-width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  background: #2e2e3a;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.page-box:hover:not(.active) {
+  background: #3a3a4a;
+}
+
+.page-box.active {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
   color: #111;
+  cursor: default;
+  font-weight: 800;
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.6);
+}
+
+.page-dots {
+  color: rgba(255,255,255,0.4);
+  font-size: 16px;
+  font-weight: 700;
+  user-select: none;
+  padding: 0 2px;
+}
+
+.page-info {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.4);
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 78px;
+  background: rgba(20,20,20,0.55);
+  backdrop-filter: blur(22px);
+  display: flex;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  left: 0;
+  right: 0;
+}
+
+.bottom-nav button {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #ffd700;
+  opacity: 0.55;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.bottom-nav button:hover, .bottom-nav button.active {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.bottom-nav .icon {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.2;
+}
+
+.bottom-nav button:hover .icon, .bottom-nav button.active .icon {
+  filter: drop-shadow(0 0 6px rgba(255,215,0,0.7));
+}
+
+.bottom-nav .label {
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .cart-icon-wrapper {
@@ -645,55 +550,34 @@ body {
   margin: 12px 0;
   cursor: pointer;
 }
-
 </style>
 </head>
 
 <body>
 
 <div id="cart-page" style="display:none" class="app-overlay">
-
   <div style="padding:16px">
-
-    <div style="font-size:18px;font-weight:800;margin-bottom:12px">
-      🛒 Panier
-    </div>
-
+    <div style="font-size:18px;font-weight:800;margin-bottom:12px">🛒 Panier</div>
     <div id="cart-content" class="product-card cart-item">
-
-  <button class="remove-item" onclick="removeFromCart()">✕</button>
-
-  <div class="card-content">
-    <div class="card-bin">1× Classic</div>
-    <div class="card-line">Produit sélectionné</div>
-    <div class="card-price">
-      <span class="price" id="cart-price">15€</span>
+      <button class="remove-item" onclick="removeFromCart()">✕</button>
+      <div class="card-content">
+        <div class="card-bin">1× Classic</div>
+        <div class="card-line">Produit sélectionné</div>
+        <div class="card-price"><span class="price" id="cart-price">15€</span></div>
+      </div>
     </div>
-  </div>
-
-</div>
-
     <div style="margin-top:20px">
       <button class="cart-pay-btn">Payer</button>
     </div>
-
   </div>
-
 </div>
 
 <div class="header-fixed">
   <img src="backround.png" alt="Header PeixPeix">
 </div>
 
-<div class="products-wrapper">
-  <div class="products-inner">
-    <!-- TES product-card ici -->
-  </div>
-</div>
-
 <div id="shop-page" class="app-overlay">
 
-  <!-- ✅ NOUVEAU HEADER UTILISATEUR (style Loki) -->
   <div class="user-header">
     <div class="user-info">
       <div class="user-avatar">P</div>
@@ -708,24 +592,18 @@ body {
   </div>
 
   <div class="top-actions">
-
     <div class="filters-box" onclick="toggleFilters()">
       <i data-lucide="sliders-horizontal" class="filter-icon"></i>
       <span>Filtres</span>
     </div>
-
   </div>
 
   <div class="filters-panel" id="filters">
-
     <div class="filters-grid">
-
-      <!-- Ligne 1 -->
       <div class="filter-item">
         <label>BIN</label>
         <input type="text" placeholder="Ex: 457173">
       </div>
-
       <div class="filter-item">
         <label>Banque</label>
         <select class="filter-select">
@@ -742,8 +620,6 @@ body {
           <option value="societe_generale">SOCIETE GENERAL, S.A.</option>
         </select>
       </div>
-
-      <!-- Ligne 2 -->
       <div class="filter-item">
         <label>Base</label>
         <select class="filter-select">
@@ -754,15 +630,12 @@ body {
           <option value="sncf">SNCF</option>
         </select>
       </div>
-
       <div class="filter-item">
         <label>Code postal</label>
         <input type="text" placeholder="Ex: 75001">
       </div>
-
     </div>
 
-    <!-- Ligne 3 : Age (Min/Max) -->
     <div class="range-filter">
       <label>Âge</label>
       <div class="range-inputs">
@@ -772,7 +645,6 @@ body {
       </div>
     </div>
 
-    <!-- Ligne 4 : Prix (Min/Max) -->
     <div class="range-filter">
       <label>Prix</label>
       <div class="range-inputs">
@@ -783,7 +655,6 @@ body {
     </div>
 
     <button class="apply-filters">Appliquer les filtres</button>
-
   </div>
 
   <div class="container">
@@ -794,41 +665,30 @@ body {
 
 </div>
 
-<!-- ✅ NAV BAR SORTIE DE app-overlay -->
 <div class="bottom-nav">
-
   <button onclick="openShop()" id="nav-shop" class="active">
     <i data-lucide="store" class="icon"></i>
     <span class="label">Boutique</span>
   </button>
-
   <button onclick="openCart()" id="nav-cart">
-  <div class="cart-icon-wrapper">
-    <i data-lucide="shopping-cart" class="icon"></i>
-    <div id="cart-badge" class="cart-badge">1</div>
-  </div>
-  <span class="label">Panier</span>
-</button>
-
+    <div class="cart-icon-wrapper">
+      <i data-lucide="shopping-cart" class="icon"></i>
+      <div id="cart-badge" class="cart-badge">1</div>
+    </div>
+    <span class="label">Panier</span>
+  </button>
   <button onclick="openHistory()" id="nav-history">
     <i data-lucide="receipt" class="icon"></i>
     <span class="label">Historique</span>
   </button>
-
 </div>
 
-<button class="back-btn" onclick="openShop()">
-  ← Retour à la boutique
-</button>
+<button class="back-btn" onclick="openShop()">← Retour à la boutique</button>
 
 <script>
 Telegram.WebApp.expand();
 
-const isMobile =
-  Telegram.WebApp.platform === "android" ||
-  Telegram.WebApp.platform === "ios" ||
-  window.innerWidth < 768;
-
+const isMobile = Telegram.WebApp.platform === "android" || Telegram.WebApp.platform === "ios" || window.innerWidth < 768;
 document.body.classList.add(isMobile ? "mobile" : "desktop");
 
 function toggleFilters() {
@@ -837,14 +697,12 @@ function toggleFilters() {
 }
 
 lucide.createIcons();
-
 </script>
 
 <script>
 const PRODUCTS_PER_PAGE = 6;
 let currentPage = 1;
 
-// FAKE DATA (remplacé plus tard par le bot)
 const products = Array.from({ length: 50 }, (_, i) => ({
   bin: "444111",
   type: "DEBIT",
@@ -933,7 +791,8 @@ function prevPage() {
 }
 
 function goToPage(page) {
-  if (page !== currentPage) {
+  const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+  if (page !== currentPage && page >= 1 && page <= totalPages) {
     currentPage = page;
     renderProducts();
     renderPagination();
@@ -942,54 +801,42 @@ function goToPage(page) {
   }
 }
 
-// INIT
 renderProducts();
 renderPagination();
 renderPageInfo();
 </script>
 
 <script>
-/* ===== PANIER GLOBAL ===== */
 let cartCount = 0;
 
-/* ===== AJOUT PANIER ===== */
 function addToCart() {
   cartCount = 1;
-
   const badge = document.getElementById("cart-badge");
   badge.style.display = "flex";
   badge.textContent = cartCount;
-
   document.getElementById("cart-content").style.display = "flex";
 }
 
-/* ===== OUVRIR PANIER ===== */
 function openCart() {
   document.getElementById("shop-page").style.display = "none";
   document.getElementById("cart-page").style.display = "block";
   setActiveNav("cart");
 }
 
-/* ===== RETOUR SHOP ===== */
 function openShop() {
   document.getElementById("cart-page").style.display = "none";
   document.getElementById("shop-page").style.display = "block";
   setActiveNav("shop");
 }
 
-/* ===== SUPPRIMER ARTICLE ===== */
 function removeFromCart() {
   cartCount = 0;
-
   document.getElementById("cart-content").style.display = "none";
   document.getElementById("cart-badge").style.display = "none";
 }
 
-/* ===== NAV ACTIVE ===== */
 function setActiveNav(active) {
-  document.querySelectorAll(".bottom-nav button")
-    .forEach(b => b.classList.remove("active"));
-
+  document.querySelectorAll(".bottom-nav button").forEach(b => b.classList.remove("active"));
   document.getElementById("nav-" + active).classList.add("active");
 }
 </script>
