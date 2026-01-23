@@ -243,12 +243,13 @@ body {
 .range-inputs input {
   flex: 1;
   padding: 9px 10px;
-  border-radius: border-box;
+  border-radius: 10px;          /* arrondi cohérent avec les autres inputs */
   background: rgba(15,15,15,0.9);
   border: 1px solid rgba(255,255,255,0.08);
   color: #ffd700;
   font-size: 13px;
   text-align: center;
+  box-sizing: border-box;       /* important pour que la largeur ne déborde pas */
 }
 
 .range-inputs input::placeholder {
